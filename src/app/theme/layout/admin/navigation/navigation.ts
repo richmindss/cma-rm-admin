@@ -39,28 +39,6 @@ const NavigationItems = [
         url: '/dashboard/default',
         classes: 'nav-item',
         icon: 'feather icon-home'
-      },
-      {
-        id: 'page-layouts',
-        title: 'Page Layouts',
-        type: 'collapse',
-        icon: 'feather icon-layout',
-        children: [
-          {
-            id: 'vertical',
-            title: 'Vertical',
-            type: 'item',
-            url: '/layout/static',
-            target: true
-          },
-          {
-            id: 'horizontal',
-            title: 'Horizontal',
-            type: 'item',
-            url: '/layout/horizontal',
-            target: true
-          }
-        ]
       }
     ]
   },
