@@ -1,0 +1,14 @@
+<table class="table table-hover table-responsive layout" *ngIf="columns">
+    <thead>
+      <tr>
+        <th *ngFor="let col of columns" scope="col">{{col.val}}</th>
+      
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let row of data" (click)="onClick(row)" style="cursor: pointer;">
+          <td *ngFor="let col of columns" scope="col">{{row[col.name]}}</td>
+      </tr>
+      
+    </tbody>
+  </table>

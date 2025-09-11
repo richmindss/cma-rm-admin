@@ -1,0 +1,132 @@
+
+  <!-- <ngb-alert type="success" (close)="successMessage = null">Saved Details</ngb-alert> -->
+  <div class="row" *ngIf="error" class="text text-danger">
+      <div class="col-md-12">
+        {{error}}
+      </div>
+    </div>
+
+  <!-- <div class="row">
+    <div class="col-md-12 bg-white">
+      
+  <app-header-logo [msg]="'app bg image'" 
+    [header]="'Upload app bg image (width:200px; height:100px)'" 
+    [url]="'bgimage'" 
+    [docType]="'app_mainbg'" 
+    [img_width]="'200'"
+    [img_height]="'100'"
+    [fileType]="fileType"
+    [uploadType]="'imagelogo'"
+    (docError)="ondocError($event)"
+    [dropZoneId]="'mydropzone_mainbg'"></app-header-logo>
+  
+  
+  </div>
+  </div> -->
+
+<div class="row">
+  <div class="col-md-12 bg-white">
+    
+<app-header-logo [msg]="'app logo'" 
+  [header]="'Upload app logo (width: 200px; height: 100px)'" 
+  [url]="'logo'" 
+  [docType]="'app_logo'" 
+  [img_width]="'200'"
+  [img_height]="'100'"
+  [fileType]="fileType"
+  [uploadType]="'imagelogo'"
+  (docError)="ondocError($event)"
+  [dropZoneId]="'mydropzone_logo'"></app-header-logo>
+
+
+</div>
+</div>
+
+
+<div class="row space-margin"> 
+  <div class="col-md-12">
+      <h4>Scrolling Message</h4>
+      <div class="row">
+        <div class="col-md-9">
+          <input type="text" class="form-control" name="scrolling" [(ngModel)]="scrolling" oninput="this.value = this.value.replace(/[^a-zA-Z0-9()\-\s\/]/g, '')">
+        </div>
+        <div class="col-md-3">
+          <button class="btn btn-success" (click)="saveScrolling()">Save</button>
+        </div>
+      </div>
+    
+    
+    </div>
+  </div>
+
+
+  <div class="row space-margin"> 
+    <div class="col-md-12">
+        <h4>Powered By Message</h4>
+        <div class="row">
+          <div class="col-md-9">
+            <input type="text" class="form-control" name="poweredByMsg" [(ngModel)]="poweredByMsg" oninput="this.value = this.value.replace(/[^a-zA-Z0-9()\-\s\/]/g, '')">
+          </div>
+          <div class="col-md-3">
+            <button class="btn btn-success" (click)="savePoweredByMsg()">Save</button>
+          </div>
+        </div>
+      
+      
+      </div>
+    </div>
+
+ 
+
+<div class="row space-margin"> 
+<div class="col-md-12">
+    <h4>What should be used on application Header?</h4>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-2">
+    <label class="form-check-label">
+      <input type="radio" class="form-check-custom"
+       (click)="onSelectionChange('banner_text')"
+       value="banner_text"
+         name="Text" [(ngModel)]="bannerType" > Banner Text
+    </label>
+  </div>
+
+  <div class="col-md-2 ">
+    <label class="form-check-label">
+      <input type="radio" class="form-check-custom"
+      (click)="onSelectionChange('banner_image')"
+      value="banner_image"
+       name="image" [(ngModel)]="bannerType" > Banner Image
+    </label>
+  </div>
+  
+</div>
+
+<div class="row space-margin" *ngIf="bannerType == 'banner_image'" >
+    <div class="col-md-12">
+    <app-header-logo 
+    [msg]="'app banner'" 
+    [header]="'Upload app banner(width: 800px; height: 100px)'" 
+    [url]="'banner'" 
+    [img_width]="'800'"
+    [img_height]="'100'"
+    [docType]="'banner_image'" 
+    [fileType]="fileType"
+    [uploadType]="'imagebanner'"
+    (docError)="ondocError($event)"
+    [dropZoneId]="'bannerdropzone'">
+  </app-header-logo>
+
+  </div>
+</div>
+
+<div class="row space-margin" *ngIf="bannerType == 'banner_text'">
+  <div class="col-md-12">
+<app-home-card-config [contenttype]="'app_header'">
+</app-home-card-config>
+</div>
+</div>
+

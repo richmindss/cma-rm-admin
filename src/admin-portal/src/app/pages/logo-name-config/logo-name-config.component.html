@@ -1,0 +1,81 @@
+<body class="app flex-row align-items-center">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-md-8">
+          <div class="card-group">
+            <div class="card p-4">
+              <div class="card-body">
+                <div class="row p-2">
+                  <div class="col-md-12 text-center ">
+                    <h2>Logo And Name Configuration</h2>
+          </div>
+          <div class="row p-2">
+            <div class="col-md-6 text-left">
+              <p >Logo*</p> <h6 style="font-size:small;">Size Min 50Kb-Max 100Kb Height*Width=20*20</h6>
+            </div>
+            <div class="col-md-6 " >
+              
+              
+                    <div class="custom-file text-left">
+                      <input type="file" class="custom-file-input" id="customFile">
+                      <label class="custom-file-label" for="customFile">Choose file</label>
+                    </div>
+              
+
+
+            </div>
+          </div>
+          <div class="row p-2">
+            <div class="col-md-4 text-left">
+              <p >Portal Name<span style="color:red">*</span></p>
+            </div>
+            <div class="col-md-4">
+              <div class="form-check-inline"> <label class="form-check-label"> <input type="radio"
+                    class="form-check-input" name="optradio">Upload Image </label> </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-check-inline"> <label class="form-check-label"> <input type="radio"
+                    class="form-check-input" name="optradio">Content Editor </label> </div>
+            </div>
+            <div class="row p-3">
+              <div class="col-md-6 text-left">
+                <p >Portal Name</p> <h6 style="font-size:small;">Size Min 100Kb-Max 300Kb Height*Width=20*120</h6>
+              </div>
+              <div class="col-md-6">
+
+
+                  
+                      <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="customFile">
+                        <label class="custom-file-label" for="customFile">Choose file</label>
+                      </div>
+                    
+                </div>
+            </div>
+            
+
+            <div class="row text-center">
+                <div class="container">
+              <app-template-editor [elementId]="'my-editor'" (onEditorContentChange)="onTextChange($event)" [value]="selectionText"></app-template-editor>
+              </div>
+              </div>
+              <div class="row p-3 float-center">
+                  <div class="col-md-6 "> <button type="submit" class="btn btn-primary">Save </button> </div>
+                  <div class="col-md-6 "> <button type="reset" class="btn btn-danger">Cancel</button> </div>
+                </div>
+             
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+</body>
+<!-- 
+<div class="row">
+  <div class="container">
+<app-template-editor [elementId]="'my-editor'" (onEditorContentChange)="onTextChange($event)" [value]="selectionText"></app-template-editor>
+</div>
+</div> -->

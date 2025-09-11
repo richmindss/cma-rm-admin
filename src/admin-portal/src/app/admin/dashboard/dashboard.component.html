@@ -1,0 +1,53 @@
+<div class="container-fluid py-4">
+  <!-- Header -->
+  <div class="row mb-4">
+    <div class="col-12">
+      <div class="d-flex justify-content-between align-items-center">
+        <h1 class="fw-bold text-primary">📊 Dashboard</h1>
+        <span class="bg-info fs-4">
+          Welcome, {{ user?.record?.Email }} ({{ user?.record?.Role }})
+        </span>
+      </div>
+      <hr />
+    </div>
+  </div>
+
+  <!-- Cards Section -->
+  <div class="row g-4">
+    <!-- Card 1 -->
+    <div class="col-md-4">
+      <div class="card shadow-sm border-0 rounded-4">
+        <div class="card-body text-center">
+          <i class="fas fa-users fa-2x text-primary mb-2"></i>
+          <h5 class="card-title">Users</h5>
+          <p class="card-text text-muted">Manage all registered users.</p>
+          <button class="btn btn-outline-primary btn-sm">View</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="col-md-4">
+      <div class="card shadow-sm border-0 rounded-4">
+        <div class="card-body text-center">
+          <i class="fas fa-file-alt fa-2x text-success mb-2"></i>
+          <h5 class="card-title">Posts</h5>
+          <p class="card-text text-muted">Review and manage content posts.</p>
+          <button class="btn btn-outline-success btn-sm">View</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="col-md-4">
+      <div class="card shadow-sm border-0 rounded-4">
+        <div class="card-body text-center">
+          <i class="fas fa-cogs fa-2x text-warning mb-2"></i>
+          <h5 class="card-title">Settings</h5>
+          <p class="card-text text-muted">Adjust application settings.</p>
+          <button class="btn btn-outline-warning btn-sm">Configure</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

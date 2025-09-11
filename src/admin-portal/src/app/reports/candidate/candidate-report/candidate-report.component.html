@@ -1,0 +1,145 @@
+<div class="row">
+  <div class="col-md-12">
+      <h4>Candidate Daily Report</h4>
+  </div>
+</div>
+<div class="card p-12">
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="alert alert-danger" role="alert" *ngIf="error">
+          {{error}}
+        </div>
+        <div class="alert alert-success" role="alert" *ngIf="success">
+          {{success}}
+        </div>
+      </div>
+    </div>
+    <div class="row space-margin">
+        <div class="col-md-6">
+          <label>From Date <app-required></app-required></label>
+          <app-datefield
+            [(data)]="candidate.fromdate"
+            [placeholder]="'Please select date'"
+            [maxDate]="candidate.todate"
+          ></app-datefield>
+        </div>
+        <div class="col-md-6">
+          <label>To Date <app-required></app-required></label>
+          <app-datefield
+            [(data)]="candidate.todate"
+            [placeholder]="'Please select date'"
+            [maxDate]="candidate.today"
+          ></app-datefield>
+        </div>
+      </div>
+      <div class="row space-margin">
+        <div class="col-md-6">
+          <label>Report Type <app-required></app-required></label>
+            <select (change)="onChange($event.target.value)" class="form-control custom-select" placeholder="Please select Report Type" [(ngModel)]="candidate.reporttype">
+              <option [ngValue]="undefined" disabled selected> Please Select Report Type </option>
+              <option value="candidateData">Candidate Data</option>              
+              <option value="categoryWiseAppSubmission">Category Wise Application Submission Report</option> 
+              <option value="categoryWiseAppPaymentSubmission">Category Wise Application & Payment Submitted Report</option>    
+              <option value="catWisePaymentCollection">Category Wise Payment Collection Report</option> 
+             <option value="modeWisePaymentCollection">Mode Wise Payment Collection Report</option> 
+              <option value="preferredCityWiseCount">Preferred Test City Wise Count Report</option>
+              <option value="examPrefferedCityWiseCount">Exam Wise Preferred Test City Count Report</option>  
+            </select>
+        </div>
+        <div class="col-md-6">
+          <label>Exam Name</label>
+          <select 
+          (compareWith)="compareFn"
+               multiple name="exam" 
+              class="custom-select" 
+              [(ngModel)]="candidate.exam">
+            <option [ngValue]="{}" > ---- ALL EXAMS ---- </option>
+            <option *ngFor="let e of exam;" [ngValue]="e">{{e.exam_name}}</option>
+          </select>
+        </div>
+        
+      </div>
+   
+   <div *ngIf="candidate.reporttype && candidate.reporttype !=='candidateData'" style="color: red" >This report will take some time to appear. Better to export it.</div>
+<div class="space-margin" style="display: block;">
+<button type="button" title="Show Report"  (click)="getReport()" class="btn btn-primary btn-xs">Show Report</button>&nbsp;
+<button [attr.disabled]="freitag? true : null" style="float: right;" type="button" title="Export"  (click)="exportReport()" class="btn btn-success btn-xs">Export <i
+  class="fa fa-angle-double-up"></i></button>&nbsp;
+</div>
+
+<div class="row space-margin"   style="display: block; " *ngIf="report && report.data.length > 0 && candidate.reporttype=='candidateData'">
+  <div class="row space-margin">
+    <div class="col-md-12">
+      <table class="table table-hover table-outline mb-0" style="background-color: white; table-layout: fixed;width: 100%;" >
+        <thead class="thead-default" style=" background-color: #c2cfd6;">
+
+          <tr>
+              <th>UserId</th>
+              <th>ExamId</th>
+              <th>Exam</th>
+              <th>Category</th>
+              <th>Email</th>
+              <th>Mobile</th>
+              <th>PWD</th>
+              <th>Test City1</th>
+              <th>Test City2</th>
+              <th>Payment Done</th>
+              <th>Other Category</th>
+             
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let d of report.data">
+            <td> {{d["UserId"]}}</td>
+            <td> {{d["ExamId"]}}</td>
+            <td> {{d["Exam"]}}</td>
+            <td> {{d["Category"]}}</td>
+            <td> {{d["Email"]}}</td>
+            <td> {{d["Mobile"]}}</td>
+            <td> {{d["PWD"]}}</td>
+            <td> {{d["Test City1"]}}</td>
+            <td> {{d["Test City2"]}}</td>
+            <td> {{d["Payment Done"]}}</td>
+            <td> {{d["Other Category"]}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+<div class="row space-margin"  style="display: block; " *ngIf="report && report.data.length > 1 && 
+  candidate.reporttype !=='candidateData'">
+  <div class="row space-margin">
+    <div class="col-md-12">
+
+      <table class="table table-hover " style="background-color: white; table-layout: fixed;width: 100%; overflow: auto;" >
+        <thead class="thead-default" style=" background-color: #c2cfd6;">
+          <tr>
+              <th *ngFor="let h of headers">{{h}}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let d of report.data">
+            <td *ngFor="let hr of headers"> {{d[hr]}}</td>
+          </tr>
+        </tbody>
+      </table>
+   
+    </div>
+  </div>
+
+</div>
+
+   
+<div class="row space-margin" *ngIf="rowCount >=25 && candidate.reporttype=='candidateData'" >
+      <div class="col-md-12">
+        <app-pagination [(currentPage)]="currentPage" [pageSize]="pageSize" [totalRecords]="rowCount"
+          (pageChanged)="fetchReportData($event)"></app-pagination>
+      </div>
+    </div>
+</div>
+
+  

@@ -1,0 +1,40 @@
+
+<div class="row space-margin">
+  <div class="col-md-12">
+    <h4>{{header}}</h4>
+  </div>
+</div>
+
+<div class="row" >
+    <div class="col-md-12 text-center upload-holder ">
+        <app-rm-uploader 
+        [url]="url" 
+        [doctype]="docType"
+        [contextId]=""
+        [contextType]=""
+        [fileType]="fileType"
+        [uploadType]="uploadType"  
+        [img_width] ="img_width"   
+        [img_height] ="img_height"     
+        (docError)="ondocError($event)"
+        (docUploaded)="ondocUploaded($event)"
+        (docimport)="ondocImport($event)"
+        [msg]="msg" [dropZoneId]="dropZoneId"></app-rm-uploader> 
+       
+        <img *ngIf="logourl && uploadType != 'hall_ticket'  && uploadType != 'upload_application_template'" [attr.width]="img_width" 
+              [attr.height]="img_height" [attr.src]="logourl" 
+              
+              class="space-sidemargin">
+    </div>
+</div>
+<div class="row" *ngIf="uploadType == 'hall_ticket' || uploadType == 'upload_application_template'">
+  <div class="col-md-12">
+    <a href="{{logourl}}" >Download</a>
+
+  </div>
+</div>
+  
+
+
+ 
+

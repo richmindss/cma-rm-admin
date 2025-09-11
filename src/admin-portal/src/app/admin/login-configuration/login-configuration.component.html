@@ -1,0 +1,62 @@
+
+  <div class="form-group">
+    <div>
+      <h2>Login Configuration</h2>
+    </div>
+  </div>
+
+<div class="row justify-content-center">
+  <div class="col-md-12">
+    <div class="card ">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <label for="passvalidatord">Password Validator</label>
+              <input type="text" class="form-control" name="passvalidatord" [(ngModel)]="setting.pattern">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <label for="passmessage">Password Message</label>
+
+            
+              <textarea class="form-control" rows="5" id="passmessage" [(ngModel)]="setting.message"></textarea>
+
+           
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+
+                <label><input type="checkbox" [(ngModel)]="setting.enabled"> Enable Password Validation?</label>
+
+           
+            </div>
+          </div>
+        </div>
+
+        <div class="row p-1">
+          <div class="col-md-1">
+            <button type="submit" class="btn btn-primary" (click)="onSave()">Save</button>
+          </div>
+
+        </div>
+        <div class="row p-1">
+          <ngb-alert *ngIf="successMessage" type="success" (close)="successMessage = null">{{ successMessage }}
+
+          </ngb-alert>
+          <ngb-alert *ngIf="errorMessage" type="danger" (close)="errorMessage = null">{{ errorMessage }}
+
+          </ngb-alert>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

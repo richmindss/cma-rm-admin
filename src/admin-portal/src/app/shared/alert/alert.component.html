@@ -1,0 +1,10 @@
+<div class="fixed-top">
+    <ngb-alert *ngIf="successMessage" type="success" class="sticky-top alert alert-dismissible"
+        (close)="successMessage = null">{{ successMessage }}
+
+    </ngb-alert>
+    <ngb-alert class="sticky-top alert alert-dismissible" *ngIf="errorMessage" type="danger"
+        (close)="errorMessage = null">{{ errorMessage }}
+
+    </ngb-alert>
+</div>

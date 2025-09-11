@@ -1,0 +1,56 @@
+<div class="row">
+  <div class="col-md-12">
+    <h2>Jobs</h2>
+  </div>
+</div>
+<div class="card">
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-4">
+        <button type="button" (click)="candidateExport()" class="btn btn-primary btn-xs"><i
+            class="fas fa-file-export"></i>Candidate Export</button>&nbsp;
+      </div>
+      <div class="col-md-4">
+        <button type="button" (click)="sendHallTicket()" class="btn btn-success btn-xs"><i
+            class="fas fa-file-export"></i>Send Hall Ticket email</button>&nbsp;
+      </div>
+    </div>
+  </div>
+</div>
+&nbsp;
+<div class="row">
+  <div class="col-md-12 table-wrapper-scroll-y my-custom-scrollbar height:100px">
+    <table class="table table-hover table-outline mb-0" style="background-color: white;" *ngIf="userCount">
+      <thead class="thead-default" style=" background-color: #c2cfd6;">
+        <tr>
+          <th>Job Type</th>
+          <th>Status</th>
+          <th>Created By</th>
+          <th>Created Date</th>
+        
+      </tr>
+    </thead>
+
+        <tr *ngFor="let t of jobsResult">
+          <td>{{t.job_type}}</td>
+          <td>{{t.status}} </td>
+          <td>{{t.email}}</td>
+          <td>{{getFormatDate(t.created)}}</td>
+  
+        </tr>
+      
+      
+    </table>
+  </div>
+</div>
+<div class="row"  *ngIf="userCount >= 25">
+  <div class="col-md-12">
+    <app-pagination [(currentPage)]="currentPage" [pageSize]="pageSize" [totalRecords]="userCount"
+      (pageChanged)="fetchUserData($event)"></app-pagination>
+  </div>
+</div>
+
+<div class="space-margin"></div>
+<div class="row">
+  <app-alert [sender]="sender"></app-alert>
+</div>

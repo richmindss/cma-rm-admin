@@ -1,0 +1,33 @@
+<div class="cand-menu"> 
+    <ul class="left-nav"> 
+        <li *ngFor="let menuItem of menus">
+            <div class="menu-item" (click)="onMenuClick(menuItem, null)" [ngClass]="{'active': menuItem.active}">
+              <i [attr.class]="menuItem.icon" class="pl-20" ></i>
+              <a>{{getMenuText (menuItem)}}</a> 
+
+              <i  *ngIf="menuItem.submenu && menuItem.submenu.length > 0 && menuItem.expanded" class="caret fas fa-caret-up" ></i>
+              <i  *ngIf="menuItem.submenu && menuItem.submenu.length > 0 && !menuItem.expanded" class="caret fas fa-caret-down" ></i>
+             
+            </div>
+
+
+            <ul class="left-nav child-menu-container" 
+            *ngIf="menuItem.submenu && menuItem.submenu.length > 0 && menuItem.expanded">
+                <li *ngFor="let subItem of menuItem.submenu">
+                    
+                   
+
+                    <div class="menu-item" (click)="onMenuClick(subItem, menuItem)"
+                           [ngClass]="{'active': subItem.active}">
+                        <i [attr.class]="subItem.icon" class="pl-20" ></i>
+                        <a >{{getMenuText (subItem)}}</a>
+          
+                      </div>
+
+                </ul>
+
+          </li> 
+    </ul>
+
+</div>
+  

@@ -1,0 +1,109 @@
+<div class="app flex-row align-items-center space-margin">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <div class="card-group" style="border: 2px solid #001f3f;">
+          <div class="card p-4">
+            <div class="card-body">
+              <h3>Login</h3>
+
+              <div class="form-group">
+                <label for="username">Email/Username<span style="color:red">*</span></label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text"><i class="fas fa-user" aria-hidden="true"></i></div>
+                      </div>
+                  <input type="text" [(ngModel)]="Email" id="username" name="username" class="form-control" autocomplete="off">
+                </div>
+
+              </div>
+
+              <div class="form-group">
+                <label for="password">Password<span style="color:red">*</span></label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text"><i class="fas fa-lock" aria-hidden="true"></i></div>
+                      </div>
+                  <input type="password" [(ngModel)]="Password" id="password" name="password" class="form-control" autocomplete="new-password">
+                </div>
+
+              </div>
+
+
+          
+                <div class="co-sm-4">
+                  <re-captcha *ngIf="siteKey" (resolved)="captchaResolved($event)" class="re-captcha-mobile"
+                    siteKey="{{siteKey}}"></re-captcha>
+                  <div class="help-block text-danger" *ngIf="error">
+                    {{error}}
+                  </div>
+
+                </div>
+            
+              <!-- <div class="help-block text-danger" *ngIf="errorm">
+                {{errorm}}
+              </div> -->
+
+                &nbsp;&nbsp;
+              <div class="row">
+                <div class="col-6">
+                  <button type="submit" class="btn px-4" (click)="onLoginSubmit()" type="button"
+                    style="background-color:#001f3f;color:white">Login</button>
+                </div>
+                <div class="col-6 text-right">
+                  <button class="btn btn-link px-0" type="button" (click)="onForgotpass()">Forgot password?</button>
+                </div>
+
+              </div>
+
+
+              <div class="form-group" *ngIf="otp_required">
+                <h3>Otp has been sent to your email/phone. If you have not received otp on email, check your spam.</h3>
+                <label for="otp">Enter OTP</label>
+                <div class="input-group">
+                  <input type="text" [(ngModel)]="otp" id="otp" name="otp" class="form-control" autocomplete="off">
+                </div>
+                <!-- <div class="Valid help-block text-danger" *ngIf="error">
+                  {{error}}
+                </div> -->
+                <div class="help-block text-danger" *ngIf="errorm">
+                  {{errorm}}
+                </div>
+              </div>
+              <div class="row space-margin" *ngIf="otp_required">
+                <div class="col-12">
+                  <button type="submit" class="btn btn-info px-4" (click)="onOTPSubmit()"
+                    type="button">Validate</button>
+                    <!-- <button *ngIf="isOtpExpired" class="btn btn-info px-4 top-margin" (click)="onOTPResend()"
+                            type="button">Resend OTP</button> -->
+                </div>
+              </div>
+
+              <div *ngIf="isOtpExpired" class="row space-margin">
+
+                <div class="col-12">
+                  <div class="Valid help-block text-danger" *ngIf="error">
+                    {{error}}
+                  </div>
+
+                  <button class="btn px-4" (click)="onOTPResend()" type="button"
+                    style="background-color:#001f3f;color:white">Resend OTP</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card text-white py-5 d-md-down" style="width:100%;background-color:#001f3f;">
+            <div class="card-body text-center p-5" style="background-color:#001f3f;">
+              <div class="p-5">
+                <h2>CAMS</h2>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row space-margin">
+
+    </div>
+  </div>

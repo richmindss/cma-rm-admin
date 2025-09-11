@@ -1,0 +1,125 @@
+         
+ <div class="card">
+  <div class="card-body">
+
+    <app-home-card-config-header (onHeaderChanged)="onHeaderChanged($event)" [contenttype]="contenttype">
+
+    </app-home-card-config-header>
+
+    </div>
+ </div>
+
+
+ <div class="row" style="margin-top:20px;" *ngIf="showLanguageOption">
+   <div class="col-md-12">
+    <h5>Language based contents <span *ngIf="!showLeftBar" class="text text-danger">{{language.name}}</span></h5>
+   </div>
+ </div>
+
+  <div class="card" *ngIf="showLanguageOption && showLeftBar">
+    <div class="card-body">
+
+      <div class="row" *ngIf="!language">
+        <div class="col-md-12">
+          <h3 class="text text-danger"> No languages preferences found.</h3>
+        </div>
+      </div>
+
+
+      <div class="row">
+        <div class="col-md-3" >
+          <app-home-card-config-left (onLanguageClicked)="onLanguageClicked($event)"></app-home-card-config-left>
+        </div>
+        <div class="col-md-9">
+          
+            <div class="row">
+              <div class="col-md-12">
+            <b>Content {{language? language.name: ''}}</b>
+              <app-home-card-config-right 
+                *ngIf="language" 
+                [content]="content" 
+                [tinyId]="contenttype"
+                (onContentChanged)="onContentChanged($event)"
+                >
+            </app-home-card-config-right>   
+
+           
+
+          </div>
+        </div>
+
+
+
+        <div class="row" style="margin-top:20px" *ngIf="language">
+          <div class="col-md-6">
+              <button class="btn btn-primary" (click)="saveContent()">Save</button>
+          </div>
+
+          <div class="col-md-6">
+          <ngb-alert *ngIf="successMessage" type="success" (close)="successMessage = null">{{ successMessage }}
+
+          </ngb-alert>
+          <ngb-alert *ngIf="errorMessage" type="danger" (close)="errorMessage = null">{{ errorMessage }}
+
+          </ngb-alert>
+          </div>
+      </div> 
+          </div>  
+      </div>
+
+    </div>
+  </div>
+  
+
+
+
+
+  <!-- full screen-->
+
+
+  <div class="card" *ngIf="showLanguageOption && !showLeftBar">
+    <div class="card-body"> 
+      <div class="row">
+        
+        <div class="col-md-12">
+          
+            <div class="row">
+              <div class="col-md-12">
+
+              <app-home-card-config-right 
+                *ngIf="language" 
+                [content]="content" 
+                [tinyId]="contenttype"
+                (onContentChanged)="onContentChanged($event)"
+                >
+            </app-home-card-config-right>    
+          </div>
+        </div>
+
+
+
+        <div class="row" style="margin-top:20px">
+          <div class="col-md-6">
+              <button class="btn btn-primary" (click)="saveContent()">Save</button>
+          </div>
+
+          <div class="col-md-6">
+          <ngb-alert *ngIf="successMessage" type="success" (close)="successMessage = null">{{ successMessage }}
+
+          </ngb-alert>
+          <ngb-alert *ngIf="errorMessage" type="danger" (close)="errorMessage = null">{{ errorMessage }}
+
+          </ngb-alert>
+          </div>
+      </div> 
+          </div>  
+      </div>
+
+    </div>
+  </div>
+
+  <div class="space-margin"></div>
+<div class="row p-2">
+    <app-alert [sender]="sender"></app-alert>
+</div>
+  

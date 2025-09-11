@@ -1,0 +1,50 @@
+<!-- <h2>Home Page Configuration</h2> -->
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="btn-group" role="group" aria-label="Updte info">
+            <button type="button"
+                [ngClass]="{'btn btn-primary': contentMode == 'NOW', 'btn btn-secondary': contentMode != 'NOW'}"
+                (click)="updateNow()">Immediate Update</button>
+            <button type="button"
+                [ngClass]="{'btn btn-primary': contentMode == 'LATER', 'btn btn-secondary': contentMode != 'LATER'}"
+                (click)="updateLater()">Later Update</button>
+        </div>
+    </div>
+</div>
+
+<div class="row" *ngIf="contentMode == 'NOW'" style="margin-top:20px;">
+    <div class="col-md-12">
+        <h3>Record will be updated immediately.</h3>
+    </div>
+
+</div>
+<div class="row" *ngIf="contentMode == 'LATER'" style="margin-top:20px;">
+    <div class="col-md-12">
+        <h3>Record will be updated on the selected date and time.</h3>
+    </div>
+</div>
+
+
+<div class="row" *ngIf="contentMode == 'LATER'">
+    <div class="col-md-3">
+        <div class="input-group" style="margin-top:38px;">
+
+            <app-datefield [(data)]="date" [holdFuture]="true" [maxDate]="today"
+            [placeholder]="'As on date'"
+                (keypress)="isNotSpecialCharAndAlphabet($event)">
+            </app-datefield>
+
+          
+
+        </div>
+    </div>
+    <div class="col-md-3">
+        <ngb-timepicker [meridian]="meridian" (ngModelChange)="onTimeChanged(time)" [(ngModel)]="time"></ngb-timepicker>
+    </div>
+    <div class="col-md-3">
+        <button class="btn btn-danger" style="margin-top:38px;" (click)="saveLaterTime()">Save Date/Time Info</button>
+    </div>
+</div>
+
+<app-alert [sender]="sender"></app-alert>

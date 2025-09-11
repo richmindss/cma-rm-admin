@@ -1,0 +1,115 @@
+<div class="row">
+  <div class="col-sm-12">
+    <h2>Portal Language:  <span class='text text-danger'>
+        {{selectedOption.name}}
+    </span> </h2>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-body">
+    <div class="row p-2">
+      <div class="col-md-4 text-left" *ngFor="let l of opts">
+        <button 
+        *ngIf="l.value == selectedOption.value"
+        class="btn btn-primary" 
+          (click)="onLangPrefClick(l)">
+          <i class="fa fa-check"></i>
+        {{l.name}}
+        </button> 
+        <button 
+        *ngIf="l.value != selectedOption.value"
+        class="btn btn-secondary" 
+          (click)="onLangPrefClick(l)">
+        {{l.name}}
+        </button>
+      </div> 
+    </div>
+
+   
+  </div>
+</div>
+
+
+<div class="row" style="margin-top:20px" *ngIf="selectedOption.value != 'english'">
+  <div class="col-md-12">
+    <h4>Select Portal Languages..</h4>
+  </div>
+</div>
+
+<div class="card" *ngIf="selectedOption.value != 'english'">
+  <div class="card-body">
+
+    <div class="row">
+      <div class="col-md-4 ">
+        <h5>Available Languages</h5>
+        <div class="lang-container lang-h scrollbar-menu">
+          <ul class="lang-ul">
+            <ng-container *ngFor="let l of languages">
+              
+              <li 
+              *ngIf="!l.selected"
+              [ngClass]="{'active': l.leftSelected}" 
+              (click)="onLeftLangClick(l)"
+               >
+                   {{l.name}}
+             </li>
+            </ng-container>
+          </ul>
+       
+      </div>
+        
+      </div>
+      <div class="col-md-2">
+        
+
+       <ul class="action-ul lang-h">
+         <li class="action-btn" *ngFor="let b of actions">
+           <button (click)="onAction(b)" [ngClass]="b.class">
+             <i [ngClass]='b.icon'></i>
+           </button>
+         </li>
+       </ul>
+         
+         
+         
+      </div>
+      <div class="col-md-4 ">
+          <h5>Selected Languages</h5>
+      
+          <div class="lang-container lang-h scrollbar-menu">
+             
+              <ul class="lang-ul">
+                  <ng-container *ngFor="let l of languages">
+           
+                    
+                  <li  
+                  *ngIf="l.selected"
+                  [ngClass]="{'active': l.rightSelected}" 
+                  (click)="onRightLangClick(l)"
+                   >
+                       {{l.name}}
+                 </li>
+
+                  </ng-container>
+              </ul>
+
+            </div>
+
+        </div>
+    </div>
+<div class="row p-2">
+  <div class="col-md-12">
+    <button type="save" (click)="saveLangPref()" class="btn btn-primary">Save</button>
+  </div>
+</div>
+<div class="row p-1">
+  <ngb-alert *ngIf="successMessage" type="success" (close)="successMessage = null">{{ successMessage }}
+
+  </ngb-alert>
+  <ngb-alert *ngIf="errorMessage" type="danger" (close)="errorMessage = null">{{ errorMessage }}
+
+  </ngb-alert>
+</div>
+</div>
+</div>

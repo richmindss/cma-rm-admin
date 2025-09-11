@@ -1,0 +1,18 @@
+<div class="input-group">
+    <input type="text" placeholder="{{placeholder}}" class="form-control" 
+    #df="bsDatepicker"
+            [(ngModel)]="data" 
+            (ngModelChange)="onModelChange($event)" 
+            [bsConfig]="bsConfig" 
+            [minDate]="minDate"
+            [maxDate]="maxDate"
+            [minDate]="minDate"
+            bsDatepicker>
+    <div class="input-group-append">
+        <button class="btn btn-primary fas fa-calendar-alt"  (click)="df.toggle()"
+            type="button">
+        </button>
+    </div>
+</div>
+
+

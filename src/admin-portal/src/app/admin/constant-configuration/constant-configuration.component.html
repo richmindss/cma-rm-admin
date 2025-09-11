@@ -1,0 +1,215 @@
+<div class="row">
+  <div class="col-md-6">
+    <div class="card p-6">
+      <div class="card-body">
+        <div class="form-group">
+          <button class="btn btn-success btn-md" type="button" data-toggle="modal" (click)="openConstant(content, {})">
+            <i class="fa fa-plus"></i> Add Constant
+          </button>
+          <div class="input-group sapce-margin">
+            <input type="text" class="form-control" [(ngModel)]="search" placeholder="Search...">
+            <div class="input-group-append">
+              <button class="btn btn-secondary" type="button" (click)="searchConstant()">
+                <i class="fa fa-search"></i>
+              </button>
+            </div>
+          </div>
+          <div class="sapce-margin">
+            Total: {{constantResult.length}}
+          </div>
+          <ng-template #content let-modal>
+            <div class="modal-header " >
+              <h4 class="modal-title">Add Constant </h4>
+              <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div *ngIf="error">
+                <label> <span style="color:red">{{error}}</span></label>
+              </div>
+              
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="eventname">Name<span style="color:red">*</span></label>
+                    <input type="text" class="form-control" [(ngModel)]="constant.name" oninput="this.value = this.value.replace(/[^a-zA-Z0-9()\-\s\/]/g, '')">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+
+                  <div class="form-group">
+                    <label for="eventcode">Code<span style="color:red">*</span></label>
+                    <input type="text" class="form-control" [(ngModel)]="constant.code" oninput="this.value = this.value.replace(/[^a-zA-Z0-9()\-\s\/]/g, '')">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label for="eventname">Sequence<span style="color:red">*</span></label>
+                      <input type="text" class="form-control" (keypress)="isNumber($event)" [(ngModel)]="constant.sequence" oninput="this.value = this.value.replace(/[^0-9 ]/g, '')">
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                    <input type="checkbox"  [(ngModel)]="constant.active" autocomplete="off">
+                    <label>&nbsp;&nbsp;Active</label>
+                </div>
+              <div class="modal-footer">
+                <button type="reset" class="btn btn-primary" (click)="onSaveConstant()">Save</button>
+                <button type="button" class="btn btn-secondary" (click)="modal.close('Save click')">Close</button>
+              </div>
+            </div>
+          </ng-template>
+          <div class="row">
+            <div class="col-md-12">
+              <table class="table table-hover table-outline mb-0" style="background-color: white;">
+                <thead class="thead-default" style=" background-color: #c2cfd6;">
+                  <tr>
+                    <th>Name</th>
+                    <th style="text-align:right;">Action</th>
+                  </tr>
+                </thead>
+                <tr  *ngFor="let s of constantResult;"  style="cursor:pointer" >
+                     <td><a>{{s.name}}</a></td> 
+                <td style="text-align:right;"  class="btn-group float-right">
+                  <button type="button" (click)="view(s)" title="view" class="btn btn-success btn-xs"><i
+                    class="fa fa-plus"></i></button>
+                  <button type="button" (click)="openConstant(content,s)" title="Edit" class="btn btn-primary btn-xs"><i
+                      class="fa fa-edit"></i></button>
+                  <button type="button" (click)="deleteConstant(s)" title="Delete" class="btn btn-danger btn-xs"><i
+                      class="fa fa-trash"></i></button>
+                </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6" *ngIf="isConstantValueVisible">
+    <div class="card p-6">
+      <div class="card-body">
+        <div class="form-group">
+          <div class="row">
+          <div class="col-md-12">
+            <h3>Selected Constant : <b>{{currentConstant.name}} [{{constantValueResult.length}}]</b></h3>
+          </div>
+        </div>
+          <button class="btn btn-success btn-md" type="button" data-toggle="modal" (click)="open(content,{})">
+            <i class="fa fa-plus"></i> Add Constant Value
+          </button>
+          <div class="input-group sapce-margin">
+              <input type="text" class="form-control" [(ngModel)]="searchval" placeholder="Search...">
+              <div class="input-group-append">
+                <button class="btn btn-secondary" type="button" (click)="searchConstantValue()">
+                  <i class="fa fa-search"></i>
+                </button>
+              </div>
+            </div>
+          <div class="sapce-margin"></div>
+          <ng-template #content let-modal>
+            <div class="modal-header ">
+              <h4 class="modal-title">{{constantvalue._id ? 'Edit Constant Value' : 'Add Constant Value'}} </h4>
+              <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div *ngIf="error">
+                <label> <span style="color:red">{{error}}</span></label>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="eventname">Name<span style="color:red">*</span></label>
+                    <input type="text" class="form-control" [(ngModel)]="constantvalue.name">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="eventcode">Code<span style="color:red">*</span></label>
+                    <input type="text" class="form-control" [(ngModel)]="constantvalue.code">
+                  </div>
+                </div>
+              </div>
+              
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="eventname">Sequence<span style="color:red">*</span></label>
+                    <input type="text" class="form-control" (keypress)="isNumber($event)" [(ngModel)]="constantvalue.sequence">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="ext1">Ext 1</label>
+                    <input class="form-control" [(ngModel)]="constantvalue.ext1">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="ext2">Ext 2</label>
+                    <input class="form-control" [(ngModel)]="constantvalue.ext2">
+                  </div>
+                </div>
+
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <select name="ext3"  [(ngModel)]="constantvalue.ext3" multiple>
+                 
+                <!-- <option [ngValue]="''" disabled selected>select</option> -->
+                <option *ngFor="let empstatus of exams" [ngValue]='empstatus._id'>
+                    {{empstatus.exam_name}}</option>
+                </select>
+                  
+                </div>
+                </div>
+                
+                <div class="col-md-12 ">
+                  <input type="checkbox"  [(ngModel)]="constantvalue.active" autocomplete="off">
+                  <label>&nbsp;&nbsp;Active</label>
+              </div>
+              </div>
+              <div class="modal-footer">
+                <button type="reset" class="btn btn-primary" (click)="onSaveConstantValue()">Save</button>
+                <button type="button" class="btn btn-secondary" (click)="modal.close('Save click')">Close</button>
+              </div>
+            </div>
+          </ng-template>
+          <div class="row" *ngIf="isConstantValueVisible">
+            <div class="col-md-12">
+              <table class="table table-hover table-outline mb-0" style="background-color: white;">
+                <thead class="thead-default" style=" background-color: #c2cfd6;">
+                  <tr>
+                    <th>Name</th>
+                    <th style="text-align:right;">Action</th>
+                  </tr>
+                </thead>
+                <tr style="cursor:pointer" *ngFor="let t of constantValueResult;">
+                  <td><a>{{t.name}}</a></td> 
+
+                <td style="text-align:right" class="btn-group float-right">
+                  <button type="button" (click)="open(content, t)" title="Edit" class="btn btn-primary btn-xs"><i
+                      class="fa fa-edit"></i></button>
+                  <button type="button" (click)="deleteConstantValue(t)" title="Delete" class="btn btn-danger btn-xs"><i
+                      class="fa fa-trash"></i></button>
+                  <!-- <span class="pull-right">&nbsp;&nbsp;</span> -->
+                </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

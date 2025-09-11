@@ -1,0 +1,99 @@
+<div class="modal-header">
+  <h4 class="modal-title">{{userData._id ? 'Edit User' : 'Add User'}}</h4>
+</div>
+<div class="card">
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-12">
+          <div class="row p-2">
+              <div *ngIf="error">
+                  <label> <span style="color:red">{{error}}</span></label>
+              </div>
+          </div>
+        <div class="row">
+           <div class="col-md-6 ">
+            <div class="form-group">
+              <label for="eventcode">Name<span style="color:red">*</span></label>
+              <input type="text" placeholder="Please enter the Name" [(ngModel)]="userData.Name" class="form-control"  [readonly]="userData._id" autocomplete="off">
+            </div>
+          </div>
+          <div class="col-md-6 ">
+            <div class="form-group">
+              <label for="eventcode">Email ID<span style="color:red">*</span></label>
+              <input type="text" placeholder="Please enter the Email ID" [(ngModel)]="userData.Email" class="form-control"  [readonly]="userData._id" autocomplete="off">
+            </div>
+          </div>
+         
+        </div>
+        <div class="row">
+           <div class="col-md-6">
+            <div class="form-group">
+              <label for="eventcode">Phone Number<span style="color:red">*</span></label>
+              <input type="text" placeholder="Please enter the Phone Number" maxlength="10" (keypress)="isNumber($event)" [(ngModel)]="userData.Phone" class="form-control" autocomplete="off">
+            </div>
+          </div>
+          <div class="col-md-6">
+           <div class="form-group">
+            <label for="role">Role <span style="color:red">*</span></label>
+            <select
+              name="role"
+              class="custom-select form-control"
+              [(ngModel)]="userData.Role"
+            >
+              <option [ngValue]="''" disabled *ngIf="user?.record?.Role =='superAdmin'"> Please Select Role </option>
+              <option [ngValue]="'Editor'" *ngIf="user?.record?.Role =='superAdmin'">Editor</option>
+              <option [ngValue]="'Reviewer'" *ngIf="user?.record?.Role !='superAdmin'">Reviewer</option>
+              <option [ngValue]="'Author'" *ngIf="user?.record?.Role !='superAdmin'">Author</option>
+            </select>
+          </div>
+          </div>
+          
+        </div>
+        <div class="row">
+            <!-- <div class="col-md-3">  
+            </div> -->
+        <!-- <div class="col-md-6">
+          <div class="form-check form-check-inline">
+            <input 
+              type="checkbox" 
+              class="form-check-input" 
+              id="disable" 
+              [(ngModel)]="userData.Status"
+            >
+            <label class="form-check-label ms-2" for="disable">Deactivate</label>
+          </div>
+        </div> -->
+
+          <!-- <div class="col-md-3">            
+              <label for="locked"><span style="color:white">*</span></label>
+              <input type="checkbox" class="form-control" class="form-check-input" [(ngModel)]="userData.locked">Locked
+          </div> -->
+          <div class="col-md-3">  
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 text-right">
+
+            <button type="reset" class="btn btn-primary" (click)="onSave()"><i class="far fa-save"></i>&nbsp;Save</button>
+          </div>
+          <div class="col-md-6">
+
+            <button type="button" class="btn btn-secondary" (click)="onClose()"><i class="fa fa-window-close"></i>&nbsp;Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+      <ngb-alert *ngIf="successMessage" type="success" (close)="successMessage = null">{{ successMessage }}
+    
+      </ngb-alert>
+      <ngb-alert *ngIf="errorMessage" type="danger" (close)="errorMessage = null">{{ errorMessage }}
+    
+      </ngb-alert>
+    </div>
+</div>
+<div class="space-margin"></div>
+<div class="row p-2">
+  <app-alert [sender]="sender"></app-alert>
+</div>

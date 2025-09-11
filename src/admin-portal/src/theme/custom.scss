@@ -1,0 +1,16 @@
+
+//override variables here .. 
+
+@import './variables';
+
+@import "node_modules/bootstrap/scss/bootstrap";
+
+
+.app {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+.q-required {
+    color:red;
+}

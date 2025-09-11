@@ -1,0 +1,141 @@
+<div class="modal-header">
+    <h4 class="modal-title">{{eduDetail._id ? 'Edit Education Detail' : 'Add Education Detail'}}</h4>
+  
+  </div>
+  <div class="card">
+    <div class="card-body">
+
+   
+      <div class="row">
+        <div class="col-md-12">
+       <div>
+         <button class="btn btn-success" (click)="showHelp=!showHelp">Help?</button>
+         
+       </div>
+          <ol *ngIf="showHelp">
+            <li>
+              This screen maps subjects to education and also controls how many rows will be displayed when highest education is selected by the candidate.
+            </li>
+            <li>
+             You should select subject in "Subject Code" field. 
+             Subjects are taken from a constant  defined under constant-configuration menu. 
+         
+            </li>
+            <li>Example for subjects for POSTGRADUATION, go to constant-configuration and search for POSTGRADUATION. 
+              This will show list of all needed subjects.</li>
+
+              <li>
+                When you define subjects (in constant-configuration), you can put "Readonly" in ext1 field to create number of child rows required for each education. 
+                For example, if selected highest education level is POSTGRADUATION,
+                then you would like the candidate to fill details of POSTGRADUATION, GRADUATION, HSC and SSC. 
+                This will show four rows to the candidate to fill information.
+                "code" of these readonly subjects should match with another constant which has actual subjects defined for that code.
+                
+              </li>
+              <li>
+                We only support these codes: "POSTGRADUATION", "GRADUATION", "HSC", "SSC" for readonly.
+              </li>
+          </ol>
+        
+         
+  
+      </div>
+    
+      </div>
+
+
+      <div class="row" style="margin-top: 20px;">
+        <div class="col-md-12">
+  
+          <div class="alert alert-danger" role="alert" *ngIf="error">
+            {{error}}
+          </div>
+          
+  
+  
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="name">Name<span style="color:red">*</span></label>
+                <input type="text" [(ngModel)]="eduDetail.name" class="form-control" placeholder="Please enter the Name">
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="code">Code<span style="color:red">*</span></label>
+                <input type="text" [(ngModel)]="eduDetail.code" class="form-control" placeholder="Please enter the code">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="sequence">Sequence<span style="color:red">*</span></label>
+                <input type="text" [(ngModel)]="eduDetail && eduDetail.sequence" (keypress)="isNumber($event)" class="form-control" placeholder="Please enter the Sequence">
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="subject">Subject Code<span style="color:red">*</span></label>
+              
+               
+
+                <select class="form-control custom-select" id="subject"
+                    [(ngModel)]="eduDetail.subject_code" [disabled]="false">
+                    <option [ngValue]="''" disabled selected> Please enter the Subject Code </option>
+                  <option *ngFor="let code of codes" 
+                  [value]="code._id">{{code.name}}</option>
+                </select>
+              </div>
+            </div>
+          </div>
+  
+  
+          <div class="row">
+              <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="eventcode">Number of subjects<span style="color:red">*</span></label>
+                    <input type="text"  [(ngModel)]="eduDetail.count" (keypress)="isNumber($event)" class="form-control" placeholder="Please enter the number of subjects">
+                  </div>
+                </div>
+            
+              <div class="col-md-5 space-margin">
+                  <div class="form-group">
+                    <div style="margin-top:10px">
+                      <input type="checkbox" class="form-control" class="form-check-input" [(ngModel)]="eduDetail.multiple_subjects">Show multiple subjects
+                    </div>
+                  </div>
+                </div>         
+           
+           
+          </div>
+  
+          <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                  <label for="eventcode">Education Sequence (Higher education should be bigger number)<span style="color:red">*</span></label>
+                  <input type="text"  [(ngModel)]="eduDetail.edu_sequence" (keypress)="isNumber($event)" class="form-control" placeholder="Please enter edu sequence">
+                </div>
+              </div>
+          
+                  
+         
+         
+        </div>
+  
+         
+  
+          <div class="row">
+            <div class="col-md-6 text-right">
+  
+              <button type="reset" class="btn btn-primary" (click)="onSave()"><i class="far fa-save"></i>&nbsp;Save</button>
+            </div>
+            <div class="col-md-6">
+  
+              <button type="button" class="btn btn-secondary" (click)="onClose()"><i class="fa fa-window-close"></i>&nbsp;Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

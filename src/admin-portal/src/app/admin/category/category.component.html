@@ -1,0 +1,90 @@
+<div class="col-md-12">
+  <h4>{{_id ? 'Edit Category' :'Add Category'}}</h4>
+</div>
+<div class="card">
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-12">
+        <div *ngIf="error">
+          <label> <span style="color:red">{{error}}</span></label>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Category Name<span style="color:red">*</span></label>
+              <input type="text" [(ngModel)]="category" class="form-control">
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Category Description</label>
+              <input type="text" [(ngModel)]="categorydesc" class="form-control">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Age Completed(no.of Year)</label>
+              <input type="number" (keypress)="isNumber($event)" [(ngModel)]="age" class="form-control">
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="eventname">As on Date<span style="color:red">*</span></label>
+              <div class="input-group">
+                <input type="text"
+                      placeholder="as on date"
+                      class="form-control"
+                      #dp="bsDatepicker"
+                      [(ngModel)]="asondate"                      
+                      [bsConfig]="dateOpts"
+                      bsDatepicker>
+                <div class="input-group-append">
+                  <button class="btn btn-secondary fas fa-calendar" (click)="dp.toggle()" type="button">
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="eventname">Minimum Qualification<span style="color:red">*</span></label>
+              <select name="minqual" class="custom-select" [(ngModel)]="minqualification">
+                <option *ngFor="let minqual of eduList" value={{minqual.code}}>{{minqual.name}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Experience Level (No. of Year)</label>
+              <input type="number" (keypress)="isNumber($event)" [(ngModel)]="experience" class="form-control">
+            </div>
+          </div>
+        </div>
+        <!-- <div class="modal-footer">
+        <button type="reset" class="btn btn-primary" (click)="onSave()">Save</button>
+        <button type="button" class="btn btn-secondary" (click)="onClose()">Close</button>
+      </div> -->
+        <div class="row p-2">
+          <div class="col-md-5 text-right">
+            <button type="button" class="btn btn-primary" (click)="onSave()"><i class="far fa-save"></i> Save</button>
+          </div>
+          <div class="col-md-3">
+            <button type="button" class="btn btn-danger" (click)="onCancel()">Cancel</button>
+          </div>
+          <div class="col-md-4">
+            <ngb-alert *ngIf="successMessage" type="success" (close)="successMessage = null">{{ successMessage }}
+
+            </ngb-alert>
+            <ngb-alert *ngIf="errorMessage" type="danger" (close)="errorMessage = null">{{ errorMessage }}
+
+            </ngb-alert>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

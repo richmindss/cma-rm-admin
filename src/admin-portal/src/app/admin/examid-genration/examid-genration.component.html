@@ -1,0 +1,64 @@
+
+<div class="row">
+  <div class="col-md-12">
+    <h2>Exam ID Generation</h2>
+  </div>
+</div>
+<div class="card space-margin ">
+  <div class="card-body">
+    <div class="row p-2">     
+      <div *ngIf="error">
+          <label> <span style="color:red">{{error}}</span></label>
+        </div>
+    </div>
+    <div class="form-group">
+      <div class="row p-2">
+        <div class="col-md-2">
+          <label class="form-check-label">
+            <input type="radio" class="form-check-custom" value="overall" name="overall" [(ngModel)]="type" > Overall
+          </label>
+        </div>
+        <div class="col-md-2">
+          <label class="form-check-label">
+            <input type="radio" class="form-check-custom" value="examwise" name="examwise" [(ngModel)]="type" > Examwise
+          </label>
+        </div>
+      </div>
+
+      <div class="row p-2" *ngIf="type=='overall'">
+        <div class="col-md-2">
+          <label for="UserId">Exam ID Length<span style="color:red">*</span></label>
+        </div>
+        <div class="col-md-2 text-left">
+          <input maxlength="2" [(ngModel)]="examidlength" (keypress)="isNumber($event)" class="form-control" name="examidlength" />
+          
+        </div>
+        <div class="col-md-2 text-right">
+          <label for="PrefixValue">Prefix Value</label>
+        </div>
+        <div class="col-md-2">
+          <input type="text" [(ngModel)]="prefixvalue" (keypress)="isSpec($event)" class="form-control" name="PrefixValue" />
+        </div>
+        <div class="col-md-2 text-right">
+          <label for="SuffixValue">Suffix Value</label>
+        </div>
+        <div class="col-md-2 ">
+          <input type="text" [(ngModel)]="suffixvalue" (keypress)="isSpec($event)" class="form-control" name="SuffixValue" />
+        </div>
+      </div>
+      <div class="row p-1">
+        <div class="col-md-1">
+          <button type="submit" class="btn btn-primary" (click)="onSave()">Save</button>
+        </div>    
+        <div class="col-md-8">
+          <ngb-alert *ngIf="successMessage" type="success" (close)="successMessage = null">{{ successMessage }}
+    
+          </ngb-alert>
+          <ngb-alert *ngIf="errorMessage" type="danger" (close)="errorMessage = null">{{ errorMessage }}
+    
+          </ngb-alert>
+       </div>
+      </div>
+    </div>
+  </div>
+</div>

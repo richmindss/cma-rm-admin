@@ -1,0 +1,51 @@
+<div class="form-group">
+  <div>
+    <h2>Candidate Application Configuration</h2>
+  </div>
+</div>
+<div class="card">
+  <div class="card-body">
+    <div class="col-md-12 ">
+        <div class="form-group">
+            <div class="row p-2">
+                <div *ngIf="error">
+                    <label> <span style="color:red">{{error}}</span></label>
+                </div>
+            </div>
+            
+      <div class="row "*ngFor="let question of criteria;">
+        <div class="col-md-6">
+          <label>
+            {{question.name}}</label>
+        </div>
+        <div class="col-md-3">
+          <label for="radio" class="form-check-label">
+            <input type="radio" class="form-check-custom" value="on"
+              name="{{question._id}}" [(ngModel)]="question.answer"> ON
+          </label>
+        </div>
+        <div class="col-md-3">
+          <label for="radio1" class="form-check-label">
+            <input type="radio" class="form-check-custom"
+              [(ngModel)]="question.answer" value="off" name="{{question._id}}"> OFF
+          </label>
+        </div>
+      </div>
+<div class="row p-2">
+        <div class="col-2 ">
+            <button class="btn btn-primary" type="button" (click)="onSave()">save</button>
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row p-2">
+    <ngb-alert *ngIf="successMessage" type="success" (close)="successMessage = null">{{ successMessage }}
+  
+    </ngb-alert>
+    <ngb-alert *ngIf="errorMessage" type="danger" (close)="errorMessage = null">{{ errorMessage }}
+  
+    </ngb-alert>
+  </div>
+  

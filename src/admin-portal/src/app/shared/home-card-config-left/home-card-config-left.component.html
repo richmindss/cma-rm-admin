@@ -1,0 +1,10 @@
+<div> 
+  <ul class="left-nav"> 
+      <li *ngFor="let s of languages;" (click)="onLangClick(s)" style="cursor:pointer;">
+          <div class="menu-item" [ngClass]="{'active': currentLanguage.code == s.code}">
+             
+            {{s.name}} 
+          </div>
+        </li> 
+  </ul>
+</div> 

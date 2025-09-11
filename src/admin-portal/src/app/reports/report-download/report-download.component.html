@@ -1,0 +1,55 @@
+<div class="form-group">
+  <div>
+    <h2>Available Reports</h2>
+  </div>
+</div>
+<div class="col-md-12">
+  <div class="alert alert-danger" role="alert" *ngIf="error">
+    {{error}}
+  </div>
+  
+</div>
+
+
+
+<div class="row space-margin" >
+  <div class="col-md-3">
+    <div style="color: #B5B4B4;">
+      <h4 style="color:gray">Total:<span class="badge ng-binding" style="font-size: 20px;">{{reportsCount || 0}}</span>
+      </h4>
+      <div class="col-sm-2 pull-left"> </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <table class="table table-hover table-outline mb-0" style="background-color: white;">
+      <thead class="thead-default" style=" background-color: #c2cfd6;">
+        <tr>
+          <th>Name</th>
+          <th>Report Type</th>
+          <th>File Size</th>
+          <th>Created On</th>
+          <th><button  type="button" title="Refresh" (click)="getAllReports()" class="btn btn-primary btn-xs"> R </button></th>
+          
+        </tr>
+      </thead>
+      <tr *ngFor="let s of reports;">
+        <td>{{s.name}}</td>
+        <td>{{s.reporttype}}</td>
+        <td>{{s.size_h}}</td>
+        <td>{{s.created_on}}</td>
+        <td><button  [attr.disabled]="freitag || !s.isavailable ? true : null" type="button" title="Download" (click)="onDownload(s._id)" class="btn btn-primary btn-xs"><i
+          class="fa fa-download"></i></button></td>
+       
+      </tr>
+    </table>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12" *ngIf="reportsCount >= 25">
+    <app-pagination [(currentPage)]="currentPage" [pageSize]="pageSize" [totalRecords]="reportsCount"
+      (pageChanged)="fetchReportData($event)"></app-pagination>
+  </div>
+</div>

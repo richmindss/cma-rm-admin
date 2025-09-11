@@ -1,0 +1,38 @@
+<div class="scroll-auto-y">
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col" sortable="name" (sort)="onSort($event)">Candidate Status</th>
+      <th scope="col" sortable="area" (sort)="onSort($event)">Count</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td>1</td>
+      <td>Number of Candidate Registered on Portal</td>
+      <td>{{totalcount}}</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>Number of Candidate Application Form Pending</td>
+      <td *ngIf="totalcount >0 ">{{totalcount - totalSubmitted}}</td>
+      <td *ngIf="totalcount == 0 ">0</td>
+      
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>Number of Candidate Application Form Submitted</td>
+      <td>{{totalSubmitted}}</td>
+    </tr>
+  
+  
+    <tr *ngFor="let d of paymentData; let i = index"> 
+      <td>{{4+i}}</td>
+      <td>Number of Candidate Application ({{d.name}})</td>
+      <td>{{d.count}}</td>
+    </tr>
+  
+    </tbody>
+  </table>
+</div>

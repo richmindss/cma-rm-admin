@@ -1,0 +1,76 @@
+<div class="row">
+  <div class="col-md-12">
+    <h2>Email Setting</h2>
+  </div>
+</div>
+<div class="card">
+  <div class="card-body">
+    <div class="col-md-12 ">
+      <div class="form-row">
+        <div class="col-md-6 mb-2">
+          <label>Name</label>
+          <input type="text" class="form-control" name="name" [(ngModel)]="name">
+        </div>
+        <div class="col-md-6 mb-2">
+          <label>Hostname</label>
+          <input type="text" class="form-control" name="hostname" [(ngModel)]="hostname">
+        </div>
+      </div>
+      <div class="form-row">
+      <div class="col-md-6 mb-6 form-check ">
+        <div class="form-check">
+          <input class="form-check-input" [(ngModel)]="enable" type="checkbox" id="enable">
+          <label class="form-check-label" for="enable">
+            Enable SSL?
+          </label>
+        </div>
+      </div>
+      </div>
+      <div class="form-row">
+        <div class="col-md-6 mb-2">
+          <label>Port</label>
+          <input type="text" class="form-control" name="port" [(ngModel)]="port">
+        </div>
+        <div class="col-md-6 mb-2">
+          <label>From Email Address</label>
+          <input type="text" class="form-control" name="fromemail" [(ngModel)]="fromemail">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col-md-6 mb-2">
+          <label>Username</label>
+          <input type="text" class="form-control" name="username" [(ngModel)]="username">
+        </div>
+        <div class="col-md-6 mb-2">
+          <label>Password</label>
+          <input type="password" class="form-control" name="password" [(ngModel)]="password">
+        </div>
+      </div>
+      <div class="row ">
+          <div class="col-md-2 ">
+            <button type="button" class="btn btn-primary text left" (click)="onSave()"><i class="far fa-save">
+              </i> Save</button>
+          </div>
+          <div class="col-md-4">
+            <ngb-alert *ngIf="successMessage" type="success" (close)="successMessage = null">{{ successMessage }}
+  
+            </ngb-alert>
+            <ngb-alert *ngIf="errorMessage" type="danger" (close)="errorMessage = null">{{ errorMessage }}
+  
+            </ngb-alert>
+         </div>
+        </div>
+      <div class="form-row space-margin">
+        <div class="col-md-6 mb-2">
+          <label>To Email Address</label>
+          <input type="text" class="form-control" name="toemail" [(ngModel)]="toemail">
+        </div>
+        <div class="col-md-6">
+          <button type="button" class="btn btn-btn btn-warning text left space-margin" (click)="onTestConnection()"><i class="far fa-thumbs-up"></i> Test
+            Connection</button>
+        </div>
+      </div>
+     
+    </div>
+  </div>
+</div>

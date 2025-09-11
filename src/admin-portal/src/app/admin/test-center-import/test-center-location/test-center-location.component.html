@@ -1,0 +1,99 @@
+<div class="card">
+  <div class="card-body">
+    <h1>Test Center</h1>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="eventcode">Test Center Name<span style="color:red">*</span></label>
+              <input type="text" [(ngModel)]="testLocation.name" class="form-control"
+                placeholder=" enter the Test Center Name ">
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="eventcode">Test Center ID<span style="color:red">*</span></label>
+              <input type="text" placeholder="enter the Test Center ID" maxlength="25"
+                (keypress)="isNotAlphabet($event)" [(ngModel)]="testLocation.testcenterid" class="form-control">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="eventcode">Test Center Seating Capacity<span style="color:red">*</span></label>
+              <input type="text" maxlength="3" placeholder=" enter the Test Center Seating Capacity"
+                [(ngModel)]="testLocation.testcentercapacity" class="form-control" (keypress)="isNumber($event)">
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="eventcode">Booked Seating Capacity<span style="color:red">*</span></label>
+              <input type="text" placeholder="enter the Booked Seating Capacity" maxlength="3"
+                [(ngModel)]="testLocation.bookedseatingcapacity" class="form-control" (keypress)="isNumber($event)">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="eventcode">Buffer Capacity<span style="color:red">*</span></label>
+              <input type="number" placeholder="enter the Buffer Capacity" [(ngModel)]="testLocation.buffercapacity"
+                class="form-control" (keypress)="isNumber($event)">
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="eventcode">Test Center Contact Number<span style="color:red">*</span></label>
+              <input type="text" placeholder=" enter the Test Center Contact Number" id="eventcode" maxlength="10"
+                [(ngModel)]="testLocation.contactnumber" (keypress)="isNumber($event)" class="form-control">
+
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="eventname">Test Center City<span style="color:red">*</span></label>
+              <input type="text" placeholder="enter the Test Center City"
+                (input)="isNotCopyPasteNumAndSpecialChar($event)" maxlength="15" [(ngModel)]="testLocation.city"
+                class="form-control">
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="eventname">Test Center State<span style="color:red">*</span></label>
+             
+              <select name="t" class="custom-select form-control" [disabled]="false" [(ngModel)]="testLocation.state">
+                <option [ngValue]="''" disabled selected> select Test Center State </option>
+                <option *ngFor="let t of stateResult" value={{t}}>{{t}}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <label for="eventname">Address<span style="color:red">*</span></label>
+              <input type="text" placeholder=" enter the Address" [(ngModel)]="testLocation.address"
+                class="form-control">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <button type="button" class="btn btn-primary mr-3" (click)="onSave()"><i class="far fa-save"></i> &nbsp;
+              Save</button>
+            <button type="button" class="btn btn-secondary mr-3" (click)="onClose()"><i
+                class="fas fa-arrow-circle-left"></i>&nbsp;Back</button>
+            <button type="button" *ngIf="centerid!='new'" class="btn btn-danger pull-right" (click)="onDelete()"
+              style="float: right"><i class="fa fa-trash"></i> &nbsp;Delete</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+<app-alert [sender]="sender"></app-alert>

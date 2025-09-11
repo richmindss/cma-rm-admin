@@ -1,0 +1,20 @@
+<div>
+  <ul class="left-nav">
+    <div
+      class="menu-item"
+      [ngClass]="{ active: currenttab.code == 'CAND_HEADER' }"
+      style="cursor:pointer;"
+      (click)="onTabClick({ code: 'CAND_HEADER' })">
+      Header
+    </div>
+    <li *ngFor="let s of tabs" (click)="onTabClick(s)" style="cursor:pointer;">
+      <div class="menu-item" [ngClass]="{ active: currenttab.code == s.code }">
+        {{ s.name }}
+      </div>
+    </li>
+    <div class="menu-item" [ngClass]="{ active: currenttab.code == 'CAND_FOOTER' }" style="cursor:pointer;margin-top:10px"
+      (click)="onTabClick({ code: 'CAND_FOOTER' })">
+      Footer
+    </div>
+  </ul>
+</div>

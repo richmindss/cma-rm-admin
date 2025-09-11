@@ -1,0 +1,51 @@
+<div class="row">
+  <div class="col-md-12">
+    <h2>Candidate List</h2>
+  </div>
+</div>
+<div class="form-group">
+  <div class="row space-margin">
+    <div class="col-md-4">
+      <input type="search" id="search" class="form-control" [(ngModel)]="filter.key" placeholder="Search">
+    </div>
+    <div class="col-md-2">
+      <button class="btn btn-success" (click)="searchcandidateList()"><i class="fa fa-search"></i> Search</button>
+    </div>
+    <div class="col-md-2">
+      <button class="btn btn-primary" (click)="clearCandidateList()"><i class="fa fa-search-minus"></i> Clear</button>
+    </div>
+  </div>
+</div>
+<div class="row space-margin">
+  <div class="col-md-12">
+    <table class="table table-hover table-outline mb-0" style="background-color: white;">
+      <thead class="thead-default" style=" background-color: #c2cfd6;">
+        <tr>
+          <th>Email</th>
+          <th>Phone</th>
+          <th>User ID</th>
+
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let s of data" style="cursor:pointer" (click)="onEdit(s)">
+          <td>
+            <i class="fas fa-hourglass" style="color:red" *ngIf="s.temp"></i>
+            {{s.email}} 
+           </td>
+          <td> {{s.phone}}</td>
+          <td> {{s.userid}}</td> 
+
+        </tr>
+
+
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="row " *ngIf="candidateCount >= 25">
+  <div class="col-md-12">
+    <app-pagination [(currentPage)]="currentPage" [pageSize]="pageSize" [totalRecords]="candidateCount"
+      (pageChanged)="fetchCandidateData($event)"></app-pagination>
+  </div>
+</div>

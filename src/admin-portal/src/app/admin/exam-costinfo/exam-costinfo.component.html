@@ -1,0 +1,53 @@
+  
+<div class="form-group">
+<div>
+<button class="btn btn-success btn-md" type="button" (click)="addcCostInfo()">
+    <i class="fa fa-plus"></i> Add Eligibility Info
+</button>
+</div>
+</div>  
+  
+        <div class="row">
+          <div class="col-md-12">
+            <table class="table table-hover table-outline mb-0" style="background-color: white;">
+                <thead class="thead-default" style=" background-color: #c2cfd6;">
+                    <tr>             
+                        <th>Category</th>           
+                        <th>Gender</th> 
+
+                        <th>Other Category</th>
+                        <!-- <th>Location</th> -->
+                        
+                        <th>Minimum Qualification</th>
+                        <th>Work Exp.</th>
+                        <th>Age Limit</th>   
+                        <th>PWD</th>   
+                        <th>Price</th>                           
+                        <th style="text-align:right;">Action</th>
+                    </tr>
+                </thead>  
+                <tr  *ngFor="let s of examCostInfo;"  style="cursor:pointer" >
+                   <td>{{s.category.name}}</td>               
+                   <td>{{s.gender.name}}</td> 
+
+                   <td>{{s.misc_criteria.name}}</td>
+                   <!-- <td>{{s.locationObj.name}}</td>       -->
+                   
+                    <td>{{s.minqualification.name}}</td>
+                    <td>{{s.minworkexp}}</td>
+                   <td>{{s.agelimit}}</td>      
+                   <td>{{s.ispwd}}</td>                               
+                   <td>{{s.price}}</td>                                                         
+                    
+                    <td style="text-align:right">
+                      <button type="button"  title="Edit" (click)="onEdit(s._id)"  class="btn btn-primary btn-xs"><i class="fa fa-edit"></i></button>&nbsp;                      
+                        <button type="button" (click)="onDelete(s._id)" title="Delete" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></button>                      
+                        <span class="pull-right">&nbsp;&nbsp;</span>
+                    </td>
+                </tr>
+              </table>
+            </div>   
+            </div>        
+    
+  
+      

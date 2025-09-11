@@ -1,0 +1,37 @@
+<div class="row">
+    <div class="col-md-12">
+        <h2>Export List</h2>
+    </div>
+</div>
+<div class="card p-12">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-12 text-center ">
+                <div class="form-group">
+                    <select class="form-control custom-select">
+                            <option *ngFor="let candstatus of status" 
+                            value={{candstatus._id}}>{{candstatus.name}}</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 text-center upload-holder ">
+                    <app-header-logo [msg]="'Drop excel file here'" 
+                    [header]="" 
+                    [url]="'export'" 
+                    [docType]="'export'" 
+                    [img_width]="'200px'"
+                    [fileType]="fileType"
+                    [uploadType]="uploadType"
+                    (docError)="ondocError($event)"
+                    (docImport)="ondocImport($event)"
+                    [dropZoneId]="'mydropzone_export'"></app-header-logo>
+                  
+
+                <img *ngIf="statusurl" [attr.width]="img_width" height="100px" [attr.src]="statusurl"
+                    class="space-sidemargin">
+            </div>
+        </div>
+    </div>
+</div>

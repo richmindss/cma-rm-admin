@@ -1,0 +1,33 @@
+<div class="row sapce-margin" >
+    <div class="col-md-12 ">
+      <div class="card">
+        <h5 class="card-header text-left">Upload Word Document</h5>
+        <div class="card-body">
+          <div class="col-md-6">
+            <div class="row"  class="text text-danger">
+              <div class="col-md-12">
+                {{ err }}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12 bg-white">
+                <app-header-logo
+                  [msg]="'upload application word document'"
+                  [header]="''"
+                  [url]="'upload_application_template'"
+                  [docType]="'upload_application_template'"
+                  [img_width]="'200'"
+                  [img_height]="'180'"
+                  [fileType]="wordType"
+                  [uploadType]="'upload_application_template'"
+                  (docError)="onError($event)"
+                  [dropZoneId]="'dropzone_upload_application_template'"
+                  (docUploaded)="ondocUploaded($event)"
+                ></app-header-logo>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

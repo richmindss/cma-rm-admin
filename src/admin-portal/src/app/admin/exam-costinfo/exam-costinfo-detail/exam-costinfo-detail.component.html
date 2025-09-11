@@ -1,0 +1,210 @@
+<div class="col-md-12">
+  <h4>{{costInfoId=='new' ? 'Add Cost Info' :'Edit Cost Info'}}</h4>
+</div>
+<div class="card space-margin">
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-12">
+        <div *ngIf="error">
+          <label> <span style="color:red">{{error}}</span></label>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="inputCategory">Category<span style="color:red">*</span></label>
+              <select name="category" placeholder="Please select Category" class="custom-select"
+                [(ngModel)]="costInfoDetail.category.id" [disabled]="false">
+                <option [ngValue]="''" disabled selected> Please select Category </option>
+                <option *ngFor="let category of categoryResult" value={{category._id}}>{{category.name}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="inputState">Gender<span style="color:red">*</span></label>
+              <select name="gender" placeholder="Please select Gender" class="custom-select"
+                [(ngModel)]="costInfoDetail.gender.id" [disabled]="false">
+                <option [ngValue]="''" disabled selected> Please select Gender </option>
+                <option *ngFor="let gender of genderResult" value={{gender._id}}>{{gender.name}}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="card space-margin">
+  <div class="card-body">
+    <div class="row">
+
+      <div class="col-md-6">
+        <div class="form-group">
+          <label>Misc Criteria</label>
+          <select name="misccriteria" placeholder="Please select Misc Criteria" class="custom-select"
+            [(ngModel)]="costInfoDetail.misc_criteria.id" [disabled]="false">
+            <option [ngValue]="''" disabled selected> Please select Misc Criteria </option>
+            <option *ngFor="let misc of miscResult" value={{misc._id}}>{{misc.name}}</option>
+          </select>
+        </div>
+      </div>
+      <!-- <pre> 
+        <code>
+           {{ costInfoDetail | json }}
+        </code>
+      </pre> -->
+      <div class="col-md-6" *ngIf="isConstantValueVisible">
+        <div class="form-group">
+          <label>Location Selection</label>
+          <select name="location" placeholder="Please select location" class="custom-select"
+            [(ngModel)]="costInfoDetail.locationObj.id" [disabled]="false">
+            <option [ngValue]="''" disabled selected> Please select Location </option>
+            <option *ngFor="let loc of locationList" value={{loc._id}}>{{loc.name}}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+
+
+
+      <div class="col-md-1">
+      </div>
+              <div class="col-md-3">
+                <div class="form-group">
+                    <input type="checkbox" class="form-control" class="form-check-input" [(ngModel)]="costInfoDetail.ispwd"> PWD
+                </div>
+              </div>
+
+
+              <div class="col-md-8" *ngIf="costInfoDetail.ispwd">
+
+                <table class="table table-hover">
+                  <tr><th>PWD Type</th><th>Min%</th><th> Max % </th>
+                   
+                </tr>
+                  <tr *ngFor="let pwd of costInfoDetail.pwd_type">
+                    
+                    <td>
+                      {{pwd.name}}
+                    </td>
+                    <td>
+                      <input type="text"   placeholder="minimum VH(LV)"
+                      (keypress)="isNumber($event)" [(ngModel)]="pwd.min" class="form-control">
+                      
+                    </td>
+                    <td>
+                      <input type="text"   placeholder="maximum VH(LV)"
+                      (keypress)="isNumber($event)" [(ngModel)]="pwd.max" class="form-control">
+                    </td>
+                    
+                  </tr>
+                 </table>
+
+                  
+             
+      </div>
+    </div>
+  </div>
+</div>
+<div class="card space-margin">
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="qualification">Minimum Qualification<span style="color:red">*</span></label>
+          <select name="minqual" placeholder="Please select Minimum Qualification" class="custom-select"
+            [(ngModel)]="costInfoDetail.minqualification.id" [disabled]="false">
+            <option [ngValue]="''" disabled selected> Please select Minimum Qualification </option>
+            <option *ngFor="let minqual of eduList" value={{minqual._id}}>{{minqual.name}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <div class="form-group">
+            <label for="miniexp">Minimum Work Experience</label>
+            <input type="text" maxlength="2" placeholder="Please enter Minimum work experiance"
+              (keypress)="isNumber($event)" [(ngModel)]="costInfoDetail.minworkexp" class="form-control">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card space-margin">
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="agelimit">Age Limit</label>
+          <input type="text" maxlength="2" placeholder="Please Enter Age Limit" (keypress)="isNumber($event)"
+            [(ngModel)]="costInfoDetail.agelimit" class="form-control">
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="eventname">As on Date </label>
+        
+          <app-datefield [holdFuture]="true" [(data)]="costInfoDetail.asondate" [placeholder]="'As on date'"></app-datefield>
+
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label>Price</label>
+          <input #price type="text" placeholder="Please Enter Price" maxlength="10"
+            (keypress)="validateFloatKeyPress($event)" [(ngModel)]="costInfoDetail.price"
+            class="form-control">
+        </div>
+      </div>
+      <div class="col-md-6">
+      </div>
+    </div>
+  </div>
+</div>
+<div class="card space-margin">
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-12">
+        <h5 class="text-grey "> Minimum Passing Percentage <i class="fas fa-percent"></i></h5>
+      </div>
+    </div>
+    <div class="row" *ngFor="let qualification of costInfoDetail.minipassing;">
+      <div class="col-md-2">
+        <div class="form-group">
+          <label for="qualification">{{qualification.name}}</label>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <input type="text" maxlength="5" 
+           
+            (keypress)="validateFloatKeyPress($event)"
+            [(ngModel)]="qualification.percentage" 
+            
+            name="{{qualification._id}}">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row p-2">
+  <div class="col-md-5 text-right">
+    <button type="button" class="btn btn-primary" (click)="onSave()"><i class="far fa-save"></i> Save</button>
+  </div>
+  <div class="col-md-3">
+    <button type="button" class="btn btn-danger" (click)="onCancel()">Cancel</button>
+  </div>
+  <div class="col-md-4">
+    <ngb-alert *ngIf="successMessage" type="success" (close)="successMessage = null">{{ successMessage }}
+
+    </ngb-alert>
+    <ngb-alert *ngIf="errorMessage" type="danger" (close)="errorMessage = null">{{ errorMessage }}
+
+    </ngb-alert>
+  </div>
+</div>

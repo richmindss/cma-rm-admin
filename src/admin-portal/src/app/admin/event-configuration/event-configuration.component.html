@@ -1,0 +1,86 @@
+<div class="form-group">
+  <div>
+    <h2>Event Configuration ({{eventCount}})</h2>
+  </div>
+</div>
+  
+<div class="form-group">
+<div>
+<!-- <button class="btn btn-success btn-md" type="button" data-toggle="modal"  (click)="open(content,{})">
+    <i class="fa fa-plus"></i> Add Event
+</button> -->
+</div>
+</div>
+
+<ng-template #content let-modal>
+        <div class="modal-header">
+            <h4 class="modal-title">{{event._id ? 'Edit Event' : 'Add Event'}}</h4>
+            <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>       
+        <div class="modal-body">  
+            <div *ngIf="error">
+                <label> <span style="color:red">{{error}}</span></label>
+              </div>      
+        <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="eventcode">Event Code<span style="color:red">*</span></label>
+                        <input type="text" [(ngModel)]="event.code" class="form-control"placeholder="Please enter the Event Code" >
+                    </div>
+                </div>
+            </div>             
+                <div class="row">
+                  <div class="col-md-12">
+                      <div class="form-group">
+                      <label for="eventname">Event Name<span style="color:red">*</span></label>
+                      <input type="text" [(ngModel)]="event.name" class="form-control" placeholder="Please the Event Name" >
+                      </div>
+                  </div>
+                </div>                   
+            <div class="modal-footer">                
+                <button type="reset" class="btn btn-primary" (click)="onSave()"><i class="far fa-save"></i>&nbsp;Save</button>
+                <button type="button" class="btn btn-secondary" (click)="modal.close('Save click')"><i class="fa fa-window-close"></i>&nbsp;Close</button>
+            </div>
+        
+           
+          </div>
+  </ng-template>
+
+  
+        <div class="row">
+          <div class="col-md-12">
+            <table class="table table-hover table-outline mb-0" style="background-color: white;">
+                <thead class="thead-default" style=" background-color: #c2cfd6;">
+                    <tr>             
+                        <th>Event Code</th>           
+                        <th>Event Name</th>                        
+                        <!-- <th style="text-align:right;">Action</th> -->
+                    </tr>
+                </thead>  
+                <tr  *ngFor="let s of events;" >
+                   <td>{{s.code}}</td>                    
+                    <td><a href="/#/admin/email-sms/{{s._id}}" >{{s.name}}</a></td>                    
+                    
+                    <!-- <td style="text-align:right">
+                      <button type="button" (click)="open(content, s)" title="Edit" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i></button>&nbsp;                      
+                        <button type="button" (click)="deleteEvent(s)" title="Delete" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></button>                      
+                        <span class="pull-right">&nbsp;&nbsp;</span>
+                    </td> -->
+                </tr>
+              </table>
+            </div>   
+            </div>   
+            <div class="row" *ngIf="eventCount >pageSize">
+                <div class="col-md-12">
+                  <app-pagination
+                  [(currentPage)]="currentPage"
+                  [pageSize]="pageSize"
+                  [totalRecords]="eventCount"
+                  (pageChanged)="fetchUserData($event)"></app-pagination>
+                </div>
+              </div>     
+    
+  
+      

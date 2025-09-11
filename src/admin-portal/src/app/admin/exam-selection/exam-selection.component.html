@@ -1,0 +1,63 @@
+<div class="form-group">
+  <div>
+    <h2>Settings</h2>
+  </div>
+</div>
+
+
+<div class="card">
+  <div class="card-body">
+    <div class="col-md-12 ">
+      <div class="row p-2">
+        <div class="col-md-2">
+            <label>Nav Color: </label>
+        </div>
+        <div class="col-md-4">
+        <div class="input-group colorpicker-component">
+            
+          <input type="color" name="color" [(ngModel)]="setting.firstoption" class="form-control" />
+          <span class="input-group-addon"></span>
+      </div>
+    </div>
+      </div>
+      <div class="row p-2">
+          <div class="col-md-2">
+              <label>Button Color: </label>
+          </div>
+          <div class="col-md-4">
+          <div class="input-group colorpicker-component">
+            <input type="color" name="color" [(ngModel)]="setting.secondoption" class="form-control" />
+            <span class="input-group-addon"></span>
+        </div>
+        </div>
+        </div>
+        <div class="row p-2">
+            <div class="col-md-2">
+                <label>Hover Color: </label>
+            </div>
+            <div class="col-md-4">
+            <div class="input-group colorpicker-component">
+                
+              <input type="color" name="color" [(ngModel)]="setting.thirdoption" class="form-control" />
+              <span class="input-group-addon"></span>
+          </div>
+          </div>
+          </div>
+
+      <div class="row p-1">
+        <div class="col-md-1">
+          <button type="submit" class="btn btn-primary" (click)="onSave()">Save</button>
+        </div>
+
+      </div>
+      <div class="row p-1">
+        <ngb-alert *ngIf="successMessage" type="success" (close)="successMessage = null">{{ successMessage }}
+
+        </ngb-alert>
+        <ngb-alert *ngIf="errorMessage" type="danger" (close)="errorMessage = null">{{ errorMessage }}
+
+        </ngb-alert>
+      </div>
+    </div>
+  </div>
+</div>

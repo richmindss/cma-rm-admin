@@ -1,0 +1,82 @@
+<div class="form-group">
+  <div>
+    <h4 style="text-align: center;color: green;">Users Management</h4>
+  </div>
+</div>
+
+<div class="form-group">
+  <div class="row">
+  <div class="col-md-3">
+    <button class="btn btn-success btn-md" type="button" data-toggle="modal" (click)="onAddUsers()">
+      <i class="fa fa-plus"></i> Add User
+    </button>
+  </div>
+
+  </div>
+
+  <!-- <div class="row space-margin">
+    <div class="col-md-4">
+     <input type="search" id="search" class="form-control" [(ngModel)]="filter.key" placeholder="Search">
+     
+    </div>
+    <div class="col-md-4">
+      <input type="checkbox" [(ngModel)]="filter.locked"
+      class="form-check-input"> Locked
+     </div>
+    <div class="col-md-4" >
+      <button  class="btn btn-success" (click)="getUserList()">Search</button>
+    </div>
+  
+    </div> -->
+
+</div>
+<div class="row">
+  <div class="col-md-12">
+Total Users: {{userCount}}
+    </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <table class="table table-hover table-outline mb-0" style="background-color: white;">
+      <thead class="thead-default" style=" background-color: #c2cfd6;">
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Role</th>           
+            <th>Status</th>
+            <!-- <th>Locked</th> -->
+          <th style="text-align:center;">Action</th>
+        </tr>
+      </thead>
+      <tr *ngFor="let u of userlist;" style="cursor:pointer">
+        <td><a>{{u.Name}}</a></td>
+        <td><a>{{u.Email}}</a></td>
+        <td><a>{{u.Phone}}</a></td>        
+        <td><a>{{u.Role}}</a></td>
+        <td><a>{{u.Status ? 'Active' : 'DeActive' }}</a></td>
+        <!-- <td>{{u.locked ? 'Yes' : 'No' }}</td> -->
+      
+      
+
+        <td style="text-align:center">
+          <button type="button" (click)="open(u)" [ngbTooltip]="Edit" title="Edit" class="btn btn-primary btn-xs"><i
+              class="fa fa-edit" style="cursor: pointer;"></i></button>&nbsp;
+          <button type="button" (click)="deleteUserList(u)" [ngbTooltip]="Delete" title="Delete" class="btn btn-danger btn-xs"><i
+              class="fa fa-trash" style="cursor: pointer;"></i></button>
+          <span class="pull-right">&nbsp;&nbsp;</span>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<!-- <div class="row"  *ngIf="userCount >= 25">
+  <div class="col-md-12">
+    <app-pagination
+    [(currentPage)]="currentPage"
+    [pageSize]="pageSize"
+    [totalRecords]="userCount"
+    (pageChanged)="fetchUserData($event)"></app-pagination>
+  </div>
+</div> -->

@@ -1,0 +1,65 @@
+<div class="card space-margin">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-12">
+                <h3>Test Schedule Upload</h3>
+                <h4>Check the date format and time carefully. Date should be 'DD/MM/YYYY and time shoudl be 'hh:mm:ss aa</h4>
+                <h4>If you are using excel, both date and time must be prefixed with single quote '  so that it is treated as a text.</h4>
+                
+            </div>
+        </div>
+        <div class="row space-margin">
+            <div class="col-md-4">
+                <label for="name">Candidate User ID<app-required></app-required></label>
+                <input type="text" class="form-control" [(ngModel)]="testschedule.can_userid">
+            </div>
+            <div class="col-md-4">
+                <label for="id">Candidate Exam ID<app-required></app-required></label>
+                <input type="text" class="form-control" [(ngModel)]="testschedule.can_examid">
+            </div>
+            <div class="col-md-4">
+                <label for="name">Test Center ID<app-required></app-required></label>
+                <input type="text" class="form-control" 
+                    [(ngModel)]="testschedule.testcenterid">
+            </div>
+        </div>
+        <div class="row space-margin">
+            <div class="col-md-4">
+                <label for="id">Test Date<app-required></app-required></label>
+                <input type="text" class="form-control" [(ngModel)]="testschedule.testdate">
+            </div>
+            <div class="col-md-4">
+                <label for="name">Test Start Time<app-required></app-required></label>
+                <input type="text" class="form-control" [(ngModel)]="testschedule.teststarttime">
+            </div>
+            <div class="col-md-4">
+                <label for="id">Exam Duration (in Min)<app-required></app-required></label>
+                <input type="text" class="form-control" 
+                    [(ngModel)]="testschedule.examduration">
+            </div>
+        </div>
+        <div class="row space-margin">
+            <div class="col-md-4">
+                <label for="name">Reporting Duration (in min)<app-required></app-required></label>
+                <input type="text" class="form-control" [(ngModel)]="testschedule.reportingduration">
+            </div>
+        </div>
+    </div>
+</div>
+<div class="space-margin"></div>
+<div class="card">
+    <div class=card-body>
+        <div class="row">
+            <div class="col-md-6">
+                <button type="button" class="btn btn-primary mr-3" (click)="onSave()"><i class="far fa-save"></i>
+                    Save</button>
+                <button type="button" class="btn btn-secondary mr-3" (click)="onCancel()"><i
+                        class="fas fa-arrow-circle-left"></i> Back</button>
+            </div>
+            <div class="col-md-6">
+                <button type="button" *ngIf="testscheduleId!='new'" class="btn btn-danger pull-right" (click)="onDelete()"
+                    style="float: right"><i class="fa fa-trash"></i> &nbsp;Delete</button> </div>
+        </div>
+    </div>
+</div>
+<app-alert [sender]="sender"></app-alert>

@@ -1,0 +1,29 @@
+@media screen and (max-width: 767px) {
+    // .scroll {
+    //     overflow-y: scroll;
+    //     height:100%;
+    //     width: 100%;
+    //     position:relative;
+
+    // }
+    // .scrollx{
+    //     overflow-x:scroll;
+    //     height:100%;
+    //     position:relative;
+
+        
+    // }
+
+    .card {
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    }
+    .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    }
+    .welcome-badge {
+    font-size: 1.25rem; /* Bigger than fs-5 */
+    padding: 0.6rem 1rem; /* Optional: make badge padding nicer */
+    }
+
+}
