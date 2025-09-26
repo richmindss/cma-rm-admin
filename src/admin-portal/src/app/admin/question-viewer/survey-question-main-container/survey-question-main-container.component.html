@@ -1,0 +1,11 @@
+<div class="row">
+    <div class="col-md-12">
+        <h1 *ngIf="questions"> Total Survey Questions : {{questions.length}} </h1>
+    </div>
+</div>
+
+<div class="row" *ngFor="let ques of questions">
+    <div class="col-md-12">
+        <app-survey-question-container [qbid]="qbid" [questionId]="ques._id"></app-survey-question-container>
+    </div>
+</div>

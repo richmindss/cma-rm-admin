@@ -5,7 +5,7 @@ import { BackendService } from '../backend/backend.service';
 })
 export class UserListService {
 
-  private path = '/users'; 
+  private path = '/admin/users'; 
   constructor(private backendService: BackendService ) { }
 
   saveUserList(userList) {     
@@ -19,12 +19,24 @@ export class UserListService {
 
   getUserDetails(userId) {
     
-    return this.backendService.get(this.path + '/'+ userId);
+    return this.backendService.get(this.path + "/getUser/"+ userId);
+  }
+
+  updateUser(userData:any){
+    return this.backendService.post(this.path +"/updateUser", userData);
   }
 
   deleteUserList(userid) {
     
-    return this.backendService.get(this.path + '/'+ userid + '/delete');
+    return this.backendService.get(this.path + '/deleteUser/'+ userid);
+  }
+
+  getSubjectList(){
+    return this.backendService.get(this.path + "/getSubject");
+  }
+
+  getExamsList(){
+    return this.backendService.get(this.path + "/getExamsList");
   }
 
    

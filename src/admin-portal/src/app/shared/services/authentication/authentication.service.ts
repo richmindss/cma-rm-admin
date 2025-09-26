@@ -8,7 +8,7 @@ import { StorageService } from '../storage/storage.service';
 export class AuthenticationService {
 
   
-  private path = '/authentication';
+  private path = '/admin/authentication';
   private userSessionKey = 'user';
 
   private otp_path = '/otp';
@@ -19,7 +19,7 @@ export class AuthenticationService {
 
 
   login(Email: string, Password: string, captcha: string, page:string) {
-    return this.backendService.post('/login',
+    return this.backendService.post('/admin/login',
      {Email: Email, Password: Password, captcha: captcha, page: page});
   }
 
@@ -53,7 +53,7 @@ export class AuthenticationService {
 
   logout (candidateid:any) {
     //this.storageService.clear();
-    return this.backendService.get('/logout');
+    return this.backendService.get('/admin/logout');
   }
 
   getUserDetails(){

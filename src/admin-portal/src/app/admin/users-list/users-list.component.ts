@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
-import { UserListService } from "../../shared/services";
+import { UserListService,AuthenticationService } from "../../shared/services";
 import Swal from "sweetalert2";
 import { first } from "rxjs/operators";
 
@@ -16,7 +16,7 @@ export class UsersListComponent implements OnInit {
   filter: any = {
     key: ""
   };
-
+  user:any = {};
   /*** for paginaton start */
   pageSize = 25;
   currentPage = 1;
@@ -26,11 +26,13 @@ export class UsersListComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private userListServiceApi: UserListService
+    private userListServiceApi: UserListService,
+    private authenticationService: AuthenticationService
   ) {}
 
   ngOnInit() {
     this.getUserList();
+      this.user = this.authenticationService.getUserDetails();
   }
 
   open(user) {

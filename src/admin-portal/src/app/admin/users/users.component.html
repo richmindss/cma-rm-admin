@@ -11,75 +11,118 @@
               </div>
           </div>
         <div class="row">
-           <div class="col-md-6 ">
+           <div class="col-md-4 ">
             <div class="form-group">
               <label for="eventcode">Name<span style="color:red">*</span></label>
-              <input type="text" placeholder="Please enter the Name" [(ngModel)]="userData.Name" class="form-control"  [readonly]="userData._id" autocomplete="off">
+              <input type="text" placeholder="Please enter the Name" [(ngModel)]="userData.Name" class="form-control"  autocomplete="off">
             </div>
           </div>
-          <div class="col-md-6 ">
+          <div class="col-md-4 ">
             <div class="form-group">
               <label for="eventcode">Email ID<span style="color:red">*</span></label>
               <input type="text" placeholder="Please enter the Email ID" [(ngModel)]="userData.Email" class="form-control"  [readonly]="userData._id" autocomplete="off">
             </div>
           </div>
-         
-        </div>
-        <div class="row">
-           <div class="col-md-6">
+           <div class="col-md-4">
             <div class="form-group">
               <label for="eventcode">Phone Number<span style="color:red">*</span></label>
               <input type="text" placeholder="Please enter the Phone Number" maxlength="10" (keypress)="isNumber($event)" [(ngModel)]="userData.Phone" class="form-control" autocomplete="off">
             </div>
           </div>
-          <div class="col-md-6">
+        </div>
+        <div class="row">
+         
+          <div class="col-md-4">
            <div class="form-group">
             <label for="role">Role <span style="color:red">*</span></label>
-            <select
-              name="role"
-              class="custom-select form-control"
-              [(ngModel)]="userData.Role"
-            >
-              <option [ngValue]="''" disabled *ngIf="user?.record?.Role =='superAdmin'"> Please Select Role </option>
-              <option [ngValue]="'Editor'" *ngIf="user?.record?.Role =='superAdmin'">Editor</option>
-              <option [ngValue]="'Reviewer'" *ngIf="user?.record?.Role !='superAdmin'">Reviewer</option>
-              <option [ngValue]="'Author'" *ngIf="user?.record?.Role !='superAdmin'">Author</option>
+
+            <select name="role" class="custom-select form-control" [(ngModel)]="userData.Role">
+              <option [ngValue]="''" disabled> Please Select Role </option>
+              <option [ngValue]="'superAdmin'" *ngIf="user?.record?.Role =='superAdmin'">superAdmin</option>
+              <option [ngValue]="'Editor'" *ngIf="user?.record?.Role =='Editor'">Editor</option>
+              <option [ngValue]="'Reviewer'" *ngIf="user?.record?.Role =='Editor'">Reviewer</option>
+              <option [ngValue]="'Author'" *ngIf="user?.record?.Role =='Editor'">Author</option>
             </select>
-          </div>
-          </div>
-          
-        </div>
-        <div class="row">
-            <!-- <div class="col-md-3">  
-            </div> -->
-        <!-- <div class="col-md-6">
-          <div class="form-check form-check-inline">
-            <input 
-              type="checkbox" 
-              class="form-check-input" 
-              id="disable" 
-              [(ngModel)]="userData.Status"
-            >
-            <label class="form-check-label ms-2" for="disable">Deactivate</label>
-          </div>
-        </div> -->
 
-          <!-- <div class="col-md-3">            
-              <label for="locked"><span style="color:white">*</span></label>
-              <input type="checkbox" class="form-control" class="form-check-input" [(ngModel)]="userData.locked">Locked
-          </div> -->
-          <div class="col-md-3">  
+          </div>
+          </div>
+
+           <div class="col-md-4" *ngIf="user?.record?.Role =='Editor'">
+           <div class="form-group">
+            <label for="role">Exam Name <span style="color:red">*</span></label>
+
+          <select name="gender" class="custom-select"  [(ngModel)]="userData.Exam">
+            <option [ngValue]="''" disabled selected>Select Exam Name</option>
+            <option *ngFor="let exam of examArr" value="{{ exam._id }}">
+              {{ exam.Name }}
+            </option>
+          </select>
+
+          </div>
+          </div>
+
+        
+           <div class="col-md-4" *ngIf="user?.record?.Role =='Editor'">
+           <div class="form-group">
+            <label for="role">Subject Name <span style="color:red">*</span></label>
+
+            <select name="gender" class="custom-select"  [(ngModel)]="userData.Subject">
+              <option [ngValue]="''" disabled selected>Select Subject Name</option>
+              <option *ngFor="let sub of subjectArr" value="{{ sub._id }}">
+                {{ sub.Name }}
+              </option>
+            </select>
+
+          </div>
           </div>
         </div>
-        <div class="row">
-          <div class="col-md-6 text-right">
 
+        <div class="row">
+           <div class="col-md-4" *ngIf="user?.record?.Role =='Editor'">
+           <div class="form-group">
+            <label for="role">Language <span style="color:red">*</span></label>
+
+            <select name="gender" class="custom-select"  [(ngModel)]="userData.Language">
+              <option [ngValue]="''" disabled selected>Select Language</option>
+              <option *ngFor="let lan of lanDataArr" value="{{ lan._id }}">
+                {{ lan.Name }}
+              </option>
+            </select>
+
+          </div>
+          </div>
+
+          <div class="col-md-4" *ngIf="user?.record?.Role =='Editor'">
+            <div class="form-group">
+              <label for="eventcode">Start Question Number<span style="color:red">*</span></label>
+              <input type="number" placeholder="Please enter start question number" [(ngModel)]="userData.startQbNo" class="form-control"  autocomplete="off">
+            </div>
+          </div>
+
+          <div class="col-md-4" *ngIf="user?.record?.Role =='Editor'">
+            <div class="form-group">
+              <label for="eventcode">End Question Number<span style="color:red">*</span></label>
+              <input type="number" placeholder="Please enter end question number" [(ngModel)]="userData.endQbNo" class="form-control"  autocomplete="off">
+            </div>
+          </div>
+
+        </div>
+
+        
+       
+        <div class="row">
+
+         <div class="col-md-6 text-right" *ngIf="userData?._id">
+            <button type="reset" class="btn btn-primary" (click)="onUpdate()"><i class="far fa-save"></i>&nbsp;Update</button>
+          </div>
+          <div class="col-md-6 text-right" *ngIf="!userData?._id">
             <button type="reset" class="btn btn-primary" (click)="onSave()"><i class="far fa-save"></i>&nbsp;Save</button>
           </div>
-          <div class="col-md-6">
 
+          <div class="col-md-6">
             <button type="button" class="btn btn-secondary" (click)="onClose()"><i class="fa fa-window-close"></i>&nbsp;Close</button>
           </div>
+
         </div>
       </div>
     </div>

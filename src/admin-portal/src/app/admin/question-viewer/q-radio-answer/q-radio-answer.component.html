@@ -1,0 +1,13 @@
+<div class="row" *ngFor="let opt of options">
+    <div class="col-md-12">
+        
+        
+            <div class="radio">
+                <label>                             
+                        <input type="radio" name="{{question._id}}">                      
+                        <app-q-alternate [question]="question" [option]="opt"></app-q-alternate>
+                </label>
+            </div>
+        
+    </div>
+</div>

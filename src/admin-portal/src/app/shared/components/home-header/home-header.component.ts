@@ -23,7 +23,7 @@ export class HomeHeaderComponent implements OnInit {
 
   ngOnInit() {
     this.apiUrl = this.coreService.getRootPath();
-    // this.user = this.authenticationService.getUserDetails();
+    this.user = this.authenticationService.getUserDetails();
 
     this.logoUrl = this.getImgUrl();
   }
@@ -52,5 +52,8 @@ export class HomeHeaderComponent implements OnInit {
         this.authenticationService.saveLogin(null);
         this.router.navigate(["pages/login"]);
       });
+  }
+   changePassword(){
+    this.router.navigate(['/admin/change-password']);
   }
 }

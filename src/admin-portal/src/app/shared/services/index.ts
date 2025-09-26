@@ -10,7 +10,7 @@ export * from "./user-definition/user-definition.service";
 export * from "./email-setting/email-setting.service";
 export * from "./security-authentication/security-authentication.service";
 export * from "./captcha/captcha.service";
-export * from "./exam-selection/exam-selection.service";
+export * from "./qb-upload/qb-upload.service";
 export * from "./app-tab/app-tab.service";
 export * from "./test-center/test-center.service";
 export * from "./reports/reports.service";

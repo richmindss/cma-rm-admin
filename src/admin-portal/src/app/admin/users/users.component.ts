@@ -17,14 +17,21 @@ export class UsersComponent implements OnInit {
     Name:"",
     Email: "",
     Phone: "",
-    Role: ""
+    Role: "",
+    Subject :"",
+    Exam:"",
+    Language:"",
+    startQbNo:"",
+    endQbNo:"",
   
   };
   user: any = {};
   userId: string;
   sender = "users";
-
+  subjectArr : any =[];
   roleResult: any = [];
+  examArr : any =[];
+  lanDataArr : any = [];
   private _success = new Subject<string>();
   private _error = new Subject<string>();
 
@@ -43,12 +50,13 @@ export class UsersComponent implements OnInit {
 
   ngOnInit() {
   //  this.getRole();
+    this.getSubject();
+    this.getExamsList();
     this.initAlert();
     this.user = this.authenticationService.getUserDetails();
     this.route.paramMap.subscribe(params => {
       this.route.paramMap.subscribe(params => {
         this.userId = params.get("id") || "";
-
         if (this.userId !== "new") {
           this.userData._id = this.userId;
           this.getUserDetails(this.userId);
@@ -62,7 +70,7 @@ export class UsersComponent implements OnInit {
       .getUserDetails(userId)
       .pipe(first())
       .subscribe(res => {
-        this.userData = res;
+        this.userData = res["data"];
       });
   }
 
@@ -117,21 +125,47 @@ export class UsersComponent implements OnInit {
 
   fillcodesets() {
     this.userData.role = this.userData.role || {};
-    // this.userData.role.name = this.getName(
-    //   this.roleResult,
-    //   this.userData.role.id,
-    //   null
-    // );
-    // this.userData.role.code = this.getCode(
-    //   this.roleResult,
-    //   this.userData.role.id,
-    //   null
-    // );
+
+  }
+
+  getSubject(){
+    this.userListService
+      .getSubjectList()
+      .pipe(first())
+      .subscribe(res => {
+        if (res["success"] == false) {
+          alert(res["message"]);
+          this.alertService.err(this.sender, res["message"]);
+          return;
+        }else{
+          this.subjectArr = res["data"];
+          this.lanDataArr = res["lanData"];
+         
+        }
+       
+      });
+  }
+
+  getExamsList(){
+    this.userListService
+      .getExamsList()
+      .pipe(first())
+      .subscribe(res => {
+        if (res["success"] == false) {
+          alert(res["message"]);
+          this.alertService.err(this.sender, res["message"]);
+          return;
+        }else{
+          this.examArr = res["data"];
+          console.log("this.examArr......",this.examArr);
+        }
+       
+      });
   }
 
   onSave() {
-    this.error = " ";
- 
+    this.error = "";
+     //alert("on save....");
     if (!this.userData.Name) {
       this.error = "Please Enter Name";
       return false;
@@ -161,7 +195,7 @@ export class UsersComponent implements OnInit {
       this.error = "Please select Role";
       return false;
     }
-
+   
     this.userListService
       .saveUserList(this.userData)
       .pipe(first())
@@ -173,6 +207,56 @@ export class UsersComponent implements OnInit {
           return;
         }else{
          alert("User Saved Successfully ...")
+         this.alertService.show(this.sender, "User saved...");
+        }
+       
+      });
+  }
+
+  onUpdate(){
+ this.error = "";
+     //alert("on save....");
+    if (!this.userData.Name) {
+      this.error = "Please Enter Name";
+      return false;
+    }
+
+    if (!this.userData.Email) {
+      this.error = "Email cannot be left Blank";
+      return false;
+    }
+
+    if (!this.validateEmail(this.userData.Email)) {
+      this.error = "Please enter valid email";
+      return false;
+    }
+
+    if (!this.userData.Phone) {
+      this.error = "Phone cannot be left Blank";
+      return false;
+    }
+
+    if (this.userData.Phone && this.userData.Phone.length != 10) {
+      this.error = "Please enter valid Phone Number";
+      return false;
+    }
+
+    if (!this.userData.Role){
+      this.error = "Please select Role";
+      return false;
+    }
+   
+    this.userListService
+      .updateUser(this.userData)
+      .pipe(first())
+      .subscribe(res => {
+        console.log(res)
+        if (res["success"] == false) {
+          alert(res["message"]);
+          this.alertService.err(this.sender, res["message"]);
+          return;
+        }else{
+         alert("User Updated Successfully ...")
          this.alertService.show(this.sender, "User saved...");
         }
        

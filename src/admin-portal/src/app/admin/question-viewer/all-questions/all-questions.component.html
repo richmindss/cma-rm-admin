@@ -1,0 +1,83 @@
+
+
+<div class="modal-header">
+  <h4 class="modal-title">Update Question :  {{this.questionUpdate.questionid}}</h4>
+  <button type="button" class="close" aria-label="Close" (click)="close()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+
+<div class="modal-body">
+  <div class="col-md-12 ">
+     
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="card"> 
+
+      <h5>Question : {{this.questionUpdate.questionid}}</h5>
+     <!-- <p style="color: red;"> Without Changes Dont press update button</p> -->
+      <div class="card-body">
+        <app-template-editor 
+            [elementId]="questionUpdate._id" 
+            [height]="250"
+            (onEditorContentChange)="openForQuestion($event,'question')"
+            [(value)]="questionUpdate.question"></app-template-editor>
+            <button class="btn btn-primary" (click)="updateQuestionBank()">UPDATE</button>
+    </div>
+    <h5>Option : 1</h5>
+    <div class="card-body">
+      <app-template-editor 
+          [elementId]="alt1" 
+          [height]="200"
+          (onEditorContentChange)="openForQuestion($event,'alternative1')"
+          [(value)]="alt1"></app-template-editor>
+          <button class="btn btn-primary" (click)="updateAlternative1()">UPDATE</button>
+  </div>
+  <h5>Option : 2</h5>
+  <div class="card-body">
+    <app-template-editor 
+        [elementId]="alt2" 
+        [height]="200"
+        (onEditorContentChange)="openForQuestion($event,'alternative2')"
+        [(value)]="alt2"></app-template-editor>
+        <button class="btn btn-primary" (click)="updateAlternative2()">UPDATE</button>
+</div>
+<h5>Option : 3</h5>
+<div class="card-body">
+  <app-template-editor 
+      [elementId]="alt3" 
+      [height]="200"
+      (onEditorContentChange)="openForQuestion($event,'alternative3')"
+      [(value)]="alt3"></app-template-editor>
+      <button class="btn btn-primary" (click)="updateAlternative3()">UPDATE</button>
+</div>
+<h5>Option : 4</h5>
+<div class="card-body">
+  <app-template-editor 
+      [elementId]="alt4" 
+      [height]="200"
+      (onEditorContentChange)="openForQuestion($event,'alternative4')"
+      [(value)]="alt4"></app-template-editor>
+      <button class="btn btn-primary" (click)="updateAlternative4()">UPDATE</button>
+</div>
+    </div>
+  </div>
+</div>
+
+<!-- <div class="row">
+  <div class="col-md-3">
+
+  </div>
+  <div class="col-md-6">
+    <button class="btn btn-primary" (click)="updateQuestionBank()">Save</button>
+  </div>
+
+  <div class="col-md-3">
+
+  </div>
+</div> -->
+
+</div>
+</div> 

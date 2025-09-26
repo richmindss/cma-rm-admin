@@ -10,7 +10,7 @@ export class SettingsService {
 
  
   getMenu (){
-    return this.backendService.get ("/settings/menu");
+    return this.backendService.get ("/admin/settings/menu");
   }
 
   setHallTicket (x){

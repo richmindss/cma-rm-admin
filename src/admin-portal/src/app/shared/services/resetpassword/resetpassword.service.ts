@@ -6,7 +6,7 @@ import { BackendService } from '../backend/backend.service';
 })
 export class ResetpasswordService {
 
-  private path = "/resetpassword";
+  private path = "/admin/resetpassword";
 
   constructor(private backendService:BackendService) { }
 
@@ -30,11 +30,12 @@ export class ResetpasswordService {
             log_id : log_id
           });
   }
-  resetPasswordbyUser(oldPassword : string, newPassword: string){
-    return this.backendService.post(this.path + "/reset/user",
+  resetPasswordbyUser(oldPassword : string, newPassword: string, emailId:string){
+    return this.backendService.post(this.path + "/changePassword",
     {
-      old_password : oldPassword,
-      new_password : newPassword
+      oldPassword : oldPassword,
+      newPassword : newPassword,
+      emailId : emailId
     });
   }
 

@@ -1,0 +1,74 @@
+<div class="row space-margin" *ngIf="qbdata">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body">
+
+
+                <div class="row">
+
+                    <div class="col-md-3">
+                       <!-- <span style="color:red"> {{uploadError}}</span> -->
+                       
+                        <p class="btn-sm py-5 px-1 my-2 text-center" style="background-color: grey" [ngStyle]="{ cursor: applicationSubmitted ? 'inherit' : 'pointer' }" (click)="file.click()">
+                         Upload Question Bank zip file here</p>
+                            <input type="file"  #file class="d-none" (change)="onFileSelect($event)" accept=".zip"/>
+
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <button (click)="uploadZip()" class="btn btn-success" [disabled]="isDisabled">Upload ZIP</button>
+                                <p style="color:red" *ngIf="responseMessage">{{ responseMessage }}</p>
+                            
+                            <!-- </div> -->
+
+
+                    </div>
+
+                    <div class="col-md-9" *ngIf="this.qbsummarydata && this.qbsummarydata.length">
+                        <h2 style="text-align: center;"> QB Summary</h2>
+                        <table class="table table-hover">
+                            <tr style="background-color: grey">
+                                <th>Topic</th>
+                                <th>Question Type</th>
+                                <th>Neg. Marks</th>
+                                <th>Marks</th>
+                                <th>Number of Questions</th>
+                            </tr>
+
+                            <tr *ngFor="let q of this.qbsummarydata">
+                                <td>{{q.topic}}</td>
+                                <td>{{q.question_type}}</td>
+                                <td>{{q.neg_marks}}</td>
+                                <td>{{q.marks}}</td>
+                                <td>{{q.count}}</td>
+                            </tr>
+
+                            <tr>
+                                <th> </th>
+                                <th></th>
+                                <th></th>
+                                <th>Total marks : {{getTotalMarks ()}}</th>
+                                <th>Total Questions : {{getTotalQuestions ()}}</th>
+                            </tr>
+
+                        </table>
+                    </div>
+
+                </div>
+               <div class="row" *ngIf="this.qbsummarydata && this.qbsummarydata.length>0">
+                <div class="col-md-3">
+                  <a (click)="viewAllQuestion()" style="color: green;">View Uploaded All Questions</a>
+                </div>
+
+                <div class="col-md-9">
+                   
+                </div>
+
+               </div>
+               
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<app-alert [sender]="sender"></app-alert>

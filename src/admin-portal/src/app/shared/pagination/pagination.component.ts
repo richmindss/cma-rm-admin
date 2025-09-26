@@ -15,6 +15,7 @@ export class PaginationComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {    
+    alert("hello ashiokkkkkkkkk")
   }
 
   onPageChanged(){

@@ -21,7 +21,7 @@ export class InterceptorService implements HttpInterceptor {
 
     let authReq = req.clone({
       setHeaders: {
-        'Content-Type': 'application/json',
+       
         'access-token': token || '',
         'appname': this.coreService.getAppName(),
         'usertype': this.coreService.getUserType()

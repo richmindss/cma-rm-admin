@@ -9,34 +9,22 @@ import { first } from "rxjs/operators";
   styleUrls: ["./menu-nav.component.scss"]
 })
 export class MenuNavComponent implements OnInit {
-  menus = [ {
-      "icon": "fas fa-tachometer-alt",
-      "text": "Dashboard",
-      "target": "admin/dashboard",
-      "active": false,
-      "expanded": false
-    },{
-      "icon": "far fa-user",
-      "text": "Users",
-      "target": "admin/users",
-      "active": false,
-      "expanded": false
-    },
-  ];
-
+  menus:any = [];
+  
   constructor(
     private router: Router,
     private settingsService: SettingsService
   ) {}
 
   ngOnInit() {
-    // this.settingsService
-    //   .getMenu()
-    //   .pipe(first())
-    //   .subscribe(res => {
-    //     this.menus = res["menu"];
-    //     this.makeActive();
-    //   });
+    this.settingsService
+      .getMenu()
+      .pipe(first())
+      .subscribe(res => {
+        console.log(res)
+        this.menus = res["data"];
+        this.makeActive();
+      });
   }
 
   getMenuText(m) {

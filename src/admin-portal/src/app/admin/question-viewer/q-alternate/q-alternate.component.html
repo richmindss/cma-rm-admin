@@ -1,0 +1,6 @@
+
+<span *ngIf="question?.atype1=='text' || question?.atype2=='text' || question?.atype3=='text' || question?.atype4=='text'"  [innerHTML]="option.text"></span>
+
+<span *ngIf="getAlternate()">
+ <img src="{{this.imgUrl}}" >
+</span>

@@ -1,0 +1,22 @@
+
+
+
+<table *ngIf="rows" class="table table-hover">
+    <tr>
+        <th></th>
+        <th *ngFor="let c of cols;">{{c.text}}</th>
+    </tr>
+
+    <tr *ngFor="let r of rows">
+        <td>{{r.text}}</td>
+        <td *ngFor="let c of cols;">
+                <div class="form-check">
+                        <input type="checkbox" class="form-check-input" >
+                        <label class="form-check-label" ></label>
+                    </div>
+        </td>
+    </tr>
+    
+</table>
+
+ 

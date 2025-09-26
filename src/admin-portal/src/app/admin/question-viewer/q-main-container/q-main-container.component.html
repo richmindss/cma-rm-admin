@@ -1,0 +1,35 @@
+<div class="row">
+    <div class="col-md-6">
+        <h1 *ngIf="questions"> Total Questions Rows: {{questions.length}} </h1>
+    </div>
+   
+    <!-- <div class="col-md-3">
+        <select name="batch" class="form-control" (change)="onLanguageChange($event)">
+            <option value="" disabled selected>Select Language for QB download</option>
+            <option [value]="batch.code" *ngFor="let batch of languages">{{batch.code}}</option>
+          </select>
+    </div>   
+    <div class="col-md-3">
+        <button class="btn btn-success" type="button" (click)="generateAsExcel()">
+            <i class="fa fa-ticket"></i> Download As Excel
+          </button>
+    </div> -->
+</div>
+
+<div class="row" *ngFor="let ques of getQuestions()">
+    
+        <div class="col-md-12" *ngIf="ques">
+            <app-q-question-container [qbid]="qbid" [questionId]="ques"></app-q-question-container>
+        </div>
+</div>
+
+<ngb-pagination
+  [collectionSize]="collectionSize"
+  [(page)]="page"
+  [pageSize]="pageSize"
+  [maxSize]="5"
+  [rotate]="true"
+  [ellipses]="false"
+  [boundaryLinks]="true"
+>
+</ngb-pagination>

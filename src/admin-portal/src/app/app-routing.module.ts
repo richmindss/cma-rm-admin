@@ -18,6 +18,7 @@ export const routes: Routes = [
     redirectTo: 'admin',
     pathMatch: 'full'
   },
+
   {
     path: 'reports',
     loadChildren: () => import('./reports/reports.module').then(m => m.ReportsModule)

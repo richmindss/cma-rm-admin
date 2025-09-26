@@ -1,0 +1,30 @@
+<div class="row" *ngIf="question">
+
+    <div class="col-md-12" *ngIf="question.qtype =='text'" [innerHTML]="combinedHtmlContent">
+      
+    </div>
+
+    <div class="col-md-12" *ngIf="question.qtype =='image'">
+            <!-- {{question.sn}}.  -->
+            <img src="{{question.question}}" >
+            <!-- <div *ngFor="let c of question.texts">
+
+
+
+                <div *ngIf="c.type == 'image'">
+
+                    <div  *ngIf="getError (c.value)" style="color:red;">
+                        <h3>{{c.value}} {{getError (c.value)}}</h3>
+                    </div>
+                   
+                    <app-q-image *ngIf="!getError (c.value)"  [fileid]="getDocId (c.value)"></app-q-image>
+
+                </div>
+
+                <div *ngIf="c.type == 'text'">
+                    {{c.value}}
+                </div>
+                
+            </div>  -->
+    </div>
+</div>

@@ -3,7 +3,7 @@
 // The list of file replacements can be found in `angular.json`.
 export const environment = {
   production: false,
-   rootPath : 'http://localhost:5000/api/admin'
+   rootPath : 'http://localhost:5000/api'
   //rootPath : 'https://www.hscl.onlineregistrationforms.com/api/api/admin'
 };
 
