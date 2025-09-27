@@ -20,4 +20,12 @@ export class QbUploadService {
    getQuestions(){
     return this.backendService.get (this.path + "/getQuestions");
   }
+
+  deleteQuestionBank (){
+    return this.backendService.get (this.path + "/deleteQuestionBank");
+  }
+
+  sentForReviewQuestion(id:string){
+    return this.backendService.post (this.path + '/review-question' ,{id:id});
+  }
 }

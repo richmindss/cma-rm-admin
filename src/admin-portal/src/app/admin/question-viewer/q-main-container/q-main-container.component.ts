@@ -112,4 +112,22 @@ onLanguageChange(e:any){
   this.selectedLanguage = e.target.value;
 }
 
+  onReviewQuestion(event: Event, id: string) {
+      const input = event.target as HTMLInputElement;
+        if (input.checked) {
+        this.questionBankService.sentForReviewQuestion(id)
+        .pipe(first())
+        .subscribe(res => {
+          if(res && res["status"] == true){
+           this.loadQuestions();
+          }else{
+            alert(res["message"]);
+          }
+      
+        });
+          
+        } 
+        
+  }
+
 }

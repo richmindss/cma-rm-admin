@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, OnChanges } from "@angular/core";
-// import { QuestionBankService } from "src/app/shared/services/question-bank/question-bank.service";
+import { QbUploadService } from "src/app/shared/services";
 import { first } from "rxjs/operators";
 // import { AllQuestionsComponent } from "../all-questions/all-questions.component";
 import { NgbModal, NgbModalOptions } from "@ng-bootstrap/ng-bootstrap";
@@ -16,9 +16,9 @@ export class QQuestionContainerComponent implements OnInit, OnChanges {
   question: any = {};
   isValidQuestionType: any = true;
   qTypes = ["OBQ", "MCQ", "MTP", "SUB", "CSQ"];
-
+  selectedValues: number[] = [];
   constructor(
-    // private questionBankService: QuestionBankService,
+    private questionBankService: QbUploadService,
     private modalService: NgbModal, 
     ) {}
 
@@ -64,5 +64,23 @@ export class QQuestionContainerComponent implements OnInit, OnChanges {
     // modal.componentInstance.getAllQuestionById(question);
     // modal.result.then(res => {});
    
+  }
+
+  onReviewQuestion(event: Event, id: string) {
+    const input = event.target as HTMLInputElement;
+      if (input.checked) {
+       this.questionBankService.sentForReviewQuestion(id)
+       .pipe(first())
+       .subscribe(res => {
+        if(res && res["status"] == true){
+
+        }else{
+          alert(res["message"]);
+        }
+     
+      });
+        
+      } 
+      
   }
 }

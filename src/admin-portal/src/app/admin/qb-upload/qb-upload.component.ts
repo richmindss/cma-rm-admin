@@ -27,6 +27,7 @@ export class QbUploadComponent implements OnInit {
   docid: any;
   qbid: any;
   isDisabled:boolean = false;
+  isDisabledDel : boolean = false;
   summary: any = [];
   qbErrors: any = {
     questions: [],
@@ -113,13 +114,7 @@ export class QbUploadComponent implements OnInit {
             this.getQuestionSummary();
           }
         }
-        // if (this.isNew()) {
-        //   this.router.navigate([
-        //     "/question-bank/" + this.testId + "/" + res["_id"] + "/upload"
-        //   ]);
-        //   return;
-        // }
-        
+       
       });
      
       }catch(e){
@@ -152,25 +147,26 @@ export class QbUploadComponent implements OnInit {
   }
 
 
-  // deleteQB (){
-
-  //   if (!this.qbErrors){
-  //     return;
-  //   }
-
-  //   if (this.qbErrors.questions.length  == 0 && 
-  //     this.qbErrors.aggregate.length == 0){
-  //       //looks good..
-  //       return;
-  //   }
-
-  //   this.questionBankService
-  //   .deleteQuestionBank(this.qbid)
-  //   .pipe(first())
-  //   .subscribe(res => {
-       
-  //   });
-  // }
+  deleteQuestion (){
+    this.isDisabledDel = true;
+    this.questionBankService
+    .deleteQuestionBank()
+    .pipe(first())
+    .subscribe(res => {
+      if (res["status"] == false) {
+        alert(res["message"]);
+        this.alertService.err(this.sender, res["message"]);
+        return;
+      }else{
+        if(res["status"] == true){
+          alert("Question Bank Deleted successfully");
+          this.alertService.show(this.sender,"Question Bank Deleted successfully");
+          this.getQuestionSummary();
+          this.isDisabledDel = false;
+        }
+      }
+    });
+  }
 
   onCancel() {
     //this.location.back ();

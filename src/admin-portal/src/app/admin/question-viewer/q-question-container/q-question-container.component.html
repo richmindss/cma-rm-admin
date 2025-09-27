@@ -3,14 +3,15 @@
     <div class="col-md-3">
         <div class="card">
             <div class="card-body" (click)="getAllQuestions(question)">  
-                <b>Sr No:</b> {{question.sn}} <br />
-                <b>Topic Name:</b> {{question.topic}} <br />
-                <b>Difficult Level:</b> {{question.difficulty}} <br />
-                <b>Marks:</b> {{question.marks}} <br />
-                <b>Client Question ID:</b> {{question.questionid}} <br />
-               
-                </div>
-                </div>
+                <b>Sr No : </b> {{question.sn}} <br />
+                <b>Topic Name : </b> {{question.topic}} <br />
+                <b>Difficult Level : </b> {{question.difficulty}} <br />
+                <b>Marks : </b> {{question.marks}} <br />
+                <b>Client Question ID : </b> {{question.questionid}} <br />
+                <b> Status : </b> <span [ngStyle]="{ color: question.status === 'Reviewed' ? 'green' : question.status === 'Reviewing' ? '#ffc107' : 'black' }">{{question.status}}</span> <br />
+                <b>Send to Reviewer : </b> <input type="checkbox" value="{{question._id}}" (change)="onReviewQuestion($event, question._id)"/> <br />
+            </div>
+        </div>
     </div>
     <div class="col-md-9">
             <div class="card">
@@ -23,9 +24,9 @@
                     <app-q-casetype *ngIf="question.question_type == 'CSQ' " [question]="question"></app-q-casetype>
 
 
-                    <div *ngIf="!isValidQuestionType" style="color:red;">
+                    <!-- <div *ngIf="!isValidQuestionType" style="color:red;">
                         <h3>We do not support this question type .. {{question.question_type}}</h3>
-                    </div>
+                    </div> -->
             </div>
     </div>
 

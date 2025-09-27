@@ -55,10 +55,15 @@
                 </div>
                <div class="row" *ngIf="this.qbsummarydata && this.qbsummarydata.length>0">
                 <div class="col-md-3">
-                  <a (click)="viewAllQuestion()" style="color: green;">View Uploaded All Questions</a>
+                  <a (click)="viewAllQuestion()" style="color: green;" >View Uploaded All Questions</a>
+                </div>
+                <div class="col-md-3" *ngIf="this.qbsummarydata && this.qbsummarydata.length>0">
+                  <button class="btn btn-danger btn-sm" (click)="deleteQuestion()" [disabled]="isDisabledDel">
+                   <i class="fa fa-trash"></i> Delete
+                  </button>
                 </div>
 
-                <div class="col-md-9">
+                <div class="col-md-6">
                    
                 </div>
 

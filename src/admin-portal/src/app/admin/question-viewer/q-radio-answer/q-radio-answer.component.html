@@ -4,7 +4,7 @@
         
             <div class="radio">
                 <label>                             
-                        <input type="radio" name="{{question._id}}">                      
+                        <input type="radio" name="{{question._id}}" [checked]="opt.alternate === this.question.correct_alternate">                      
                         <app-q-alternate [question]="question" [option]="opt"></app-q-alternate>
                 </label>
             </div>

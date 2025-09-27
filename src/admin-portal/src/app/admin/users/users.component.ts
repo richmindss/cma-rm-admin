@@ -38,6 +38,7 @@ export class UsersComponent implements OnInit {
   errorMessage: string | null = null;
   successMessage: string | null = null;
   error: any;
+  checkRole:string ="";
 
   constructor(
     private userListService: UserListService,
@@ -71,6 +72,8 @@ export class UsersComponent implements OnInit {
       .pipe(first())
       .subscribe(res => {
         this.userData = res["data"];
+        console.log("this.userData.............",this.userData);
+        this.checkRole = res["data"].Role;
       });
   }
 
@@ -89,6 +92,10 @@ export class UsersComponent implements OnInit {
     } else {
       return false;
     }
+  }
+
+  onChangeRole(event: any) {
+    this.checkRole = this.userData.Role;
   }
 
   isNumber(evt) {

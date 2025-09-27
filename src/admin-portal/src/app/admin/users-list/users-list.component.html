@@ -43,10 +43,14 @@ Total Users: {{userCount}}
             <th>Name</th>
             <th>Email</th>
             <th>Phone</th>
-            <th>Role</th>           
+            <th>Role</th>     
+            <th>Exam</th> 
+            <th>Language</th>  
+            <th>Subject</th>  
+            <th>Start Qb No</th>         
+            <th>End Qb No</th>
             <th>Status</th>
-            <!-- <th>Locked</th> -->
-          <th style="text-align:center;">Action</th>
+            <th style="text-align:center;">Action</th>
         </tr>
       </thead>
       <tr *ngFor="let u of userlist;" style="cursor:pointer">
@@ -54,6 +58,11 @@ Total Users: {{userCount}}
         <td><a>{{u.Email}}</a></td>
         <td><a>{{u.Phone}}</a></td>        
         <td><a>{{u.Role}}</a></td>
+        <td><a>{{u?.Exam || '---'}}</a></td>
+        <td><a>{{u?.Language || '---'}}</a></td>
+        <td><a>{{u?.Subject || '---'}}</a></td>
+        <td><a>{{u?.startQbNo || '---'}}</a></td>
+        <td><a>{{u?.endQbNo || '---'}}</a></td>
         <td><a>{{u.Status ? 'Active' : 'DeActive' }}</a></td>
         <!-- <td>{{u.locked ? 'Yes' : 'No' }}</td> -->
       

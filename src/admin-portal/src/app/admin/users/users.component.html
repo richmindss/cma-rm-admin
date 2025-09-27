@@ -36,7 +36,7 @@
            <div class="form-group">
             <label for="role">Role <span style="color:red">*</span></label>
 
-            <select name="role" class="custom-select form-control" [(ngModel)]="userData.Role">
+            <select name="role" class="custom-select form-control" [(ngModel)]="userData.Role" (change)="onChangeRole($event)">
               <option [ngValue]="''" disabled> Please Select Role </option>
               <option [ngValue]="'superAdmin'" *ngIf="user?.record?.Role =='superAdmin'">superAdmin</option>
               <option [ngValue]="'Editor'" *ngIf="user?.record?.Role =='Editor'">Editor</option>
@@ -47,13 +47,13 @@
           </div>
           </div>
 
-           <div class="col-md-4" *ngIf="user?.record?.Role =='Editor'">
+           <div class="col-md-4" *ngIf="this.checkRole =='Author' || this.checkRole =='Reviewer'">
            <div class="form-group">
             <label for="role">Exam Name <span style="color:red">*</span></label>
 
           <select name="gender" class="custom-select"  [(ngModel)]="userData.Exam">
             <option [ngValue]="''" disabled selected>Select Exam Name</option>
-            <option *ngFor="let exam of examArr" value="{{ exam._id }}">
+            <option *ngFor="let exam of examArr" value="{{ exam.Name }}">
               {{ exam.Name }}
             </option>
           </select>
@@ -62,13 +62,13 @@
           </div>
 
         
-           <div class="col-md-4" *ngIf="user?.record?.Role =='Editor'">
+           <div class="col-md-4" *ngIf="this.checkRole =='Author' || this.checkRole =='Reviewer'">
            <div class="form-group">
             <label for="role">Subject Name <span style="color:red">*</span></label>
 
             <select name="gender" class="custom-select"  [(ngModel)]="userData.Subject">
               <option [ngValue]="''" disabled selected>Select Subject Name</option>
-              <option *ngFor="let sub of subjectArr" value="{{ sub._id }}">
+              <option *ngFor="let sub of subjectArr" value="{{sub.Name }}">
                 {{ sub.Name }}
               </option>
             </select>
@@ -78,13 +78,13 @@
         </div>
 
         <div class="row">
-           <div class="col-md-4" *ngIf="user?.record?.Role =='Editor'">
+           <div class="col-md-4" *ngIf="this.checkRole =='Author' || this.checkRole =='Reviewer'">
            <div class="form-group">
             <label for="role">Language <span style="color:red">*</span></label>
 
             <select name="gender" class="custom-select"  [(ngModel)]="userData.Language">
               <option [ngValue]="''" disabled selected>Select Language</option>
-              <option *ngFor="let lan of lanDataArr" value="{{ lan._id }}">
+              <option *ngFor="let lan of lanDataArr" value="{{ lan.Name }}">
                 {{ lan.Name }}
               </option>
             </select>
@@ -92,14 +92,14 @@
           </div>
           </div>
 
-          <div class="col-md-4" *ngIf="user?.record?.Role =='Editor'">
+          <div class="col-md-4" *ngIf="this.checkRole =='Author' || this.checkRole =='Reviewer'">
             <div class="form-group">
               <label for="eventcode">Start Question Number<span style="color:red">*</span></label>
               <input type="number" placeholder="Please enter start question number" [(ngModel)]="userData.startQbNo" class="form-control"  autocomplete="off">
             </div>
           </div>
 
-          <div class="col-md-4" *ngIf="user?.record?.Role =='Editor'">
+          <div class="col-md-4" *ngIf="this.checkRole =='Author' || this.checkRole =='Reviewer'">
             <div class="form-group">
               <label for="eventcode">End Question Number<span style="color:red">*</span></label>
               <input type="number" placeholder="Please enter end question number" [(ngModel)]="userData.endQbNo" class="form-control"  autocomplete="off">

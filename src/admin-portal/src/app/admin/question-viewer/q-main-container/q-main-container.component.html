@@ -23,7 +23,10 @@
         </div>
 </div>
 
+&nbsp;&nbsp;
+
 <ngb-pagination
+*ngIf="collectionSize > pageSize"
   [collectionSize]="collectionSize"
   [(page)]="page"
   [pageSize]="pageSize"
@@ -33,3 +36,13 @@
   [boundaryLinks]="true"
 >
 </ngb-pagination>
+
+<div class="row" *ngIf="collectionSize > pageSize">
+<div class="col-md-12">
+ <h4 style="color: red;">You should review all pages ({{ getTotalPages()}}) before you send to review this question bank.</h4>
+</div>
+<div class="col-md-12" style="color: green;">
+ <input type="checkbox" value="{{'All'}}" (change)="onReviewQuestion($event, 'All')"/>  &nbsp; <b>All Questions Send to Reviewer</b>
+</div>
+
+</div>
