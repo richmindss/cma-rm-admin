@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
+import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { CommonModule } from '@angular/common';
 import { QObjectiveComponent } from './q-objective/q-objective.component';
+import { FormsModule } from '@angular/forms';
+import { EditorModule } from '@tinymce/tinymce-angular';
 // import { QMultiChoiceComponent } from './q-multi-choice/q-multi-choice.component';
 // import { QSubjectiveComponent } from './q-subjective/q-subjective.component';
 // import { QMatchPairComponent } from './q-match-pair/q-match-pair.component';
@@ -15,9 +18,9 @@ import { QQuestionContainerComponent } from './q-question-container/q-question-c
 // import { QPairAnswerComponent } from './q-pair-answer/q-pair-answer.component';
 // import { QSubAnswerComponent } from './q-sub-answer/q-sub-answer.component';
 import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
- import { QAlternateComponent } from './q-alternate/q-alternate.component';
- 
-// import { AllQuestionsComponent } from "./all-questions/all-questions.component";
+import { QAlternateComponent } from './q-alternate/q-alternate.component';
+ import { AllQuestionsComponent } from "./all-questions/all-questions.component";
+import { TemplateEditorComponent } from "./template-editor/template-editor.component"; // ✅ Import here
 
 @NgModule({
 
@@ -28,6 +31,8 @@ import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
          QContentComponent,
          QRadioAnswerComponent,
          QAlternateComponent,
+         AllQuestionsComponent,
+        TemplateEditorComponent
         // QImageComponent
          ],
 
@@ -37,16 +42,22 @@ import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
   //        QMainContainerComponent, 
   //       QQuestionContainerComponent, QCasetypeComponent, QPairAnswerComponent, QSubAnswerComponent,  QAlternateComponent,AllQuestionsComponent],
   imports: [
+    NgbModule,
     CommonModule,
+    FormsModule,
+    EditorModule,
+    // TemplateEditorComponent,  // ✅
     QMDashboardRouteModule,
     NgbPaginationModule
   ],
   exports: [
     QMainContainerComponent,
+    
    
   ],
   entryComponents: [
-    //AllQuestionsComponent
+    AllQuestionsComponent,
+    
   ]
   // entryComponents: [
   //   AllQuestionsComponent

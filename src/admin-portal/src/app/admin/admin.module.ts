@@ -31,6 +31,9 @@ import { HomeContactComponent } from './home-contact/home-contact.component';
 import {ChangePasswordComponent} from "../admin/change-password/change-password.component";
 import { QbUploadComponent } from "../admin/qb-upload/qb-upload.component";
 
+import { UserMapperComponent } from "../admin/user-mapper/user-mapper.component";
+import { UsersMapperListComponent } from "../admin/user-mapper-list/user-mapper-list.component";
+
 @NgModule({
   declarations: [
     DashboardComponent,
@@ -56,7 +59,9 @@ import { QbUploadComponent } from "../admin/qb-upload/qb-upload.component";
     HomeFaqComponent,
     HomeContactComponent,
     ChangePasswordComponent,
-    QbUploadComponent
+    QbUploadComponent,
+    UserMapperComponent,
+    UsersMapperListComponent
   ],
   imports: [
     CommonModule,

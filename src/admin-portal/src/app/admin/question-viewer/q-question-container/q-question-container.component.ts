@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, OnChanges } from "@angular/core";
-import { QbUploadService } from "src/app/shared/services";
+import { QbUploadService,AuthenticationService } from "src/app/shared/services";
 import { first } from "rxjs/operators";
-// import { AllQuestionsComponent } from "../all-questions/all-questions.component";
+import { AllQuestionsComponent } from "../all-questions/all-questions.component";
 import { NgbModal, NgbModalOptions } from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
@@ -14,16 +14,19 @@ export class QQuestionContainerComponent implements OnInit, OnChanges {
   @Input() questionId: any;
 
   question: any = {};
+  user:any = {};
   isValidQuestionType: any = true;
   qTypes = ["OBQ", "MCQ", "MTP", "SUB", "CSQ"];
   selectedValues: number[] = [];
   constructor(
     private questionBankService: QbUploadService,
     private modalService: NgbModal, 
+    private authenticationService: AuthenticationService
     ) {}
 
   ngOnInit() {
      this.question = this.questionId;
+     this.user = this.authenticationService.getUserDetails();
   }
 
   ngOnChanges() {
@@ -46,12 +49,8 @@ export class QQuestionContainerComponent implements OnInit, OnChanges {
     return this.qTypes.indexOf(this.question.question_type) >= 0;
   }
 
-  getAllQuestions(question:any) {
-    return true;
-    alert("all q");
-    // if(this.isDisconnected()){
-    //   return;
-    // }
+  updateQuestions(question:any) {
+
     var opts: NgbModalOptions = {
       centered: true,
       size: "lg",
@@ -60,20 +59,21 @@ export class QQuestionContainerComponent implements OnInit, OnChanges {
       keyboard: false
     };
 
-    // let modal = this.modalService.open(AllQuestionsComponent, opts);
-    // modal.componentInstance.getAllQuestionById(question);
-    // modal.result.then(res => {});
+    let modal = this.modalService.open(AllQuestionsComponent, opts);
+    modal.componentInstance.getAllQuestionById(question);
+    modal.result.then(res => {});
    
   }
 
-  onReviewQuestion(event: Event, id: string) {
-    const input = event.target as HTMLInputElement;
-      if (input.checked) {
-       this.questionBankService.sentForReviewQuestion(id)
+  onReviewQuestion(status: string, id: string) {
+
+    // const input = event.target as HTMLInputElement;
+    //   if (input.checked) {
+       this.questionBankService.sentForReviewQuestion(status,id)
        .pipe(first())
        .subscribe(res => {
         if(res && res["status"] == true){
-
+          window.location.reload();
         }else{
           alert(res["message"]);
         }
@@ -82,5 +82,5 @@ export class QQuestionContainerComponent implements OnInit, OnChanges {
         
       } 
       
-  }
+  //}
 }

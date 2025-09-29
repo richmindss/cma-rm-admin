@@ -21,6 +21,9 @@ import { HomeFaqComponent } from './home-faq/home-faq.component';
 import {ChangePasswordComponent} from "../admin/change-password/change-password.component";
 import { QbUploadComponent } from "../admin/qb-upload/qb-upload.component";
 
+import { UserMapperComponent } from "../admin/user-mapper/user-mapper.component";
+import { UsersMapperListComponent } from "../admin/user-mapper-list/user-mapper-list.component";
+
 const routes: Routes = [
   {
     path: "admin",
@@ -119,6 +122,22 @@ const routes: Routes = [
         },
         component: UsersListComponent
       },
+      {
+        path: "user-mapper",
+        data: {
+          title: "User Mapper"
+        },
+        component: UserMapperComponent
+      },
+
+      {
+        path: "user-mapper-list",
+        data: {
+          title: "User Mapper List"
+        },
+        component: UsersMapperListComponent
+      },
+
       {
         path: "application-configuration",
         data: {

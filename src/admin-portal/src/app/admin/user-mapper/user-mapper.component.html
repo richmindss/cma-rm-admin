@@ -1,0 +1,77 @@
+<div class="modal-header">
+  <h4 class="modal-title">{{mapUser._id ? 'Edit User Mapping' : 'User Mapping'}}</h4>
+</div>
+<div class="card">
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-12">
+          <div class="row p-2">
+              <div *ngIf="error">
+                  <label> <span style="color:red">{{error}}</span></label>
+              </div>
+          </div>
+       
+        <div class="row">
+         
+
+           <div class="col-md-4">
+           <div class="form-group">
+            <label for="role">Author List <span style="color:red">*</span></label>
+
+          <select name="gender" class="custom-select"  [(ngModel)]="mapUser.author">
+            <option [ngValue]="''" disabled selected>Select Author List</option>
+            <option *ngFor="let author of authorArr" value="{{ author._id }}">
+              {{ author.Email }}
+            </option>
+          </select>
+
+          </div>
+          </div>
+
+        
+           <div class="col-md-4">
+           <div class="form-group">
+            <label for="role">Reviewer List <span style="color:red">*</span></label>
+
+            <select name="gender" class="custom-select"  [(ngModel)]="mapUser.reviewer">
+              <option [ngValue]="''" disabled selected>Select Reviewer List</option>
+              <option *ngFor="let review of reviewerArr" value="{{review._id }}">
+                {{ review.Email }}
+              </option>
+            </select>
+
+          </div>
+          </div>
+        </div>
+
+      
+        <div class="row">
+
+         <div class="col-md-6 text-right" *ngIf="mapUser?._id">
+            <button type="reset" class="btn btn-primary" (click)="onUpdate()"><i class="far fa-save"></i>&nbsp;Update</button>
+          </div>
+          <div class="col-md-6 text-right" *ngIf="!mapUser?._id">
+            <button type="reset" class="btn btn-primary" (click)="onSave()"><i class="far fa-save"></i>&nbsp;Save</button>
+          </div>
+
+          <div class="col-md-6">
+            <button type="button" class="btn btn-secondary" (click)="onClose()"><i class="fa fa-window-close"></i>&nbsp;Close</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+      <ngb-alert *ngIf="successMessage" type="success" (close)="successMessage = null">{{ successMessage }}
+    
+      </ngb-alert>
+      <ngb-alert *ngIf="errorMessage" type="danger" (close)="errorMessage = null">{{ errorMessage }}
+    
+      </ngb-alert>
+    </div>
+</div>
+<div class="space-margin"></div>
+<div class="row p-2">
+  <app-alert [sender]="sender"></app-alert>
+</div>

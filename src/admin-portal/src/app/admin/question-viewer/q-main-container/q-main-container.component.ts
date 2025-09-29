@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, OnChanges } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
-import { QbUploadService } from "src/app/shared/services";
+import { QbUploadService,AuthenticationService } from "src/app/shared/services";
 // import { ExcelService } from "src/app/shared/services/excel-service/excel.service";
 import { first } from "rxjs/operators";
 // import { LanguageService } from "src/app/shared/services/language/language.service";
@@ -20,10 +20,12 @@ export class QMainContainerComponent implements OnInit, OnChanges {
   obj:any;
   languages: any = [];
   selectedLanguage:any;
+  user:any = {};
 
   constructor(
     private activatedRoute: ActivatedRoute,
     private questionBankService: QbUploadService,
+    private authenticationService: AuthenticationService
     // private questionBankService: QuestionBankService,
     // private excelService: ExcelService,
     // private languageServiceApi: LanguageService,
@@ -34,6 +36,7 @@ export class QMainContainerComponent implements OnInit, OnChanges {
     });
    // this.getLanguages();
    this.loadQuestions();
+   this.user = this.authenticationService.getUserDetails();
   }
 
   ngOnChanges() {
@@ -112,10 +115,10 @@ onLanguageChange(e:any){
   this.selectedLanguage = e.target.value;
 }
 
-  onReviewQuestion(event: Event, id: string) {
-      const input = event.target as HTMLInputElement;
-        if (input.checked) {
-        this.questionBankService.sentForReviewQuestion(id)
+  onReviewQuestion(status: string, id: string) {
+      // const input = event.target as HTMLInputElement;
+      //   if (input.checked) {
+        this.questionBankService.sentForReviewQuestion(status,id)
         .pipe(first())
         .subscribe(res => {
           if(res && res["status"] == true){
@@ -128,6 +131,6 @@ onLanguageChange(e:any){
           
         } 
         
-  }
+  //}
 
 }

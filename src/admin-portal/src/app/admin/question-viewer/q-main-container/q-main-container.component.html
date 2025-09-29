@@ -1,6 +1,10 @@
 <div class="row">
-    <div class="col-md-6">
-        <h1 *ngIf="questions"> Total Questions Rows: {{questions.length}} </h1>
+    <div class="col-md-3">
+        <h3 *ngIf="questions"> Total Questions Rows: {{questions.length}} </h3>
+    </div>
+
+     <div class="col-md-3">
+        <h3 *ngIf="questions && user.record?.Role !='Editor'"> Subject: {{user.record?.Subject}} </h3>
     </div>
    
     <!-- <div class="col-md-3">
@@ -38,11 +42,23 @@
 </ngb-pagination>
 
 <div class="row" *ngIf="collectionSize > pageSize">
-<div class="col-md-12">
- <h4 style="color: red;">You should review all pages ({{ getTotalPages()}}) before you send to review this question bank.</h4>
-</div>
-<div class="col-md-12" style="color: green;">
- <input type="checkbox" value="{{'All'}}" (change)="onReviewQuestion($event, 'All')"/>  &nbsp; <b>All Questions Send to Reviewer</b>
+    <div class="col-md-12">
+    <h4 style="color: red;">You should review all pages ({{ getTotalPages()}}) before you send to further process.</h4>
+    </div>
 </div>
 
+<div class="row" *ngIf="collectionSize == 0 && user.record?.Role =='Reviewer'">
+    <div class="col-md-12">
+    <h4 style="color: red;">Questions not assign for Reviewing</h4>
+    </div>
 </div>
+
+<div class="row" *ngIf="collectionSize > 0">
+    <div class="col-md-3" style="color: green;" *ngIf="user.record?.Role=='Author'">
+        <button type="button" class="btn btn-outline-primary" (click)="onReviewQuestion('Reviewing', 'All')">All Questions Send to Reviewer</button>
+    </div>
+     <div class="col-md-3" style="color: green;" *ngIf="user.record?.Role=='Reviewer'">
+        <button type="button" class="btn btn-outline-primary" (click)="onReviewQuestion('Reviewed', 'All')">All Questions Send to Editor</button>
+    </div>
+</div>
+

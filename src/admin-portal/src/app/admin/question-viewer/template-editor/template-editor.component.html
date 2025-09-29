@@ -1,0 +1,4 @@
+<editor *ngIf="props" 
+        [(ngModel)]="value" 
+        [init]="props" 
+        (ngModelChange)="onValueChanges($event)"></editor>

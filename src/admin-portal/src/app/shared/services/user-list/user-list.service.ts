@@ -39,5 +39,9 @@ export class UserListService {
     return this.backendService.get(this.path + "/getExamsList");
   }
 
+  getUserType(){
+    return this.backendService.get(this.path + "/getUserType");
+  }
+
    
 }

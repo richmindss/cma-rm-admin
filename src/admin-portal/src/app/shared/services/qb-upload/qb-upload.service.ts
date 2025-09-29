@@ -25,7 +25,16 @@ export class QbUploadService {
     return this.backendService.get (this.path + "/deleteQuestionBank");
   }
 
-  sentForReviewQuestion(id:string){
-    return this.backendService.post (this.path + '/review-question' ,{id:id});
+  sentForReviewQuestion(status:string,id:string){
+    return this.backendService.post (this.path + '/review-question' ,{status:status,id:id});
+  }
+
+  updateQuestionBank(qbid:any,type:any,content:any) {
+    console.log(qbid,type,content)
+    return this.backendService.post(this.path + "/update-qb", {
+      qbid:qbid,
+      type:type,
+      content:content
+    });
   }
 }
