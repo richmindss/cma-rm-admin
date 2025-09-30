@@ -40,12 +40,12 @@ export class UsersMapperListComponent implements OnInit {
   }
 
   onAddUsers() {
-    this.router.navigate(["admin/user-mapper"]);
+    this.router.navigate(["admin/user-mapper/new"]);
   }
 
   getUserList() {
     this.userListServiceApi
-      .getUserList()
+      .getUserMappingList()
       .pipe(first())
       .subscribe(res => {
         this.userCount = res["data"].length;

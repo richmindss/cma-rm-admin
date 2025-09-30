@@ -13,17 +13,22 @@
        
         <div class="row">
          
-
+          <div class="col-md-2"></div>
            <div class="col-md-4">
            <div class="form-group">
             <label for="role">Author List <span style="color:red">*</span></label>
 
-          <select name="gender" class="custom-select"  [(ngModel)]="mapUser.author">
-            <option [ngValue]="''" disabled selected>Select Author List</option>
-            <option *ngFor="let author of authorArr" value="{{ author._id }}">
+          <select
+            name="author"
+            class="custom-select"
+            [(ngModel)]="mapUser.author"
+            [compareWith]="compareAuthor">
+            
+            <option [ngValue]="''" disabled>Select Author List</option>
+            <option *ngFor="let author of authorArr" [ngValue]="{ _id: author._id, Email: author.Email }">
               {{ author.Email }}
             </option>
-          </select>
+        </select>
 
           </div>
           </div>
@@ -33,9 +38,9 @@
            <div class="form-group">
             <label for="role">Reviewer List <span style="color:red">*</span></label>
 
-            <select name="gender" class="custom-select"  [(ngModel)]="mapUser.reviewer">
+            <select name="gender" class="custom-select"  [(ngModel)]="mapUser.reviewer" [compareWith]="compareReviewer">
               <option [ngValue]="''" disabled selected>Select Reviewer List</option>
-              <option *ngFor="let review of reviewerArr" value="{{review._id }}">
+              <option *ngFor="let review of reviewerArr" [ngValue]="{ _id: review._id, Email: review.Email }">
                 {{ review.Email }}
               </option>
             </select>

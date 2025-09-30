@@ -43,5 +43,20 @@ export class UserListService {
     return this.backendService.get(this.path + "/getUserType");
   }
 
-   
+  saveUserMap(mapUser:any){
+    return this.backendService.post(this.path +"/saveUserMap", mapUser);
+  }   
+
+  getUserMappingList() {
+    return this.backendService.get(this.path + "/getUserMappingList");
+  }
+
+  getUserMapperDetails(userId:string){
+    return this.backendService.get(this.path + "/getMappedUser/"+ userId);
+  }
+
+  updateMappedUser(userData:any){
+    return this.backendService.post(this.path +"/updateMappedUser", userData);
+  }
+  
 }

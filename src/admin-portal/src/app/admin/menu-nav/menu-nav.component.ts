@@ -21,7 +21,7 @@ export class MenuNavComponent implements OnInit {
       .getMenu()
       .pipe(first())
       .subscribe(res => {
-        console.log(res)
+        //console.log(res)
         this.menus = res["data"];
         this.makeActive();
       });

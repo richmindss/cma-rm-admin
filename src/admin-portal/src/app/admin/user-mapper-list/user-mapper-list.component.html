@@ -40,29 +40,15 @@ Total Users: {{userCount}}
     <table class="table table-hover table-outline mb-0" style="background-color: white;">
       <thead class="thead-default" style=" background-color: #c2cfd6;">
         <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Phone</th>
-            <th>Role</th>     
-            <th>Exam</th> 
-            <th>Language</th>  
-            <th>Subject</th>  
-            <th>Start Qb No</th>         
-            <th>End Qb No</th>
+            <th>Author</th>
+            <th>Reviewer</th>
             <th>Status</th>
             <th style="text-align:center;">Action</th>
         </tr>
       </thead>
       <tr *ngFor="let u of userlist;" style="cursor:pointer">
-        <td><a>{{u.Name}}</a></td>
-        <td><a>{{u.Email}}</a></td>
-        <td><a>{{u.Phone}}</a></td>        
-        <td><a>{{u.Role}}</a></td>
-        <td><a>{{u?.Exam || '---'}}</a></td>
-        <td><a>{{u?.Language || '---'}}</a></td>
-        <td><a>{{u?.Subject || '---'}}</a></td>
-        <td><a>{{u?.startQbNo || '---'}}</a></td>
-        <td><a>{{u?.endQbNo || '---'}}</a></td>
+        <td><a>{{u.author?.Email}}</a></td>
+        <td><a>{{u.reviewer?.Email}}</a></td>
         <td><a>{{u.Status ? 'Active' : 'DeActive' }}</a></td>
         <!-- <td>{{u.locked ? 'Yes' : 'No' }}</td> -->
       
@@ -71,8 +57,8 @@ Total Users: {{userCount}}
         <td style="text-align:center">
           <button type="button" (click)="open(u)" [ngbTooltip]="Edit" title="Edit" class="btn btn-primary btn-xs"><i
               class="fa fa-edit" style="cursor: pointer;"></i></button>&nbsp;
-          <button type="button" (click)="deleteUserList(u)" [ngbTooltip]="Delete" title="Delete" class="btn btn-danger btn-xs"><i
-              class="fa fa-trash" style="cursor: pointer;"></i></button>
+          <!-- <button type="button" (click)="deleteUserList(u)" [ngbTooltip]="Delete" title="Delete" class="btn btn-danger btn-xs"><i
+              class="fa fa-trash" style="cursor: pointer;"></i></button> -->
           <span class="pull-right">&nbsp;&nbsp;</span>
         </td>
       </tr>

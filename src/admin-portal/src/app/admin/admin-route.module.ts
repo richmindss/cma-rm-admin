@@ -123,7 +123,7 @@ const routes: Routes = [
         component: UsersListComponent
       },
       {
-        path: "user-mapper",
+        path: "user-mapper/:id",
         data: {
           title: "User Mapper"
         },

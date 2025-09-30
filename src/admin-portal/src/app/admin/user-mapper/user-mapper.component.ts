@@ -14,8 +14,8 @@ import { AlertService } from "../../shared/services/alert/alert.service";
 export class UserMapperComponent implements OnInit {
   mapUser: any = {
     _id: "",
-    author:"",
-    reviewer: "",
+    author: {_id:"",Email:""},
+    reviewer: {_id:"",Email:""}
   };
   user: any = {};
   userId: string;
@@ -62,7 +62,7 @@ export class UserMapperComponent implements OnInit {
 
   getUserDetails(userId) {
     this.userListService
-      .getUserDetails(userId)
+      .getUserMapperDetails(userId)
       .pipe(first())
       .subscribe(res => {
         this.mapUser = res["data"];
@@ -70,15 +70,6 @@ export class UserMapperComponent implements OnInit {
         // this.checkRole = res["data"].Role;
       });
   }
-
-  // getRole() {
-  //   this.constantService
-  //     .getConstantValue("ROLE")
-  //     .pipe(first())
-  //     .subscribe(res => {
-  //       this.roleResult = res;
-  //     });
-  // }
 
   validateEmail(eMail) {
     if (/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(eMail)) {
@@ -139,7 +130,7 @@ export class UserMapperComponent implements OnInit {
           this.alertService.err(this.sender, res["message"]);
           return;
         }else{
-          console.log("resssssssssssssssssss",res);
+          //console.log("resssssssssssssssssss",res);
           this.authorArr = res["authors"];
           this.reviewerArr = res["reviewers"];
          
@@ -180,7 +171,7 @@ export class UserMapperComponent implements OnInit {
 
 
     this.userListService
-      .saveUserList(this.mapUser)
+      .saveUserMap(this.mapUser)
       .pipe(first())
       .subscribe(res => {
         console.log(res)
@@ -210,7 +201,7 @@ export class UserMapperComponent implements OnInit {
     }
 
     this.userListService
-      .updateUser(this.mapUser)
+      .updateMappedUser(this.mapUser)
       .pipe(first())
       .subscribe(res => {
         console.log(res)
@@ -247,7 +238,15 @@ export class UserMapperComponent implements OnInit {
     return false;
   }
 
+  compareAuthor(o1: any, o2: any): boolean {
+  return o1 && o2 ? o1._id === o2._id : o1 === o2;
+  }
+
+  compareReviewer(o1: any, o2: any): boolean {
+  return o1 && o2 ? o1._id === o2._id : o1 === o2;
+  }
+
   onClose() {
-    this.router.navigate(["admin/users/"]);
+    this.router.navigate(["admin/user-mapper-list/"]);
   }
 }
