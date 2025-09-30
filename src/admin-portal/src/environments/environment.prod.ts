@@ -1,5 +1,5 @@
 export const environment = {
     production: true,
-    rootPath : 'https://cams.onlineregistrationforms.com/api/admin'
+    rootPath : 'https://cams.onlineregistrationforms.com/api'
   };
   
