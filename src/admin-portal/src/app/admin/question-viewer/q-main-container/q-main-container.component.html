@@ -12,12 +12,12 @@
             <option value="" disabled selected>Select Language for QB download</option>
             <option [value]="batch.code" *ngFor="let batch of languages">{{batch.code}}</option>
           </select>
-    </div>   
-    <div class="col-md-3">
-        <button class="btn btn-success" type="button" (click)="generateAsExcel()">
-            <i class="fa fa-ticket"></i> Download As Excel
+    </div>    -->
+    <div class="col-md-3" *ngIf="questions && user.record?.Role =='Editor'">
+        <button class="btn btn-success" type="button" (click)="generateQuestionBank()">
+            <i class="fa fa-ticket"></i> Generate Question Bank
           </button>
-    </div> -->
+    </div>
 </div>
 
 <div class="row" *ngFor="let ques of getQuestions()">

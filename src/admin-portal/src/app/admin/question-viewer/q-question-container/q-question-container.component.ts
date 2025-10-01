@@ -17,7 +17,8 @@ export class QQuestionContainerComponent implements OnInit, OnChanges {
   user:any = {};
   isValidQuestionType: any = true;
   qTypes = ["OBQ", "MCQ", "MTP", "SUB", "CSQ"];
-  selectedValues: number[] = [];
+ selectedValues: string[] = [];
+
   constructor(
     private questionBankService: QbUploadService,
     private modalService: NgbModal, 
@@ -67,9 +68,7 @@ export class QQuestionContainerComponent implements OnInit, OnChanges {
 
   onReviewQuestion(status: string, id: string) {
 
-    // const input = event.target as HTMLInputElement;
-    //   if (input.checked) {
-       this.questionBankService.sentForReviewQuestion(status,id)
+      this.questionBankService.sentForReviewQuestion(status,id)
        .pipe(first())
        .subscribe(res => {
         if(res && res["status"] == true){
@@ -80,7 +79,24 @@ export class QQuestionContainerComponent implements OnInit, OnChanges {
      
       });
         
-      } 
-      
-  //}
+  } 
+
+onSelectQb(event: any) {
+
+  const value = event.target.value;
+  const checkedVal = event.target.checked;
+
+   this.questionBankService.questionSelection(value,checkedVal)
+      .pipe(first())
+      .subscribe(res => {
+      if(res && res["status"] == true){
+        //window.location.reload();
+      }else{
+        alert(res["message"]);
+      }
+    
+  });
+
+}
+  
 }

@@ -84,24 +84,29 @@ export class QMainContainerComponent implements OnInit, OnChanges {
     return  Math.ceil (this.collectionSize /this.pageSize);
   }
 
-  generateAsExcel(){
-  //  if(!this.selectedLanguage){
-  //   alert("First Select Language");
-  //   return false;
-  //  }
-  //   this.questionBankService
-  //   .generateAsExcel(this.selectedLanguage)
-  //   .pipe(first())
-  //   .subscribe(res => {
-  //     this.obj = res;
-  //     if(this.obj && this.obj.length>0){
-  //     this.excelService.generateExcel(this.obj);
-  //     }else{
-  //       alert("QB Not Available in selected language");
-  //     }
-  //   });
+generateQuestionBank() {
+  try {
+    this.questionBankService.downloadZip().pipe(first()).subscribe((blob: Blob) => {
+      //console.log("📦 ZIP blob received:", blob.size);
+      if(blob && blob.size<75){
+       return alert("Firstly Select questions for QB generation");
+      }
 
- }
+
+      const link = document.createElement("a");
+      const url = window.URL.createObjectURL(blob);
+
+      link.href = url;
+      link.download = "questions_bundle.zip";
+      link.click();
+
+      // Clean up
+      window.URL.revokeObjectURL(url);
+    });
+  } catch (e) {
+    console.error("❌ Error downloading ZIP:", e);
+  }
+}
 
  getLanguages() {
   // this.languageServiceApi

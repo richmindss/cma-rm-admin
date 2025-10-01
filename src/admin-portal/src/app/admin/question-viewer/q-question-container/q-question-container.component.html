@@ -8,16 +8,19 @@
                 <b>Difficult Level : </b> {{question.difficulty}} <br />
                 <b>Marks : </b> {{question.marks}} <br />
                 <b>Client Question ID : </b> {{question.questionid}} <br />
+                <span *ngIf="user?.record?.Role == 'Editor' && question.status === 'Reviewed'"> <b> Select for QB generation : </b>  
+                <input type="checkbox" value= {{question._id}} (change)="onSelectQb($event)" [checked]="question.selectedqb"  /></span><br />
                 <b> Status : </b> <span [ngStyle]="{ 
-  color: question.status === 'Reviewed' ? 'green' :
-         question.status === 'Reviewing' ? '#ffc107' :
-         question.status === 'Updated' ? 'Blue' :
-         question.status === 'Incorrect' ? 'red' : 'black'
-}">{{question.status}}</span> <br />
+                color: question.status === 'Reviewed' ? 'green' :
+                        question.status === 'Reviewing' ? '#ffc107' :
+                        question.status === 'Updated' ? 'Blue' :
+                        question.status === 'Incorrect' ? 'red' : 'black'
+                }">{{question.status}}</span> <br />
                 <button *ngIf="user?.record?.Role == 'Author'" [disabled]="question.status === 'Reviewed'" type="button" class="btn btn-outline-primary" (click)="onReviewQuestion('Reviewing', question._id)">Send to Reviewer</button>&nbsp;
                 <button *ngIf="user?.record?.Role == 'Author'" [disabled]="question.status === 'Reviewed'|| question.status === 'Reviewing'" type="button" class="btn btn-outline-primary" (click)="updateQuestions(question)">Update</button>  
                 <button *ngIf="user?.record?.Role == 'Reviewer'" [disabled]="question.status === 'Reviewed'" type="button" class="btn btn-outline-primary" (click)="onReviewQuestion('Incorrect',question._id)">Send to Author</button>  &nbsp;
                 <button *ngIf="user?.record?.Role == 'Reviewer'" [disabled]="question.status === 'Incorrect' || question.status === 'Reviewed'" type="button" class="btn btn-outline-primary" (click)="onReviewQuestion('Reviewed', question._id)">Send to Editor</button> 
+               
             </div>
         </div>
     </div>
@@ -41,3 +44,4 @@
     </div>
 
 </div>
+
