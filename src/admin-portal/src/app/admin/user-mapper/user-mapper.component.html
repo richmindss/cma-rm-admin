@@ -24,7 +24,7 @@
             [(ngModel)]="mapUser.author"
             [compareWith]="compareAuthor">
             
-            <option [ngValue]="''" disabled>Select Author List</option>
+            <option [ngValue]="{ _id: '', Email: '' }" disabled>Select Author List</option>
             <option *ngFor="let author of authorArr" [ngValue]="{ _id: author._id, Email: author.Email }">
               {{ author.Email }}
             </option>
@@ -38,8 +38,8 @@
            <div class="form-group">
             <label for="role">Reviewer List <span style="color:red">*</span></label>
 
-            <select name="gender" class="custom-select"  [(ngModel)]="mapUser.reviewer" [compareWith]="compareReviewer">
-              <option [ngValue]="''" disabled selected>Select Reviewer List</option>
+            <select name="reviewer" class="custom-select"  [(ngModel)]="mapUser.reviewer" [compareWith]="compareReviewer">
+              <option [ngValue]="{ _id: '', Email: '' }" disabled selected>Select Reviewer List</option>
               <option *ngFor="let review of reviewerArr" [ngValue]="{ _id: review._id, Email: review.Email }">
                 {{ review.Email }}
               </option>
