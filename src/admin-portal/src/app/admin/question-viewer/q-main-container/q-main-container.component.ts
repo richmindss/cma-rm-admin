@@ -16,9 +16,9 @@ export class QMainContainerComponent implements OnInit, OnChanges {
   page = 1;         // Current page
   pageSize = 50;    // Items per page
   collectionSize = 0; // Total items
-
+  qbprefix:string = "";
   obj:any;
-  languages: any = [];
+  language: string | null = null;
   selectedLanguage:any;
   user:any = {};
 
@@ -32,10 +32,8 @@ export class QMainContainerComponent implements OnInit, OnChanges {
   ) {}
 
   ngOnInit() {
-    this.activatedRoute.paramMap.subscribe(p => {
-    });
-   // this.getLanguages();
-   this.loadQuestions();
+   this.language = this.activatedRoute.snapshot.paramMap.get('language');
+   this.loadQuestions(this.language);
    this.user = this.authenticationService.getUserDetails();
   }
 
@@ -45,9 +43,10 @@ export class QMainContainerComponent implements OnInit, OnChanges {
     }
   }
 
-  loadQuestions() {
+  loadQuestions(language?: any) {
+    //alert(language)
     this.questionBankService
-      .getQuestions()
+      .getQuestions(language)
       .pipe(first())
       .subscribe(res => {
         if(res && res["status"]){
@@ -84,9 +83,15 @@ export class QMainContainerComponent implements OnInit, OnChanges {
     return  Math.ceil (this.collectionSize /this.pageSize);
   }
 
-generateQuestionBank() {
+generateQuestionBank(language:any) {
   try {
-    this.questionBankService.downloadZip().pipe(first()).subscribe((blob: Blob) => {
+    console.log(this.qbprefix);
+    if(!this.qbprefix){
+       alert("Please Enter question id prefix");
+       return;
+    }
+    
+    this.questionBankService.downloadZip(language,this.qbprefix).pipe(first()).subscribe((blob: Blob) => {
       //console.log("📦 ZIP blob received:", blob.size);
       if(blob && blob.size<75){
        return alert("Firstly Select questions for QB generation");
@@ -108,34 +113,34 @@ generateQuestionBank() {
   }
 }
 
- getLanguages() {
-  // this.languageServiceApi
-  //   .getLanguage()
-  //   .pipe(first())
-  //   .subscribe(res => {
-  //     this.languages = res;
-  //   });
-}
+
 onLanguageChange(e:any){
   this.selectedLanguage = e.target.value;
+  //alert(this.selectedLanguage)
+  this.loadQuestions(this.selectedLanguage);
 }
 
-  onReviewQuestion(status: string, id: string) {
-      // const input = event.target as HTMLInputElement;
-      //   if (input.checked) {
-        this.questionBankService.sentForReviewQuestion(status,id)
-        .pipe(first())
-        .subscribe(res => {
-          if(res && res["status"] == true){
-           this.loadQuestions();
-          }else{
-            alert(res["message"]);
-          }
-      
-        });
-          
-        } 
-        
-  //}
+  onReviewQuestion(status: string, id: string,language:string) {
 
+    if(!this.selectedLanguage && this.user.record.Role =="Reviewer"){
+      alert("Please Select language to send all question to Editor")
+      return
+    }
+    if(this.selectedLanguage && this.user.record.Role =="Reviewer"){
+     language = this.selectedLanguage;
+    }
+     
+      this.questionBankService.sentForReviewQuestion(status,id,language)
+      .pipe(first())
+      .subscribe(res => {
+        if(res && res["status"] == true){
+          console.log("language..........................",language);
+          this.loadQuestions(language);
+        }else{
+          alert(res["message"]);
+        }
+    
+      });
+          
+  } 
 }

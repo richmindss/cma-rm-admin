@@ -13,7 +13,27 @@
        
         <div class="row">
          
-          <div class="col-md-2"></div>
+          <!-- <div class="col-md-2"></div> -->
+
+      <div class="col-md-4">
+           <div class="form-group">
+            <label for="role">Editor List <span style="color:red">*</span></label>
+
+          <select
+            name="editor"
+            class="custom-select"
+            [(ngModel)]="mapUser.editor"
+            [compareWith]="compareEditor">
+            
+            <option [ngValue]="{ _id: '', Email: '' }" disabled>Select Editor List</option>
+            <option *ngFor="let editor of editorArr" [ngValue]="{ _id: editor._id, Email: editor.Email }">
+              {{ editor.Email }}
+            </option>
+        </select>
+
+          </div>
+          </div>
+
            <div class="col-md-4">
            <div class="form-group">
             <label for="role">Author List <span style="color:red">*</span></label>
@@ -52,14 +72,14 @@
       
         <div class="row">
 
-         <div class="col-md-6 text-right" *ngIf="mapUser?._id">
+         <div class="col-md-5 text-right" *ngIf="mapUser?._id">
             <button type="reset" class="btn btn-primary" (click)="onUpdate()"><i class="far fa-save"></i>&nbsp;Update</button>
           </div>
-          <div class="col-md-6 text-right" *ngIf="!mapUser?._id">
+          <div class="col-md-5 text-right" *ngIf="!mapUser?._id">
             <button type="reset" class="btn btn-primary" (click)="onSave()"><i class="far fa-save"></i>&nbsp;Save</button>
           </div>
 
-          <div class="col-md-6">
+          <div class="col-md-5">
             <button type="button" class="btn btn-secondary" (click)="onClose()"><i class="fa fa-window-close"></i>&nbsp;Close</button>
           </div>
 

@@ -1,3 +1,44 @@
-.space-margin{
-    margin-top: 20px;
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;        /* ✅ Center all text */
+  vertical-align: middle;
+  font-size: 14px;
+}
+
+.table th,
+.table td {
+  padding: 6px 8px;
+}
+
+.table th {
+  background-color: grey;
+  color: white;
+  font-weight: 600;
+}
+
+.table tr:nth-child(even) {
+  background-color: #f8f9fa;
+}
+
+.table tr:hover {
+  background-color: #e9ecef;
+}
+
+/* Make header fixed if scrolling */
+.table th {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+/* Buttons alignment and spacing */
+.table button {
+  min-width: 100px;
+  text-align: center;
+}
+
+.table-responsive {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }

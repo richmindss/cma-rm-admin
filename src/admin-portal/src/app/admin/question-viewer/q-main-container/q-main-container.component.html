@@ -3,18 +3,23 @@
         <h3 *ngIf="questions"> Total Questions Rows: {{questions.length}} </h3>
     </div>
 
-     <div class="col-md-3">
-        <h3 *ngIf="questions && user.record?.Role !='Editor'"> Subject: {{user.record?.Subject}} </h3>
+    <div class="col-md-3">
+       <input type="text" class="form-control" placeholder="Enter Question Id Prefix" [(ngModel)]="qbprefix"/>
     </div>
    
-    <!-- <div class="col-md-3">
+    <div class="col-md-3" *ngIf="questions && user.record?.Role =='Reviewer'">
         <select name="batch" class="form-control" (change)="onLanguageChange($event)">
-            <option value="" disabled selected>Select Language for QB download</option>
-            <option [value]="batch.code" *ngFor="let batch of languages">{{batch.code}}</option>
-          </select>
-    </div>    -->
+            <option value="" disabled selected>Select Language</option>
+            <option value="ENGLISH">ENGLISH</option>
+            <option value="HINDI">HINDI</option>
+            <option value="MARATHI">MARATHI</option>
+            <option value="GUJARATI">GUJARATI</option>
+            <option value="TAMIL">TAMIL</option>
+            <option value="TELUGU">TELUGU</option>
+        </select>
+    </div>   
     <div class="col-md-3" *ngIf="questions && user.record?.Role =='Editor'">
-        <button class="btn btn-success" type="button" (click)="generateQuestionBank()">
+        <button class="btn btn-success" type="button" (click)="generateQuestionBank(this.language)">
             <i class="fa fa-ticket"></i> Generate Question Bank
           </button>
     </div>
@@ -55,7 +60,7 @@
 
 <div class="row" *ngIf="collectionSize > 0">
     <div class="col-md-3" style="color: green;" *ngIf="user.record?.Role=='Author'">
-        <button type="button" class="btn btn-outline-primary" (click)="onReviewQuestion('Reviewing', 'All')">All Questions Send to Reviewer</button>
+        <button type="button" class="btn btn-outline-primary" (click)="onReviewQuestion('Reviewing', 'All',this.language)">All Questions Send to Reviewer</button>
     </div>
      <div class="col-md-3" style="color: green;" *ngIf="user.record?.Role=='Reviewer'">
         <button type="button" class="btn btn-outline-primary" (click)="onReviewQuestion('Reviewed', 'All')">All Questions Send to Editor</button>

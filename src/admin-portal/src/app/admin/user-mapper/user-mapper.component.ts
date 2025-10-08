@@ -14,6 +14,7 @@ import { AlertService } from "../../shared/services/alert/alert.service";
 export class UserMapperComponent implements OnInit {
   mapUser: any = {
     _id: "",
+    editor : {_id:"",Email:""},
     author: {_id:"",Email:""},
     reviewer: {_id:"",Email:""}
   };
@@ -21,8 +22,8 @@ export class UserMapperComponent implements OnInit {
   userId: string;
   sender = "users";
   roleResult: any = [];
-  examArr : any =[];
-
+  examArr : any = [];
+  editorArr : any = []; 
   authorArr : any =[];
   reviewerArr : any = [];
 
@@ -133,6 +134,7 @@ export class UserMapperComponent implements OnInit {
           //console.log("resssssssssssssssssss",res);
           this.authorArr = res["authors"];
           this.reviewerArr = res["reviewers"];
+          this.editorArr = res["editors"];
          
         }
        
@@ -236,6 +238,10 @@ export class UserMapperComponent implements OnInit {
     }
 
     return false;
+  }
+
+  compareEditor(o1: any, o2: any): boolean {
+  return o1 && o2 ? o1._id === o2._id : o1 === o2;
   }
 
   compareAuthor(o1: any, o2: any): boolean {

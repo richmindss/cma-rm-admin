@@ -68,7 +68,7 @@ export class QQuestionContainerComponent implements OnInit, OnChanges {
 
   onReviewQuestion(status: string, id: string) {
 
-      this.questionBankService.sentForReviewQuestion(status,id)
+      this.questionBankService.sentForReviewQuestion(status,id,"")
        .pipe(first())
        .subscribe(res => {
         if(res && res["status"] == true){

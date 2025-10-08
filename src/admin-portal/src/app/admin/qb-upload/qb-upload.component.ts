@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 // import { TestsService } from "src/app/shared";
 import { ActivatedRoute, Router } from "@angular/router";
-import { QbUploadService } from "src/app/shared/services";
+import { AuthenticationService,QbUploadService } from "src/app/shared/services";
 import { AlertService } from "../../shared/services/alert/alert.service";
 import { first } from "rxjs/operators";
 import { BackendService } from "../../shared/services/backend/backend.service";
@@ -33,31 +33,22 @@ export class QbUploadComponent implements OnInit {
     questions: [],
     aggregate: []
   };
-
+  user:any = {};
   selectedFile: File | null = null;
   responseMessage: string = '';
   qbsummarydata:any = [];
 
   constructor(
-    private router: Router,
-    private activateRoute: ActivatedRoute,
-    private questionBankService: QbUploadService,
-    // private TestsService: TestsService,
+   private router: Router,
+   private activateRoute: ActivatedRoute,
+   private questionBankService: QbUploadService,
+   private authenticationService: AuthenticationService,
    private alertService: AlertService,
    private backendService:BackendService
   ) { }
 
   ngOnInit() {
-    // this.activateRoute.paramMap.subscribe(p => {
-    //   this.testId = p.get("testid");
-    //   this.qbid = p.get("qbid");
-
-    //   this.getExam();
-
-    //   if (!this.isNew()) {
-    //     this.getQuesBankById();
-    //   }
-    // });
+    this.user = this.authenticationService.getUserDetails();
     this.getQuestionSummary();
   }
 
@@ -103,6 +94,9 @@ export class QbUploadComponent implements OnInit {
       try{
       return this.backendService.post ('/uploadQb/save-qb' ,formData)
         .subscribe(res => {
+          //this.isDisabledDel = true;
+           this.isDisabled = false;
+           this.selectedFile = null;
         if (res["status"] == false) {
           alert(res["message"]);
           this.alertService.err(this.sender, res["message"]);
@@ -124,10 +118,15 @@ export class QbUploadComponent implements OnInit {
       }
    
   }
-  viewAllQuestion(){
-    this.router.navigate([
-        "admin/question-bank/view"
-    ]);
+  
+  viewAllQuestion(language:any){
+    console.log(this.user)
+    if(this.user.record.Role=="Author"){
+      this.router.navigate(["admin/question-bank/view/",language]);
+    }else{
+      this.router.navigate(["admin/question-bank/view"]);
+    }
+   
   }
 
 
@@ -147,10 +146,10 @@ export class QbUploadComponent implements OnInit {
   }
 
 
-  deleteQuestion (){
+  deleteQuestion (language:any){
     this.isDisabledDel = true;
     this.questionBankService
-    .deleteQuestionBank()
+    .deleteQuestionBank(language)
     .pipe(first())
     .subscribe(res => {
       if (res["status"] == false) {

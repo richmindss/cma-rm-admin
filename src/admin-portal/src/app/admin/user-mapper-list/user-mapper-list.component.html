@@ -40,6 +40,7 @@ Total Users: {{userCount}}
     <table class="table table-hover table-outline mb-0" style="background-color: white;">
       <thead class="thead-default" style=" background-color: #c2cfd6;">
         <tr>
+            <th>Editor</th>
             <th>Author</th>
             <th>Reviewer</th>
             <th>Status</th>
@@ -47,6 +48,7 @@ Total Users: {{userCount}}
         </tr>
       </thead>
       <tr *ngFor="let u of userlist;" style="cursor:pointer">
+        <td><a>{{u.editor?.Email}}</a></td>
         <td><a>{{u.author?.Email}}</a></td>
         <td><a>{{u.reviewer?.Email}}</a></td>
         <td><a>{{u.Status ? 'Active' : 'DeActive' }}</a></td>

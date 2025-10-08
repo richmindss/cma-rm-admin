@@ -1,0 +1,87 @@
+<div class="row space-margin">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body">
+
+
+                <div class="row">
+
+                    <div class="col-md-12">
+                        <h3 style="text-align: center;"> Question Bank Summary</h3>
+                     <div class="table-responsive">
+                        <table class="table table-hover text-center">
+                            <colgroup>
+                            <col style="width: 5%">
+                            <col style="width: 8%">
+                            <col style="width: 8%">
+                            <col style="width: 15%">
+                            <col style="width: 5%">
+                            <col style="width: 5%">
+                            <col style="width: 8%">
+                            <col style="width: 8%">
+                            <col style="width: 6%">
+                            <col style="width: 6%">
+                            <col style="width: 6%">
+                            <col style="width: 6%">
+                            <col style="width: 6%">
+                            <col style="width: 8%">
+                            </colgroup>
+
+                            <tr>
+                            <th>Topic</th>
+                            <th>Question Type</th>
+                            <th>Language</th>
+                            <th>Exam</th>
+                            <th>Neg. Marks</th>
+                            <th>Marks</th>
+                            <th>Total Marks</th>
+                            <th>No of Questions</th>
+                            <th>Created</th>
+                            <th>Updated</th>
+                            <th>Reviewing</th>
+                            <th>Incorrect</th>
+                            <th>Reviewed</th>
+                            <th>Action</th>
+                            </tr>
+
+                            <tr *ngFor="let q of qbsummarydata">
+                            <td>{{ q.topic }}</td>
+                            <td>{{ q.question_type }}</td>
+                            <td>{{ q.language }}</td>
+                            <td>{{ q.exam }}</td>
+                            <td>{{ q.neg_marks }}</td>
+                            <td>{{ q.marks }}</td>
+                            <td>{{ q.totalMarks }}</td>
+                            <td>{{ q.count }}</td>
+                            <td class="status-created">{{ q.createdCount }}</td>
+                            <td class="status-updated">{{ q.updatedCount }}</td>
+                            <td class="status-reviewing">{{ q.reviewingCount }}</td>
+                            <td class="status-incorrect">{{ q.incorrectCount }}</td>
+                            <td class="status-reviewed">{{ q.reviewedCount }}</td>
+                            <td>
+                                <button
+                                (click)="viewAllQuestion(q.language)"
+                                type="button"
+                                class="btn btn-primary btn-sm"
+                                >
+                                View Qb
+                                </button>
+                            </td>
+                            </tr>
+                        </table>
+                    </div>
+
+
+                    </div>
+
+                </div>
+            
+               
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<app-alert [sender]="sender"></app-alert>

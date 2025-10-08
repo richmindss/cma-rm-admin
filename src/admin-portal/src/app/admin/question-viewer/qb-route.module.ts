@@ -13,42 +13,15 @@ import { QMainContainerComponent } from './q-main-container/q-main-container.com
 const routes: Routes = [
   {
     path: "view",
-    data: {
-      title: ""
-    },
+    data: { title: "Question Bank View" },
     canActivate: [AuthguardService],
     component: QMainContainerComponent,
-    children: [
-      // {
-      //   path: "view",
-      //   data: {
-      //     title: "Dashboard Page"
-      //   },
-      //   component: QMainContainerComponent
-      // },
-      // {
-      //   path: ":testid",
-      //   component: QbViewComponent,
-      //   children: [
-      //     {
-      //       path: ":qbid/upload",
-      //       component: QbUploadComponent
-      //     },
-      //     {
-      //       path: ":qbid/lang",
-      //       component: QbLangCodeComponent
-      //     },
-      //     {
-      //       path: ":qbid/review",
-      //       component: ReviewStatusComponent
-      //     },
-      //     {
-      //       path: ":qbid/encrypt",
-      //       component: EncryptedZipComponent
-      //     }
-      //   ]
-      // }
-    ]
+  },
+  {
+    path: "view/:language",
+    data: { title: "Question Bank View" },
+    canActivate: [AuthguardService],
+    component: QMainContainerComponent,
   }
 ];
 

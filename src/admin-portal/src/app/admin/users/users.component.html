@@ -51,7 +51,7 @@
            <div class="form-group">
             <label for="role">Exam Name <span style="color:red">*</span></label>
 
-          <select name="gender" class="custom-select"  [(ngModel)]="userData.Exam">
+          <select name="exam" class="custom-select"  [(ngModel)]="userData.Exam">
             <option [ngValue]="''" disabled selected>Select Exam Name</option>
             <option *ngFor="let exam of examArr" value="{{ exam.Name }}">
               {{ exam.Name }}
@@ -64,10 +64,10 @@
         
            <div class="col-md-4" *ngIf="this.checkRole =='Author' || this.checkRole =='Reviewer'">
            <div class="form-group">
-            <label for="role">Subject Name <span style="color:red">*</span></label>
+            <label for="role">Topic <span style="color:red">*</span></label>
 
-            <select name="gender" class="custom-select"  [(ngModel)]="userData.Subject">
-              <option [ngValue]="''" disabled selected>Select Subject Name</option>
+            <select name="subject" class="custom-select"  [(ngModel)]="userData.Subject">
+              <option [ngValue]="''" disabled selected>Select Topic</option>
               <option *ngFor="let sub of subjectArr" value="{{sub.Name }}">
                 {{ sub.Name }}
               </option>
@@ -78,21 +78,30 @@
         </div>
 
         <div class="row">
-           <div class="col-md-4" *ngIf="this.checkRole =='Author' || this.checkRole =='Reviewer'">
-           <div class="form-group">
-            <label for="role">Language <span style="color:red">*</span></label>
 
-            <select name="gender" class="custom-select"  [(ngModel)]="userData.Language">
+           
+           <div class="col-md-4" *ngIf="userData?._id">
+           <div class="form-group">
+
+             <select name="status" class="custom-select form-control" [(ngModel)]="userData.Status" (change)="onChangeRole($event)">
+              <option [ngValue]="''" disabled> Please Select Role </option>
+              <option [ngValue]= true>Active</option>
+              <option [ngValue]= false>DeActive</option>
+            
+            </select>
+            <!-- <label for="role">Language <span style="color:red">*</span></label>
+
+            <select name="language" class="custom-select"  [(ngModel)]="userData.Language">
               <option [ngValue]="''" disabled selected>Select Language</option>
               <option *ngFor="let lan of lanDataArr" value="{{ lan.Name }}">
                 {{ lan.Name }}
               </option>
-            </select>
+            </select> -->
 
           </div>
           </div>
 
-          <div class="col-md-4" *ngIf="this.checkRole =='Author' || this.checkRole =='Reviewer'">
+          <!-- <div class="col-md-4" *ngIf="this.checkRole =='Author' || this.checkRole =='Reviewer'">
             <div class="form-group">
               <label for="eventcode">Start Question Number<span style="color:red">*</span></label>
               <input type="number" placeholder="Please enter start question number" [(ngModel)]="userData.startQbNo" class="form-control"  autocomplete="off">
@@ -104,7 +113,7 @@
               <label for="eventcode">End Question Number<span style="color:red">*</span></label>
               <input type="number" placeholder="Please enter end question number" [(ngModel)]="userData.endQbNo" class="form-control"  autocomplete="off">
             </div>
-          </div>
+          </div> -->
 
         </div>
 

@@ -20,13 +20,14 @@ export class UsersComponent implements OnInit {
     Role: "",
     Subject :"",
     Exam:"",
-    Language:"",
-    startQbNo:"",
-    endQbNo:"",
+    Status:false
+    // Language:""
+    // startQbNo:"",
+    // endQbNo:"",
   
   };
   user: any = {};
-  userId: string;
+  userId: string | undefined;
   sender = "users";
   subjectArr : any =[];
   roleResult: any = [];
@@ -39,6 +40,7 @@ export class UsersComponent implements OnInit {
   successMessage: string | null = null;
   error: any;
   checkRole:string ="";
+
 
   constructor(
     private userListService: UserListService,
@@ -66,14 +68,14 @@ export class UsersComponent implements OnInit {
     });
   }
 
-  getUserDetails(userId) {
+  getUserDetails(userId: string) {
     this.userListService
       .getUserDetails(userId)
       .pipe(first())
       .subscribe(res => {
-        this.userData = res["data"];
-        console.log("this.userData.............",this.userData);
-        this.checkRole = res["data"].Role;
+        this.userData  =  res["data"];
+        this.checkRole =  res["data"]?.Role;
+        console.log("checkkkkkkkkkkkkkkkkkkkkk",this.checkRole )
       });
   }
 
@@ -86,7 +88,7 @@ export class UsersComponent implements OnInit {
       });
   }
 
-  validateEmail(eMail) {
+  validateEmail(eMail: string) {
     if (/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(eMail)) {
       return true;
     } else {
@@ -98,7 +100,7 @@ export class UsersComponent implements OnInit {
     this.checkRole = this.userData.Role;
   }
 
-  isNumber(evt) {
+  isNumber(evt:any) {
     evt = evt ? evt : window.event;
     var charCode = evt.which ? evt.which : evt.keyCode;
     if (charCode > 31 && (charCode < 48 || charCode > 57)) {
@@ -106,34 +108,7 @@ export class UsersComponent implements OnInit {
     }
     return true;
   }
-  getName(codes, id, field) {
-    for (var i = 0; i < codes.length; i++) {
-      if (codes[i]._id == id || codes[i].code == id) {
-        if (field) {
-          return codes[i][field];
-        }
-        return codes[i]["name"];
-      }
-    }
-    return {};
-  }
 
-  getCode(codes, id, field) {
-    for (var i = 0; i < codes.length; i++) {
-      if (codes[i]._id == id || codes[i].code == id) {
-        if (field) {
-          return codes[i][field];
-        }
-        return codes[i]["code"];
-      }
-    }
-    return {};
-  }
-
-  fillcodesets() {
-    this.userData.role = this.userData.role || {};
-
-  }
 
   getSubject(){
     this.userListService
@@ -283,7 +258,7 @@ export class UsersComponent implements OnInit {
   }
 
 
-  compareFn (a,b){
+  compareFn (a:any,b:any){
     if ( a && b){
       return a.code == b.code;
     }

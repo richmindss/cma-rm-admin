@@ -9,63 +9,98 @@
                     <div class="col-md-3">
                        <!-- <span style="color:red"> {{uploadError}}</span> -->
                        
-                        <p class="btn-sm py-5 px-1 my-2 text-center" style="background-color: grey" [ngStyle]="{ cursor: applicationSubmitted ? 'inherit' : 'pointer' }" (click)="file.click()">
+                        <p class="btn-sm py-5 px-1 text-center" style="background-color: grey" [ngStyle]="{ cursor: applicationSubmitted ? 'inherit' : 'pointer' }" (click)="file.click()">
                          Upload Question Bank zip file here</p>
                             <input type="file"  #file class="d-none" (change)="onFileSelect($event)" accept=".zip"/>
-
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <button (click)="uploadZip()" class="btn btn-success" [disabled]="isDisabled">Upload ZIP</button>
-                                <p style="color:red" *ngIf="responseMessage">{{ responseMessage }}</p>
-                            
-                            <!-- </div> -->
-
-
                     </div>
-
-                    <div class="col-md-9" *ngIf="this.qbsummarydata && this.qbsummarydata.length">
-                        <h2 style="text-align: center;"> QB Summary</h2>
-                        <table class="table table-hover">
-                            <tr style="background-color: grey">
-                                <th>Topic</th>
-                                <th>Question Type</th>
-                                <th>Neg. Marks</th>
-                                <th>Marks</th>
-                                <th>Number of Questions</th>
-                            </tr>
-
-                            <tr *ngFor="let q of this.qbsummarydata">
-                                <td>{{q.topic}}</td>
-                                <td>{{q.question_type}}</td>
-                                <td>{{q.neg_marks}}</td>
-                                <td>{{q.marks}}</td>
-                                <td>{{q.count}}</td>
-                            </tr>
-
-                            <tr>
-                                <th> </th>
-                                <th></th>
-                                <th></th>
-                                <th>Total marks : {{getTotalMarks ()}}</th>
-                                <th>Total Questions : {{getTotalQuestions ()}}</th>
-                            </tr>
-
-                        </table>
+                    <div class="col-md-3  my-5">
+                        <button (click)="uploadZip()" class="btn btn-success" [disabled]="isDisabled">Upload ZIP</button>
+                        <p style="color:red" *ngIf="responseMessage">{{ responseMessage }}</p> 
                     </div>
-
                 </div>
                <div class="row" *ngIf="this.qbsummarydata && this.qbsummarydata.length>0">
-                <div class="col-md-3">
-                  <a (click)="viewAllQuestion()" style="color: green;" >View Uploaded All Questions</a>
-                </div>
-                <div class="col-md-3" *ngIf="this.qbsummarydata && this.qbsummarydata.length>0">
-                  <button class="btn btn-danger btn-sm" (click)="deleteQuestion()" [disabled]="isDisabledDel">
-                   <i class="fa fa-trash"></i> Delete
-                  </button>
-                </div>
+               
 
-                <div class="col-md-6">
-                   
-                </div>
+                   <div class="col-md-12">
+                        <h3 style="text-align: center;"> Question Bank Summary</h3>
+                     <div class="table-responsive">
+                        <table class="table table-hover text-center">
+                            <colgroup>
+                            <col style="width: 5%">   <!-- Topic -->
+                            <col style="width: 5%">   <!-- Question Type -->
+                            <col style="width: 5%">   <!-- Language -->
+                            <col style="width: 15%">  <!-- Exam -->
+                            <col style="width: 7%">   <!-- Neg. Marks -->
+                            <col style="width: 3%">   <!-- Marks -->
+                            <col style="width: 8%">   <!-- Total Marks -->
+                            <col style="width: 6%">   <!-- Total Q. -->
+                            <col style="width: 3%">   <!-- Created -->
+                            <col style="width: 3%">   <!-- Updated -->
+                            <col style="width: 3%">   <!-- Reviewing -->
+                            <col style="width: 3%">   <!-- Incorrect -->
+                            <col style="width: 3%">   <!-- Reviewed -->
+                            <col style="width: 20%">  <!-- Action -->
+                            </colgroup>
+
+                            <thead>
+                            <tr style="background-color: grey; color: white;">
+                                <th>Topic</th>
+                                <th>Q.Type</th>
+                                <th>Language</th>
+                                <th>Exam</th>
+                                <th>Neg. Marks</th>
+                                <th>Marks</th>
+                                <th>Total Marks</th>
+                                <th>Total Q.</th>
+                                <th>Created</th>
+                                <th>Updated</th>
+                                <th>Reviewing</th>
+                                <th>Incorrect</th>
+                                <th>Reviewed</th>
+                                <th>Action</th>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                            <tr *ngFor="let q of qbsummarydata">
+                                <td>{{ q.topic }}</td>
+                                <td>{{ q.question_type }}</td>
+                                <td>{{ q.language }}</td>
+                                <td>{{ q.exam }}</td>
+                                <td>{{ q.neg_marks }}</td>
+                                <td>{{ q.marks }}</td>
+                                <td>{{ q.totalMarks }}</td>
+                                <td>{{ q.count }}</td>
+                                <td>{{ q.createdCount }}</td>
+                                <td>{{ q.updatedCount }}</td>
+                                <td style="color: orange;">{{ q.reviewingCount }}</td>
+                                <td style="color: red;">{{ q.incorrectCount }}</td>
+                                <td style="color: green;">{{ q.reviewedCount }}</td>
+                                <td style="text-align: center;">
+                                <button
+                                    (click)="viewAllQuestion(q.language)"
+                                    type="button"
+                                    class="btn btn-primary btn-sm"
+                                >
+                                    View Uploaded Qb
+                                </button>
+                                &nbsp;
+                                <button
+                                    type="button"
+                                    (click)="deleteQuestion(q.language)"
+                                    [disabled]="isDisabledDel"
+                                    title="Delete"
+                                    class="btn btn-danger btn-sm"
+                                >
+                                    <i class="fa fa-trash"></i>
+                                </button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        </div>
+
+                    </div>
 
                </div>
                

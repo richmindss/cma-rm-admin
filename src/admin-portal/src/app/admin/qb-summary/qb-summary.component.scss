@@ -1,0 +1,48 @@
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  text-align: center;           /* ✅ All text centered */
+  vertical-align: middle;
+}
+
+.table th {
+  background-color: grey;
+  color: white;
+  text-transform: uppercase;
+  font-weight: 600;
+  padding: 8px;
+}
+
+.table td {
+  padding: 6px;
+}
+
+.table tr:nth-child(even) {
+  background-color: #f8f9fa;
+}
+
+.table tr:hover {
+  background-color: #e9ecef;
+  cursor: pointer;
+}
+
+/* Sticky header for large tables */
+.table th {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+/* Status colors */
+.status-created { color: black; font-weight: 500; }
+.status-updated { color: blue; font-weight: 500; }
+.status-reviewing { color: orangered; font-weight: 500; }
+.status-incorrect { color: red; font-weight: 500; }
+.status-reviewed { color: green; font-weight: 500; }
+
+/* Responsive layout */
+.table-responsive {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}

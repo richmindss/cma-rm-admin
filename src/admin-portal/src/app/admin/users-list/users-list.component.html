@@ -46,9 +46,9 @@ Total Users: {{userCount}}
             <th>Role</th>     
             <th>Exam</th> 
             <th>Language</th>  
-            <th>Subject</th>  
-            <th>Start Qb No</th>         
-            <th>End Qb No</th>
+            <th>Topic</th>  
+            <!-- <th>Start Qb No</th>         
+            <th>End Qb No</th> -->
             <th>Status</th>
             <th style="text-align:center;">Action</th>
         </tr>
@@ -61,8 +61,8 @@ Total Users: {{userCount}}
         <td><a>{{u?.Exam || '---'}}</a></td>
         <td><a>{{u?.Language || '---'}}</a></td>
         <td><a>{{u?.Subject || '---'}}</a></td>
-        <td><a>{{u?.startQbNo || '---'}}</a></td>
-        <td><a>{{u?.endQbNo || '---'}}</a></td>
+        <!-- <td><a>{{u?.startQbNo || '---'}}</a></td>
+        <td><a>{{u?.endQbNo || '---'}}</a></td> -->
         <td><a>{{u.Status ? 'Active' : 'DeActive' }}</a></td>
         <!-- <td>{{u.locked ? 'Yes' : 'No' }}</td> -->
       
