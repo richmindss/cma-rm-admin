@@ -56,13 +56,13 @@ export class QbUploadComponent implements OnInit {
     return this.qbid == "new";
   }
 
-  ondocUploaded(e) {
+  ondocUploaded(e:any) {
     this.uploadError = "";
     this.docid = e.documentid;
     //this.getQuesBankById();
   }
 
-  ondocError(e) {
+  ondocError(e:any) {
   
     this.uploadError = "";
     if (e.status && e.status == "error"){
@@ -78,7 +78,7 @@ export class QbUploadComponent implements OnInit {
     this.selectedFile = event.target.files[0];
   }
 
-  async uploadZip(e:any){
+  async uploadZip(event:any){
      this.isDisabled = true;
      if (!this.selectedFile) {
       this.responseMessage = "Please select a zip file first!";
@@ -87,6 +87,24 @@ export class QbUploadComponent implements OnInit {
     }else{
       this.responseMessage = "";
     }
+
+      const isZip = this.selectedFile.type === 'application/zip' || this.selectedFile.name.toLowerCase().endsWith('.zip');
+      if (!isZip) {
+        alert("❌ Only ZIP files are allowed!");
+        event.target.value = ''; // Reset file input
+        return;
+      }
+
+      // ✅ 2. Check file size (20 KB to 5 MB)
+      const fileSizeKB = this.selectedFile.size / 1024; // convert bytes to KB
+      const minSize = 20; // KB
+      const maxSize = 5 * 1024; // 5 MB = 5120 KB
+
+      if (fileSizeKB < minSize || fileSizeKB > maxSize) {
+        alert("⚠️ File size must be between 20 KB and 5 MB!");
+        event.target.value = ''; // Reset file input
+        return;
+      }
 
     const formData = new FormData();
     formData.append("file", this.selectedFile);

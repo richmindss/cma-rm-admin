@@ -4,9 +4,15 @@
     </div>
 
     <div class="col-md-3">
-       <input type="text" class="form-control" placeholder="Enter Question Id Prefix" [(ngModel)]="qbprefix"/>
+       <input *ngIf="questions && user.record?.Role =='Editor'" type="text" class="form-control" placeholder="Enter Question Id Prefix" [(ngModel)]="qbprefix"/>
     </div>
-   
+
+     <div class="col-md-3">
+        <button *ngIf="questions && user.record?.Role =='Editor'" class="btn btn-success" type="button" (click)="generateQuestionBank(this.language)">
+            <i class="fa fa-ticket"></i> Generate Question Bank
+          </button>
+    </div>
+
     <div class="col-md-3" *ngIf="questions && user.record?.Role =='Reviewer'">
         <select name="batch" class="form-control" (change)="onLanguageChange($event)">
             <option value="" disabled selected>Select Language</option>
@@ -18,11 +24,7 @@
             <option value="TELUGU">TELUGU</option>
         </select>
     </div>   
-    <div class="col-md-3" *ngIf="questions && user.record?.Role =='Editor'">
-        <button class="btn btn-success" type="button" (click)="generateQuestionBank(this.language)">
-            <i class="fa fa-ticket"></i> Generate Question Bank
-          </button>
-    </div>
+  
 </div>
 
 <div class="row" *ngFor="let ques of getQuestions()">

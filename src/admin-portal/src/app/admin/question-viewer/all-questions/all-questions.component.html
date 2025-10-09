@@ -18,7 +18,7 @@
 
       <h5>Question : {{this.questionUpdate.questionid}}</h5>
      <!-- <p style="color: red;"> Without Changes Dont press update button</p> -->
-      <div class="card-body">
+      <div class="card-body" *ngIf="this.questionUpdate.qtype=='text'">
         <app-template-editor 
             [elementId]="questionUpdate._id" 
             [height]="250"
@@ -26,17 +26,49 @@
             [(value)]="questionUpdate.question"></app-template-editor>
             <button class="btn btn-primary" (click)="updateQuestionBank()">UPDATE</button>
     </div>
+
+     <div class="card-body" *ngIf="this.questionUpdate.qtype=='image'">
+      <div class="col-md-6">
+        <span style="color:green">⚠️ File size must be less than 20 KB!</span>
+          
+        <p class="btn-sm py-5 px-1 text-center" style="background-color: grey" [ngStyle]="{ cursor: applicationSubmitted ? 'inherit' : 'pointer' }" (click)="file.click()">
+            Upload Question Image Png Only </p>
+        <input type="file"  #file class="d-none" (change)="onFileSelected($event,questionUpdate,'question')" accept=".png"/>
+      </div>
+
+       <div class="col-md-6"> 
+        <img src="{{questionUpdate.question}}" >
+      </div>
+      
+     </div>
+
     <h5>Option : 1</h5>
-    <div class="card-body">
+    <div class="card-body" *ngIf="this.questionUpdate.atype1=='text'">
       <app-template-editor 
           [elementId]="alt1" 
           [height]="200"
           (onEditorContentChange)="openForQuestion($event,'alternative1')"
           [(value)]="alt1"></app-template-editor>
           <button class="btn btn-primary" (click)="updateAlternative1()">UPDATE</button>
-  </div>
+   </div>
+
+   <div class="card-body" *ngIf="this.questionUpdate.atype1=='image'">
+      <div class="col-md-6">
+        <span style="color:green">⚠️ File size must be less than 20 KB!</span>
+          
+        <p class="btn-sm py-5 px-1 text-center" style="background-color: grey" [ngStyle]="{ cursor: applicationSubmitted ? 'inherit' : 'pointer' }" (click)="file.click()">
+            Upload Alternative1 Image Png Only </p>
+        <input type="file"  #file class="d-none" (change)="onFileSelected($event,questionUpdate,'alternative1')" accept=".png"/>
+      </div>
+
+       <div class="col-md-6"> 
+        <img src="{{questionUpdate.alternative1}}" >
+      </div>
+      
+    </div>
+
   <h5>Option : 2</h5>
-  <div class="card-body">
+  <div class="card-body" *ngIf="this.questionUpdate.atype2=='text'">
     <app-template-editor 
         [elementId]="alt2" 
         [height]="200"
@@ -44,8 +76,23 @@
         [(value)]="alt2"></app-template-editor>
         <button class="btn btn-primary" (click)="updateAlternative2()">UPDATE</button>
 </div>
+<div class="card-body" *ngIf="this.questionUpdate.atype2=='image'">
+  <div class="col-md-6">
+    <span style="color:green">⚠️ File size must be less than 20 KB!</span>
+      
+    <p class="btn-sm py-5 px-1 text-center" style="background-color: grey" [ngStyle]="{ cursor: applicationSubmitted ? 'inherit' : 'pointer' }" (click)="file.click()">
+        Upload Alternative2 Image Png Only </p>
+    <input type="file"  #file class="d-none" (change)="onFileSelected($event,questionUpdate,'alternative2')" accept=".png"/>
+  </div>
+
+    <div class="col-md-6"> 
+    <img src="{{questionUpdate.alternative2}}" >
+  </div>
+  
+</div>
+
 <h5>Option : 3</h5>
-<div class="card-body">
+<div class="card-body" *ngIf="this.questionUpdate.atype3=='text'">
   <app-template-editor 
       [elementId]="alt3" 
       [height]="200"
@@ -53,8 +100,24 @@
       [(value)]="alt3"></app-template-editor>
       <button class="btn btn-primary" (click)="updateAlternative3()">UPDATE</button>
 </div>
+
+<div class="card-body" *ngIf="this.questionUpdate.atype3=='image'">
+  <div class="col-md-6">
+    <span style="color:green">⚠️ File size must be less than 20 KB!</span>
+      
+    <p class="btn-sm py-5 px-1 text-center" style="background-color: grey" [ngStyle]="{ cursor: applicationSubmitted ? 'inherit' : 'pointer' }" (click)="file.click()">
+        Upload Alternative3 Image Png Only </p>
+    <input type="file"  #file class="d-none" (change)="onFileSelected($event,questionUpdate,'alternative3')" accept=".png"/>
+  </div>
+
+    <div class="col-md-6"> 
+    <img src="{{questionUpdate.alternative3}}" >
+  </div>
+  
+</div>
+
 <h5>Option : 4</h5>
-<div class="card-body">
+<div class="card-body" *ngIf="this.questionUpdate.atype4=='text'">
   <app-template-editor 
       [elementId]="alt4" 
       [height]="200"
@@ -62,8 +125,24 @@
       [(value)]="alt4"></app-template-editor>
       <button class="btn btn-primary" (click)="updateAlternative4()">UPDATE</button>
 </div>
-    </div>
+
+<div class="card-body" *ngIf="this.questionUpdate.atype4=='image'">
+  <div class="col-md-6">
+    <span style="color:green">⚠️ File size must be less than 20 KB!</span>
+      
+    <p class="btn-sm py-5 px-1 text-center" style="background-color: grey" [ngStyle]="{ cursor: applicationSubmitted ? 'inherit' : 'pointer' }" (click)="file.click()">
+        Upload Alternative4 Image Png Only </p>
+    <input type="file"  #file class="d-none" (change)="onFileSelected($event,questionUpdate,'alternative4')" accept=".png"/>
   </div>
+
+    <div class="col-md-6"> 
+    <img src="{{questionUpdate.alternative4}}" >
+  </div>
+  
+</div>
+
+</div>
+</div>
 </div>
 
 <!-- <div class="row">
