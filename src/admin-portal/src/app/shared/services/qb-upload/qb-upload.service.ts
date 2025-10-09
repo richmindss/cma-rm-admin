@@ -20,16 +20,20 @@ private basePath = '';
     return this.backendService.get(this.path + '/getQuestionSummary')
   }
 
-   getQuestions(){
-    return this.backendService.get (this.path + "/getQuestions");
+  getAllQuestionSummary(){
+     return this.backendService.get(this.path + '/getAllQuestionSummary')
   }
 
-  deleteQuestionBank (){
-    return this.backendService.get (this.path + "/deleteQuestionBank");
+   getQuestions(lang:any){
+    return this.backendService.get (this.path + "/getQuestions/"+lang);
   }
 
-  sentForReviewQuestion(status:string,id:string){
-    return this.backendService.post (this.path + '/review-question' ,{status:status,id:id});
+  deleteQuestionBank (language:any){
+    return this.backendService.get (this.path + "/deleteQuestionBank/"+language);
+  }
+
+  sentForReviewQuestion(status:string,id:string,language:string){
+    return this.backendService.post (this.path + '/review-question' ,{status:status,id:id,language:language});
   }
 
   updateQuestionBank(qbid:any,type:any,content:any) {
@@ -41,9 +45,8 @@ private basePath = '';
     });
   }
 
- downloadZip(): Observable<Blob> { 
-  console.log(this.basePath);
-  return this.http.get(this.basePath+this.path+ "/generationQb", {
+ downloadZip(language:any,qbprefix:any): Observable<Blob> { 
+  return this.http.get(this.basePath+this.path+ "/generationQb/"+language+"/"+qbprefix, {
     responseType: 'blob'  // 👈 important
   });
 }
