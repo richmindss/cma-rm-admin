@@ -18,6 +18,8 @@ import { QbUploadComponent } from "../admin/qb-upload/qb-upload.component";
 import { UserMapperComponent } from "../admin/user-mapper/user-mapper.component";
 import { UsersMapperListComponent } from "../admin/user-mapper-list/user-mapper-list.component";
 import { QbSummaryComponent } from "../admin/qb-summary/qb-summary.component";
+import { TopicMasterComponent } from "../admin/topic-master/topic-master.component";
+import { ExamMasterComponent } from "../admin/exam-master/exam-master.component"
 
 @NgModule({
   declarations: [
@@ -33,7 +35,9 @@ import { QbSummaryComponent } from "../admin/qb-summary/qb-summary.component";
     QbUploadComponent,
     UserMapperComponent,
     UsersMapperListComponent,
-    QbSummaryComponent
+    QbSummaryComponent,
+    TopicMasterComponent,
+    ExamMasterComponent
   ],
   imports: [
     CommonModule,

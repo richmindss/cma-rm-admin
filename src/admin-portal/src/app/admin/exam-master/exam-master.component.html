@@ -1,0 +1,148 @@
+<div class="row my-3">
+  <div class="col-md-12 text-center">
+  <h4>EXAM MASTER</h4>   
+  </div>
+</div>
+
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+      <h4 class="modal-title">{{event._id ? 'Update Exam' : 'Add Exam'}}</h4>
+      <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>       
+  <div class="modal-body">  
+  
+        <div class="card">
+          <div class="card-body">
+            <div class="form-group">
+              
+              <div *ngIf="error">
+                  <label> <span style="color:red">{{error}}</span></label>
+                </div> 
+
+                <div class="row p-2">     
+                  <!-- <div class="col-sm-6">
+                    <div class="container">
+                      <label>TOPIC Code</label>
+                    <input type="text" class="form-control" [(ngModel)]="topicObj.Code">
+                    </div>
+                  </div> -->
+
+                  <div class="col-sm-6">
+                    <div class="container">
+                      <label>Exam Name</label>
+                    <input type="text" class="form-control" [(ngModel)]="examObj.Name">
+                    </div>
+                  </div>
+
+                 <div class="col-sm-6" *ngIf="event._id">
+                    <div class="container">
+                      <label>Status</label>
+                        <select name="status" class="custom-select form-control" [(ngModel)]="examObj.Status">
+                            <option [ngValue]="''" disabled> Please Select Status </option>
+                            <option [ngValue]= true>Active</option>
+                            <option [ngValue]= false>DeActive</option>
+                            
+                        </select>
+                    </div>
+                  </div>
+
+               </div>
+<!-- 
+               <div class="row p-2" *ngIf="event._id">     
+             
+        
+             </div> -->
+
+              <br>
+
+              <div class="row">
+                <div class="col-md-7 text-right">
+                  <button *ngIf="!event._id" type="button" class="btn btn-primary" (click)="createTopic()">Save</button>
+                  <button *ngIf="event._id" type="button" class="btn btn-primary" (click)="updateTopic()">Update</button>
+                </div>                 
+              </div>
+              
+        
+            </div>
+          </div>
+        </div>
+
+
+  
+     
+    </div>
+</ng-template>
+
+<div class="card">
+  <div class="card-body">
+    <div class="row">
+     
+      <div class="col-md-3">
+          <button class="btn btn-success btn-md" type="button" data-toggle="modal" (click)="open(content,{})">
+              <i class="fa fa-plus"></i> Add Exam
+          </button>&nbsp;
+      </div>
+
+      <div class="col-md-3">
+
+      </div>
+
+      <div class="col-md-2">
+      
+      </div>
+
+      <div class="col-md-2">
+      
+      </div>
+
+      <div class="col-md-2">
+      
+      </div>
+
+    </div>
+  </div>
+</div>
+&nbsp;
+
+  <div class="col-md-12 col-sm-12 rm-mt-10"> 
+
+    <table id="excel-table" class="tblclass">
+        <thead>
+            <tr>
+              <th style="width: 4%">Sr.No</th>
+              <!-- <th style="width: 10%">Topic Code</th> -->
+              <th style="width: 15%">Exam Name</th>
+              <th style="width: 15%">Created By</th>
+              <th style="width: 10%">Status</th>
+              <th style="width: 10%">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let t of examArr; let i=index;">
+            <td style="width: 4%">{{i + 1}}</td>
+            <!-- <td style="width: 10%">{{t.Code}}</td> -->
+            <td style="width: 15%">{{t.Name}}</td>
+            <td style="width: 15%">{{t.CreatedBy}}</td>
+            <td *ngIf="t.Status == true" style="width: 10%">{{"Active"}}</td>
+            <td *ngIf="t.Status == false" style="width: 10%">{{"DeActive"}}</td>
+    
+            <td style="width: 10%"><button class="btn btn-primary btn-md"  [disabled]="t.status == false" type="button" data-toggle="modal" (click)="openForUpdate(content,t)">
+                <i class=""></i> Edit
+            </button>
+           
+            <!-- <button class="btn btn-danger btn-md" [disabled]="t.status == false" type="button" data-toggle="modal" (click)="onDelete(t._id)">
+                <i class=""></i> Delete
+            </button> -->
+            
+            </td>
+           
+
+          </tr>
+        </tbody>
+    </table>
+  </div>
+
+<div class="space-margin"></div>

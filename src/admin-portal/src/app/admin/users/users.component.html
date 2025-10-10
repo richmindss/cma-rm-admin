@@ -68,8 +68,8 @@
 
             <select name="subject" class="custom-select"  [(ngModel)]="userData.Subject">
               <option [ngValue]="''" disabled selected>Select Topic</option>
-              <option *ngFor="let sub of subjectArr" value="{{sub.Name }}">
-                {{ sub.Name }}
+              <option *ngFor="let sub of subjectArr" value="{{sub.Code }}">
+                {{ sub.Name}}
               </option>
             </select>
 

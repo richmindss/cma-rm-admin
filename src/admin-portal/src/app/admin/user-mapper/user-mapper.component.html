@@ -69,6 +69,22 @@
           </div>
         </div>
 
+        <div class="row p-2" *ngIf="mapUser._id">     
+                  <div class="col-sm-4">
+                    <div class="container">
+                      <label>Status</label>
+                        <select name="status" class="custom-select form-control" [(ngModel)]="mapUser.Status">
+                            <option [ngValue]="''" disabled> Please Select Status </option>
+                            <option [ngValue]= true>Active</option>
+                            <option [ngValue]= false>DeActive</option>
+                            
+                        </select>
+                    <!-- <input type="text" class="form-control" [(ngModel)]="topicObj.Status"> -->
+                    </div>
+                  </div>
+        
+             </div>
+
       
         <div class="row">
 
