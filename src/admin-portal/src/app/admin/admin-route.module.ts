@@ -12,7 +12,8 @@ import { UserMapperComponent } from "../admin/user-mapper/user-mapper.component"
 import { UsersMapperListComponent } from "../admin/user-mapper-list/user-mapper-list.component";
 import { QbSummaryComponent } from "../admin/qb-summary/qb-summary.component";
 import { TopicMasterComponent } from "../admin/topic-master/topic-master.component";
-import { ExamMasterComponent } from "../admin/exam-master/exam-master.component"
+import { ExamMasterComponent } from "../admin/exam-master/exam-master.component";
+import { CandidateActivityComponent } from "../admin/candidate-activity/candidate-activity.component"
 
 const routes: Routes = [
   {
@@ -116,6 +117,14 @@ const routes: Routes = [
         title: "exam-master"
       },
       component: ExamMasterComponent
+    },
+
+    {
+      path: "activity",
+      data: {
+        title: "acitivity"
+      },
+      component: CandidateActivityComponent
     },
 
     ]

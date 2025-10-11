@@ -1,0 +1,31 @@
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card ">
+                <h5 class="card-header">Recent Activity</h5>
+            <div class="card-body">
+
+                <table class="table table-hover">
+                    <tr><th>Date/Time</th><th>Activity</th></tr>
+
+                    <tr *ngFor="let act of activities">
+                        <td>{{formateDate(act.created )}}</td>
+                        <td>{{act.message}}</td>
+                        
+                    </tr>
+                </table>
+                
+             
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row justify-content-center">
+    <div class="col-md-6">
+ 
+      <app-pagination
+      [(currentPage)]="currentPage"
+      [pageSize]="pageSize"
+      [totalRecords]="eventCount"
+      (pageChanged)="fetchUserData($event)"></app-pagination>
+    </div>
+  </div>   

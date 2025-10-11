@@ -21,6 +21,8 @@ import { QbSummaryComponent } from "../admin/qb-summary/qb-summary.component";
 import { TopicMasterComponent } from "../admin/topic-master/topic-master.component";
 import { ExamMasterComponent } from "../admin/exam-master/exam-master.component"
 
+import { CandidateActivityComponent } from "../admin/candidate-activity/candidate-activity.component"
+
 @NgModule({
   declarations: [
     DashboardComponent,
@@ -37,7 +39,8 @@ import { ExamMasterComponent } from "../admin/exam-master/exam-master.component"
     UsersMapperListComponent,
     QbSummaryComponent,
     TopicMasterComponent,
-    ExamMasterComponent
+    ExamMasterComponent,
+    CandidateActivityComponent
   ],
   imports: [
     CommonModule,
